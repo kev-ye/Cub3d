@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 00:15:10 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/27 23:18:49 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,39 @@
 // CAMERA STRUCT
 typedef struct      s_camera
 {
-    int pos_x;
-    int pos_y;
-    // int dir_x;
-    // int dir_y;
-    // int plane_x;
-    // int plane_y;
-    // int height_camera;
+    double pos_x;
+    double pos_y;
+    double dir_x;
+    double dir_y;
+    double plane_x;
+    double plane_y;
+    double cam_height;
+    double speed;
 }                   t_camera;
+
+// RAY STRUCT
+typedef struct      s_cam_ray
+{
+    int pix;
+    int camera_x;
+    int ray_dir_x;
+    int ray_dir_y;
+    int map_x;
+    int map_y;
+    double side_dist_x;
+    double side_dist_y;
+    double delta_dist_x;
+    double delta_dist_y;
+    double perp_wall_dist;
+    int step_x;
+    int step_y;
+    int hit;
+    int side;
+    int line_height;
+    int draw_start;
+    int draw_end;
+    double *z_buffer;
+}                   t_cam_ray;
 
 // DRAW IMAGE STRUCT
 typedef struct      s_img 
@@ -72,14 +97,35 @@ typedef struct      s_key
     int key_right;
 }                   t_key;
 
+// LINE STRUCT
+typedef struct      s_line
+{
+    int line_x;
+    int line_y;
+    int y0;
+    int y1;
+}                   t_line;
+
+// MAP STRUCT
+typedef struct      s_map
+{
+    char **map;
+    char *map_name;
+    int map_width;
+    int map_height;
+}                   t_map;
+
 // WINDOW STRUCT
 typedef struct      s_win
 {
     void        *mlx_ptr;
     void        *win_ptr;
+    int         width;
+    int         height;
     t_key       *key_code;
     t_img       *img;
     t_camera    *camera;
+    t_map       *map;
 }                   t_win;
 
 // COLOR FUNCTION
@@ -102,8 +148,21 @@ int event_key_release(int keycode, t_win *win);
 // ENGINE FUNCION
     //Engine -> img
 void    pixel_put(t_img *img, int x, int y, int color);
-t_img *new_image(t_win *win, int size_x, int size_y);
+t_img   *new_image(t_win *win, int size_x, int size_y);
+void    vertical_line(t_line *line, t_win *win, int color);
+    // Engine -> ray_casting
+void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
+void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
+void    wall_hit(t_cam_ray *ray, t_win *win);
+void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win);
+    // Engine ->camera move
+void    move_w(t_win *win);
+void    move_s(t_win *win);
+
+// TEST FUNCTION
     //Engine -> draw
 void    draw_something(t_win *win, t_img *img, int color);
+    // Engine -> draw -> move
+int    test_draw_move(t_win *win, t_img *img, int color);
 
 #endif

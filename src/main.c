@@ -6,11 +6,24 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 00:18:19 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/27 23:29:06 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char map[width][height] =
+{
+    {'1','1','1','1','1','1','1','1','1'},
+    {'1','0','0','0','0','0','0','0','1'},
+    {'1','0','0','0','0','0','0','0','1'},
+    {'1','0','0','0','0','0','0','0','1'},
+    {'1','0','0','0','0','0','0','0','1'},
+    {'1','0','0','0''0','0','0','0',,'1'},
+    {'1','0','0','0','0','0','0','0','1'},
+    {'1','0','0','0','0','0','0','0','1'},
+    {'1','1','1','1','1','1','1','1','1'};
+}
 
 void shut_down(t_win *win)
 {
@@ -50,49 +63,12 @@ int init_camera(t_win *win)
     if (!(win->camera = malloc(sizeof(t_camera))))
         return (ERROR);
     ft_bzero(win->camera, sizeof(t_camera));
-    win->camera->pos_x = 400;
-    win->camera->pos_y = 300;
-    return (SUCCESS);
-}
-
-int    test_draw_move(t_win *win, t_img *img, int color)
-{
-    if (win->key_code->key_w == 1)
-    {
-        mlx_clear_window(win->mlx_ptr, win->win_ptr);
-        if (!(img = new_image(win, 10, 10)))
-            exit(0);
-        win->camera->pos_y -= 10;
-        draw_something(win, img, RED);
-        mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
-    }
-    else if (win->key_code->key_s == 1)
-    {
-        mlx_clear_window(win->mlx_ptr, win->win_ptr);
-        if (!(img = new_image(win, 10, 10)))
-            exit(0);
-        win->camera->pos_y += 10;
-        draw_something(win, img, RED);
-        mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
-    }
-    else if (win->key_code->key_a == 1)
-    {
-        mlx_clear_window(win->mlx_ptr, win->win_ptr);
-        if (!(img = new_image(win, 10, 10)))
-            exit(0);
-        win->camera->pos_x -= 10;
-        draw_something(win, img, RED);
-        mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
-    }
-    else if (win->key_code->key_d == 1)
-    {
-        mlx_clear_window(win->mlx_ptr, win->win_ptr);
-        if (!(img = new_image(win, 10, 10)))
-            exit(0);
-        win->camera->pos_x += 10;
-        draw_something(win, img, RED);
-        mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
-    }
+    win->camera->pos_x = 22;
+    win->camera->pos_y = 12;
+    win->camera->dir_x = -1;
+    win->camera->dir_y = 0;
+    win->camera->plane_x = 0;
+    win->camera->plane_y = 0.66;
     return (SUCCESS);
 }
 
@@ -105,15 +81,9 @@ int main()
         !(init_key(win)) ||
         !(init_camera(win)))
         exit(0);
-    if (!(img = new_image(win, 10, 10)))
-        exit(0);
-    draw_something(win, img, RED);
-    mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
-    // test_draw_move(win, img, RED);
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
     mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
-    mlx_loop_hook(win->mlx_ptr, test_draw_move, win);
     mlx_loop(win->mlx_ptr);
     return (0);
 }

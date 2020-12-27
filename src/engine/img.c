@@ -6,11 +6,36 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/26 22:26:44 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/27 22:42:04 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void    vertical_line(t_line *line, t_win *win, int color)
+{
+    int y;
+    int y_max;
+    
+    if (line->y0 < line->y1)
+    {
+        y = line->y0;
+        y_max = line->y1;
+    }
+    else
+    {
+        y = line->y1;
+        y_max = line->y0;
+    }
+    if (y >= 0)
+    {
+        while (y < y_max)
+        {
+            pixel_put(win->img, line->line_x, y, color);
+            ++y;
+        }
+    }
+}
 
 void    pixel_put(t_img *img, int x, int y, int color)
 {

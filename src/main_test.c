@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 18:08:53 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/28 19:06:13 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@
 //         !(init_key(win)) ||
 //         !(init_camera(win)))
 //         exit(0);
-//     if (!(img = new_image(win, 10, 10)))
+//     if (!(img = new_image(win, 800, 600)))
 //         exit(0);
-//     draw_something(win, img, RED);
+//     vertical_line();
 //     mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
 //     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
 //     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);

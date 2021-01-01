@@ -6,11 +6,9 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 23:10:45 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/01 19:27:26 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "cub3d.h"
 
@@ -56,17 +54,17 @@ void    wall_hit(t_cam_ray *ray, t_win *win)
     {
         if (ray->side_dist_x < ray->side_dist_y)
         {
-            ray->side_dist_x += ray->delta_dist_y;
+            ray->side_dist_x += ray->delta_dist_x;
             ray->map_x += ray->step_x;
             ray->side = 0;
         }
         else
         {
-            ray->side_dist_y  += ray->delta_dist_y;
+            ray->side_dist_y += ray->delta_dist_y;
             ray->map_y += ray->step_y;
             ray->side = 1;
         }
-        if (win->map->map[ray->map_x][ray->map_y] > '0')
+        if (win->map->map[ray->map_y][ray->map_x] > '0')
             ray->hit = 1;
     }
 }
@@ -78,10 +76,43 @@ void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win)
     else
         ray->perp_wall_dist = (ray->map_y - cam->pos_y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
     ray->line_height = (int)(win->height / ray->perp_wall_dist);
-    ray->draw_start = -ray->line_height / 2 + win->height / 2;
+    ray->draw_start = (-ray->line_height / 2 + ((win->height / 2) * win->camera->cam_height));
     if (ray->draw_start < 0)
         ray->draw_start = 0;
-    ray->draw_end = ray->line_height / 2 + win->height / 2;
+    ray->draw_end = (ray->line_height / 2 + ((win->height / 2) * win->camera->cam_height));
     if (ray->draw_end >= win->height)
         ray->draw_end = win->height - 1;
+}
+
+
+void    draw_text(t_cam_ray *ray, t_win *win)
+{
+    t_img *img;
+    t_line *line;
+    int color;
+
+    if (!(line = malloc(sizeof(t_line))))
+    {
+        ft_putstr("ERROR LINE");
+        exit(0);
+    }
+    ft_bzero(line, sizeof(t_line));
+    line->line_x = ray->pix;
+    if (win->map->map[ray->map_y][ray->map_x] == '1')
+        color = BLUE;
+    else if (win->map->map[ray->map_y][ray->map_x] == '2')
+        color = YELLOW;
+    else if (win->map->map[ray->map_y][ray->map_x] == '3')
+        color = WHITE;
+    if (ray->side == 1)
+        color = color / 2;
+    line->y0 = ray->draw_end;
+    line->y1 = ray->draw_start;
+    vertical_line(line, win, color);
+    line->y0 = 0;
+	line->y1 = ray->draw_start;
+	vertical_line(line, win, RED);
+	line->y0 = win->height;
+	line->y1 = ray->draw_end;
+	vertical_line(line, win, GREEN);
 }

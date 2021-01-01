@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 22:49:53 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 23:02:02 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/31 21:21:30 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,40 @@
 
 void    move_w(t_win *win)
 {
-    if (win->map->map[(int)(win->camera->pos_x + win->camera->dir_x * win->camera->speed)][(int)win->camera->pos_y] == '0')
+    if (win->map->map[(int)win->camera->pos_y]
+                     [(int)(win->camera->pos_x + win->camera->dir_x * win->camera->speed)] == '0')
         win->camera->pos_x += win->camera->dir_x * win->camera->speed;
-    if (win->map->map[(int)win->camera->pos_x][(int)(win->camera->pos_y + win->camera->dir_y * win->camera->speed)] == '0')
+    if (win->map->map[(int)(win->camera->pos_y + win->camera->dir_y * win->camera->speed)]
+                     [(int)win->camera->pos_x] == '0')
         win->camera->pos_y += win->camera->dir_y * win->camera->speed;
 }
 
 void    move_s(t_win *win)
 {
-    if (win->map->map[(int)(win->camera->pos_x - win->camera->dir_x * win->camera->speed)][(int)win->camera->pos_y] == '0')
+    if (win->map->map[(int)win->camera->pos_y]
+                     [(int)(win->camera->pos_x - win->camera->dir_x * win->camera->speed)] == '0')
         win->camera->pos_x -= win->camera->dir_x * win->camera->speed;
-    if (win->map->map[(int)win->camera->pos_x][(int)(win->camera->pos_y - win->camera->dir_y * win->camera->speed)] == '0')
+    if (win->map->map[(int)(win->camera->pos_y - win->camera->dir_y * win->camera->speed)]
+                     [(int)win->camera->pos_x] == '0')
         win->camera->pos_y -= win->camera->dir_y * win->camera->speed;
 }
 
-// void    move_a(t_win *win)
-// {
-    
-// }
+void    move_a(t_win *win)
+{
+    if (win->map->map[(int)win->camera->pos_y]
+                     [(int)(win->camera->pos_x - win->camera->plane_x * win->camera->speed)] == '0')
+        win->camera->pos_x -= win->camera->plane_x * win->camera->speed;
+    if (win->map->map[(int)(win->camera->pos_y - win->camera->plane_y * win->camera->speed)]
+                     [(int)win->camera->pos_x] == '0')
+        win->camera->pos_y -= win->camera->plane_y * win->camera->speed;
+}
+
+void    move_d(t_win *win)
+{
+    if (win->map->map[(int)win->camera->pos_y]
+                     [(int)(win->camera->pos_x + win->camera->plane_x * win->camera->speed)] == '0')
+        win->camera->pos_x += win->camera->plane_x * win->camera->speed;
+    if (win->map->map[(int)(win->camera->pos_y + win->camera->plane_y * win->camera->speed)]
+                     [(int)win->camera->pos_x] == '0')
+        win->camera->pos_y += win->camera->plane_y * win->camera->speed;
+}

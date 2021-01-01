@@ -6,11 +6,31 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:00:56 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 18:01:16 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/28 20:55:29 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void    draw_something(t_win *win, t_img *img, int color)
+{
+
+    int x;
+    int y;
+    
+    x = 0;
+    while (x < 10)
+    {
+        y = 0;
+        while (y < 10)
+        {
+            pixel_put(img, x, y, color);
+            ++y;
+        }
+        ++x;
+    }
+    mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img->img_ptr, 0, 0);
+}
 
 int    test_draw_move(t_win *win, t_img *img, int color)
 {

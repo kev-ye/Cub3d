@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/27 23:18:49 by kaye             ###   ########.fr       */
+/*   Updated: 2020/12/29 20:28:24 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 #define RED 0x00FF0000
 #define GREEN 0x0000FF00
 #define BLUE 0x000000FF
+#define YELLOW 0x00FFFF00
+#define WHITE 0x00FFFFFF
 
 // CAMERA STRUCT
 typedef struct      s_camera
@@ -48,15 +50,16 @@ typedef struct      s_camera
     double plane_y;
     double cam_height;
     double speed;
+    double rot_speed;
 }                   t_camera;
 
 // RAY STRUCT
 typedef struct      s_cam_ray
 {
     int pix;
-    int camera_x;
-    int ray_dir_x;
-    int ray_dir_y;
+    double camera_x;
+    double ray_dir_x;
+    double ray_dir_y;
     int map_x;
     int map_y;
     double side_dist_x;
@@ -71,7 +74,6 @@ typedef struct      s_cam_ray
     int line_height;
     int draw_start;
     int draw_end;
-    double *z_buffer;
 }                   t_cam_ray;
 
 // DRAW IMAGE STRUCT
@@ -144,6 +146,9 @@ int event_destroy_win(t_win *win);
     // Event -> keyboard
 int event_key_press(int keycode, t_win *win);
 int event_key_release(int keycode, t_win *win);
+int event_key(t_win *win);
+    // Event -> loop
+int    event_loop(t_win *win);
 
 // ENGINE FUNCION
     //Engine -> img
@@ -155,14 +160,22 @@ void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
 void    wall_hit(t_cam_ray *ray, t_win *win);
 void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win);
-    // Engine ->camera move
+int     ray_casting(t_win *win);
+    // Engine -> camera move
 void    move_w(t_win *win);
 void    move_s(t_win *win);
+void    move_a(t_win *win);
+void    move_d(t_win *win);
+    // Engine -> camera turn
+void    turn_left(t_win *win);
+void    turn_right(t_win *win);
 
 // TEST FUNCTION
     //Engine -> draw
 void    draw_something(t_win *win, t_img *img, int color);
     // Engine -> draw -> move
 int    test_draw_move(t_win *win, t_img *img, int color);
+    // Engine -> draw -> wall
+void   draw_text(t_cam_ray *ray, t_win *win);
 
 #endif

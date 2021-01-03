@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/29 20:28:24 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/03 20:37:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 #define KEY_CODE_RIGHT 124
 
 // COLOR CODE
-#define RED 0x00FF0000
-#define GREEN 0x0000FF00
-#define BLUE 0x000000FF
-#define YELLOW 0x00FFFF00
-#define WHITE 0x00FFFFFF
+#define RED 0xFF0000
+#define GREEN 0x00FF00
+#define BLUE 0x0000FF
+#define YELLOW 0xFFFF00
+#define WHITE 0xFFFFFF
 
 // CAMERA STRUCT
 typedef struct      s_camera
@@ -153,6 +153,7 @@ int    event_loop(t_win *win);
 // ENGINE FUNCION
     //Engine -> img
 void    pixel_put(t_img *img, int x, int y, int color);
+void    pixel_put2(t_win *win, t_img *img, int x, int y, int color); // test
 t_img   *new_image(t_win *win, int size_x, int size_y);
 void    vertical_line(t_line *line, t_win *win, int color);
     // Engine -> ray_casting

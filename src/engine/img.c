@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/28 20:04:44 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/03 21:05:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void    vertical_line(t_line *line, t_win *win, int color)
     {
         while (y < y_max)
         {
+            // pixel_put2(win, win->img, line->line_x, y, color);
             pixel_put(win->img, line->line_x, y, color);
             ++y;
         }
@@ -40,10 +41,25 @@ void    vertical_line(t_line *line, t_win *win, int color)
 void    pixel_put(t_img *img, int x, int y, int color)
 {
     char    *dst;
-
-    dst = img->addr + (y * img->line_len+ x * (img->bpp / 8));
+    
+    dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+    // img->line_len = win->width * 4
+    // img->bpp / 8 -> becasue bpp = 32 -> 4 * 8 bits -> 32 / 8 = 4 char
     *(unsigned int*)dst = color;
 }
+
+void    pixel_put2(t_win *win, t_img *img, int x, int y, int color)
+{
+    char    *dst;
+
+    if (x < win->width && y < win->height)
+    {
+        // dst = img->addr + (4 * win->width * y + x * 4);
+        // *(unsigned int*)dst = color;
+        ft_memcpy(img->addr + (4 * win->width * y + x * 4), &color, sizeof(unsigned int));
+    }
+}
+
 
 t_img *new_image(t_win *win, int size_width, int size_height)
 {

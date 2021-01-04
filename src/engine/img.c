@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void    vertical_line(t_line *line, t_win *win, int color)
+void    vertical_line_color(t_line *line, t_win *win, int color)
 {
     int y;
     int y_max;
@@ -32,13 +32,13 @@ void    vertical_line(t_line *line, t_win *win, int color)
         while (y < y_max)
         {
             // pixel_put2(win, win->img, line->line_x, y, color);
-            pixel_put(win->img, line->line_x, y, color);
+            pixel_put_color(win->img, line->line_x, y, color);
             ++y;
         }
     }
 }
 
-void    pixel_put(t_img *img, int x, int y, int color)
+void    pixel_put_color(t_img *img, int x, int y, int color)
 {
     char    *dst;
     
@@ -53,12 +53,17 @@ void    pixel_put2(t_win *win, t_img *img, int x, int y, int color)
     char    *dst;
 
     if (x < win->width && y < win->height)
-    {
-        // dst = img->addr + (4 * win->width * y + x * 4);
-        // *(unsigned int*)dst = color;
         ft_memcpy(img->addr + (4 * win->width * y + x * 4), &color, sizeof(unsigned int));
-    }
 }
+
+// void    pixel_put_tex(t_win *win, t_line *line, t_img *texture, t_cam_ray *ray, int x, int y, int index)
+// {
+//     if (x < win->width && y < win->height)
+//     {
+//         line->tex_y = abs((((y * 256 - win->height * 128 + ray->line_height * 128) * 64) / ray->line_height) / 256);
+//         ft_memcpy(win->img->addr + 4 * win->width * y + 4, win->texture[index]->addr + line->tex_y % 64 * win->texture[index]->line_len + line->tex_x % 64 * win->texture[index]->bpp / 8, sizeof(int));
+//     }
+// }
 
 
 t_img *new_image(t_win *win, int size_width, int size_height)

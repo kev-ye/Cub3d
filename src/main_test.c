@@ -60,6 +60,8 @@
 // {
 //     t_win *win;
 //     t_img *img;
+//     int width;
+//     int height;
 
 //     if (!(win = init_mlx_win()) ||
 //         !(init_key(win)) ||
@@ -67,12 +69,14 @@
 //         exit(0);
 //     if (!(img = new_image(win, 800, 600)))
 //         exit(0);
-//     vertical_line();
-//     mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
+//     // vertical_line();
+//     // mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, img->img_ptr, win->camera->pos_x, win->camera->pos_y);
+//     img = mlx_xpm_file_to_image(win->mlx_ptr, "./textures/east.xpm", &width, &height);
+//     printf("%d\n", img);
 //     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
 //     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
 //     mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
-//     mlx_loop_hook(win->mlx_ptr, test_draw_move, win);
+//     // mlx_loop_hook(win->mlx_ptr, test_draw_move, win);
 //     mlx_loop(win->mlx_ptr);
 //     return (0);
 // }

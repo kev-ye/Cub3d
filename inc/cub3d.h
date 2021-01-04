@@ -106,6 +106,8 @@ typedef struct      s_line
     int line_y;
     int y0;
     int y1;
+    int tex_x;
+    int tex_y;
 }                   t_line;
 
 // MAP STRUCT
@@ -128,6 +130,7 @@ typedef struct      s_win
     t_img       *img;
     t_camera    *camera;
     t_map       *map;
+    t_img       **texture;
 }                   t_win;
 
 // COLOR FUNCTION
@@ -151,11 +154,15 @@ int event_key(t_win *win);
 int    event_loop(t_win *win);
 
 // ENGINE FUNCION
-    //Engine -> img
-void    pixel_put(t_img *img, int x, int y, int color);
+    // Engine -> img
+void    pixel_put_color(t_img *img, int x, int y, int color);
 void    pixel_put2(t_win *win, t_img *img, int x, int y, int color); // test
 t_img   *new_image(t_win *win, int size_x, int size_y);
-void    vertical_line(t_line *line, t_win *win, int color);
+void    vertical_line_color(t_line *line, t_win *win, int color);
+    // Engine -> texture
+int     set_texture(t_win *win, const char *path, int index);
+int     load_texture(t_win *win);
+// void     vertical_line_tex(???);
     // Engine -> ray_casting
 void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);

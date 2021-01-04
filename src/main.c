@@ -136,7 +136,10 @@ int main()
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
     mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
-    mlx_loop_hook(win->mlx_ptr, event_loop, win);
+    // mlx_loop_hook(win->mlx_ptr, event_loop, win);
+    win->texture = malloc(sizeof(char *) * 4);
+    load_texture(win);
+    // mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->texture[0]->img_ptr, 0, 0);
     mlx_loop(win->mlx_ptr);
     return (0);
 }

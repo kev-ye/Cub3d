@@ -6,19 +6,20 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:21:27 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/03 17:21:52 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/04 21:38:37 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_side(t_cam_ray *ray, t_win *win, t_line *line, int color, double wall_x)
+void    draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x)
 {
     int  tex_x;
     t_img *img;
 
-    if (ray->side == 1)
-        color = color / 2;
+    img = win->texture[0];
+    if (ray->side == 0)
+        img = win->texture[1];
     tex_x = (int)(wall_x * (double)img->width);
     if (ray->side == 0 && ray->ray_dir_x > 0)
         tex_x = img->width - tex_x - 1;
@@ -27,7 +28,7 @@ void    draw_side(t_cam_ray *ray, t_win *win, t_line *line, int color, double wa
     line->y0 = ray->draw_start;
     line->y1 = ray->draw_end;
     line->tex_x = tex_x;
-    // vertical_line_tex(???);
+    vertical_line_tex(line, win, img, ray);
 }
 
 void    draw_text(t_cam_ray *ray, t_win *win)
@@ -50,15 +51,10 @@ void    draw_text(t_cam_ray *ray, t_win *win)
         wall_x = win->camera->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
     wall_x -= floor(wall_x);
     if (win->map->map[ray->map_y][ray->map_x] == '1')
-    {
-        //draw_side();
-        color = BLUE;
-    }
-    if (ray->side == 1)
-        color = color / 2;
-    line->y0 = ray->draw_start;
-    line->y1 = ray->draw_end;
-    vertical_line_color(line, win, color);
+        draw_side(ray, win, line, wall_x);
+    // line->y0 = ray->draw_start;
+    // line->y1 = ray->draw_end;
+    // vertical_line_color(line, win, color);
     line->y0 = 0;
 	line->y1 = ray->draw_start;
 	vertical_line_color(line, win, RED);
@@ -75,12 +71,13 @@ int     set_texture(t_win *win, const char *path, int index)
     return (SUCCESS);
 }
 
-int     load_texture(t_win *win)
+int     load_texture(t_win *win) // test
 {
-    int i;
-    i = set_texture(win, "./textures/east.xpm", 0);
-    if (!i)
+    int a;
+    int b;
+    a = set_texture(win, "./textures/north.xpm", 0);
+    b = set_texture(win, "./textures/east.xpm", 1);
+    if (!a || !b)
         return (ERROR);
     return (SUCCESS);
-    
 }

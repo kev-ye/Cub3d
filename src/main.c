@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/03 19:38:33 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/04 21:26:46 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,19 @@ int init_camera(t_win *win)
     return (SUCCESS);
 }
 
+int init_tex(t_win *win)
+{
+    if (!(win->texture = malloc(sizeof(t_img *) * 2)))
+        return (ERROR);
+    if (!(win->texture[0] = malloc(sizeof(t_img))))
+        return (ERROR);
+    if (!(win->texture[1] = malloc(sizeof(t_img))))
+        return (ERROR);
+    ft_bzero(win->texture[0], sizeof(t_img));
+    ft_bzero(win->texture[1], sizeof(t_img));
+    return (SUCCESS);
+}
+
 int main()
 {
     t_win *win;
@@ -133,13 +146,13 @@ int main()
         exit(0);
     if (!(init_camera(win)))
         exit(0);
+    if (!(init_tex(win)))
+        exit(0);
+    load_texture(win);
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
     mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
-    // mlx_loop_hook(win->mlx_ptr, event_loop, win);
-    win->texture = malloc(sizeof(char *) * 4);
-    load_texture(win);
-    // mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->texture[0]->img_ptr, 0, 0);
+    mlx_loop_hook(win->mlx_ptr, event_loop, win);
     mlx_loop(win->mlx_ptr);
     return (0);
 }

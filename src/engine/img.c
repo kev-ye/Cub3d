@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/03 21:05:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/04 21:33:46 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,37 @@ void    pixel_put2(t_win *win, t_img *img, int x, int y, int color)
 //     }
 // }
 
+void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray)
+{
+    int draw;
+    draw = line->line_y * texture->line_len - win->height * texture->line_len / 2 + ray->line_height * texture->line_len / 2;
+    line->tex_y = ((draw * texture->height) / ray->line_height) / texture->line_len;
+    ft_memcpy(win->img->addr + line->line_y * win->img->line_len + line->line_x * win->img->bpp / 8, texture->addr + line->tex_y * texture->line_len + line->tex_x * (texture->bpp / 8), sizeof(int));
+}
+
+void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *ray)
+{
+    int y_max;
+
+    if (line->y0 < line->y1)
+    {
+        line->line_y = line->y0;
+        y_max = line->y1;
+    }
+    else
+    {
+        line->line_y = line->y1;
+        y_max = line->y0;
+    }
+    if (line->line_y >= 0)
+    {
+        while (line->line_y < y_max)
+        {
+            pixel_put_tex(line, texture, win, ray);
+            ++line->line_y;
+        }
+    }
+}
 
 t_img *new_image(t_win *win, int size_width, int size_height)
 {

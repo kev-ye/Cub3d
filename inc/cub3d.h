@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/03 20:37:58 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/04 20:47:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ void    pixel_put_color(t_img *img, int x, int y, int color);
 void    pixel_put2(t_win *win, t_img *img, int x, int y, int color); // test
 t_img   *new_image(t_win *win, int size_x, int size_y);
 void    vertical_line_color(t_line *line, t_win *win, int color);
+void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *ray);
+void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
     // Engine -> texture
 int     set_texture(t_win *win, const char *path, int index);
 int     load_texture(t_win *win);
@@ -185,5 +187,6 @@ void    draw_something(t_win *win, t_img *img, int color);
 int    test_draw_move(t_win *win, t_img *img, int color);
     // Engine -> draw -> wall
 void   draw_text(t_cam_ray *ray, t_win *win);
+void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
 
 #endif

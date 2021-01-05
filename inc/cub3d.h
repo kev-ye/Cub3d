@@ -42,81 +42,81 @@
 // CAMERA STRUCT
 typedef struct      s_camera
 {
-    double pos_x;
-    double pos_y;
-    double dir_x;
-    double dir_y;
-    double plane_x;
-    double plane_y;
-    double cam_height;
-    double speed;
-    double rot_speed;
+    double  pos_x;
+    double  pos_y;
+    double  dir_x;
+    double  dir_y;
+    double  plane_x;
+    double  plane_y;
+    double  cam_height;
+    double  speed;
+    double  rot_speed;
 }                   t_camera;
 
 // RAY STRUCT
 typedef struct      s_cam_ray
 {
-    int pix;
-    double camera_x;
-    double ray_dir_x;
-    double ray_dir_y;
-    int map_x;
-    int map_y;
-    double side_dist_x;
-    double side_dist_y;
-    double delta_dist_x;
-    double delta_dist_y;
-    double perp_wall_dist;
-    int step_x;
-    int step_y;
-    int hit;
-    int side;
-    int line_height;
-    int draw_start;
-    int draw_end;
+    int     pix;
+    double  camera_x;
+    double  ray_dir_x;
+    double  ray_dir_y;
+    int     map_x;
+    int     map_y;
+    double  side_dist_x;
+    double  side_dist_y;
+    double  delta_dist_x;
+    double  delta_dist_y;
+    double  perp_wall_dist;
+    int     step_x;
+    int     step_y;
+    int     hit;
+    int     side;
+    int     line_height;
+    int     draw_start;
+    int     draw_end;
 }                   t_cam_ray;
 
 // DRAW IMAGE STRUCT
 typedef struct      s_img 
 {
-    void *img_ptr;
-    char *addr;
-    int  bpp;
-    int  line_len;
-    int  endian;
-    int  width;
-    int  height;
+    void    *img_ptr;
+    char    *addr;
+    int     bpp;
+    int     line_len;
+    int     endian;
+    int     width;
+    int     height;
 }                   t_img;
 
 // KEYBOARD STRUCT
 typedef struct      s_key
 {
-    int key_w;
-    int key_s;
-    int key_a;
-    int key_d;
-    int key_left;
-    int key_right;
+    int     key_w;
+    int     key_s;
+    int     key_a;
+    int     key_d;
+    int     key_left;
+    int     key_right;
 }                   t_key;
 
 // LINE STRUCT
 typedef struct      s_line
 {
-    int line_x;
-    int line_y;
-    int y0;
-    int y1;
-    int tex_x;
-    int tex_y;
+    int     line_x;
+    int     line_y;
+    int     draw_start;
+    int     draw_end;
+    int     tex_x;
+    int     tex_y;
 }                   t_line;
 
 // MAP STRUCT
 typedef struct      s_map
 {
-    char **map;
-    char *map_name;
-    int map_width;
-    int map_height;
+    char    **map;
+    char    *map_name;
+    int     map_width;
+    int     map_height;
 }                   t_map;
 
 // WINDOW STRUCT
@@ -155,16 +155,14 @@ int    event_loop(t_win *win);
 
 // ENGINE FUNCION
     // Engine -> img
-void    pixel_put_color(t_img *img, int x, int y, int color);
-void    pixel_put2(t_win *win, t_img *img, int x, int y, int color); // test
 t_img   *new_image(t_win *win, int size_x, int size_y);
+void    pixel_put_color(t_img *img, int x, int y, int color);
 void    vertical_line_color(t_line *line, t_win *win, int color);
 void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *ray);
 void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
     // Engine -> texture
 int     set_texture(t_win *win, const char *path, int index);
 int     load_texture(t_win *win);
-// void     vertical_line_tex(???);
     // Engine -> ray_casting
 void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
@@ -186,7 +184,8 @@ void    draw_something(t_win *win, t_img *img, int color);
     // Engine -> draw -> move
 int    test_draw_move(t_win *win, t_img *img, int color);
     // Engine -> draw -> wall
-void   draw_text(t_cam_ray *ray, t_win *win);
 void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
+void   draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray);
+void   mapping(t_cam_ray *ray, t_win *win);
 
 #endif

@@ -122,14 +122,20 @@ int init_camera(t_win *win)
 
 int init_tex(t_win *win)
 {
-    if (!(win->texture = malloc(sizeof(t_img *) * 2)))
+    if (!(win->texture = malloc(sizeof(t_img *) * 4)))
         return (ERROR);
     if (!(win->texture[0] = malloc(sizeof(t_img))))
         return (ERROR);
     if (!(win->texture[1] = malloc(sizeof(t_img))))
         return (ERROR);
+    if (!(win->texture[2] = malloc(sizeof(t_img))))
+        return (ERROR);
+    if (!(win->texture[3] = malloc(sizeof(t_img))))
+        return (ERROR);
     ft_bzero(win->texture[0], sizeof(t_img));
     ft_bzero(win->texture[1], sizeof(t_img));
+    ft_bzero(win->texture[2], sizeof(t_img));
+    ft_bzero(win->texture[3], sizeof(t_img));
     return (SUCCESS);
 }
 

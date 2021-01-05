@@ -18,20 +18,38 @@ void    draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x)
     t_img *img;
 
     img = win->texture[0];
-    if (ray->side == 0)
+    if (ray->side == 1)
         img = win->texture[1];
+    if (ray->side == 2)
+        img = win->texture[2];
+    if (ray->side == 3)
+        img = win->texture[3];
     tex_x = (int)(wall_x * (double)img->width);
-    if (ray->side == 0 && ray->ray_dir_x > 0)
+    // if (ray->side == 0 && ray->ray_dir_x > 0)
+    //     tex_x = img->width - tex_x - 1;
+    // if (ray->side == 1 && ray->ray_dir_y < 0)
+    //     tex_x = img->width - tex_x - 1;
+    if ((ray->side == 0 || ray->side == 1)&& ray->ray_dir_x > 0)
         tex_x = img->width - tex_x - 1;
-    if (ray->side == 1 && ray->ray_dir_y < 0)
+    if ((ray->side == 2 || ray->side == 3) && ray->ray_dir_y < 0)
         tex_x = img->width - tex_x - 1;
-    line->y0 = ray->draw_start;
-    line->y1 = ray->draw_end;
+    line->draw_start = ray->draw_start;
+    line->draw_end = ray->draw_end;
     line->tex_x = tex_x;
     vertical_line_tex(line, win, img, ray);
 }
 
-void    draw_text(t_cam_ray *ray, t_win *win)
+void    draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray)
+{
+    line->draw_start = 0;
+	line->draw_end = ray->draw_start;
+	vertical_line_color(line, win, RED);
+	line->draw_start = ray->draw_end;
+	line->draw_end = win->height;
+	vertical_line_color(line, win, GREEN);
+}
+
+void    mapping(t_cam_ray *ray, t_win *win)
 {
     t_img *img;
     t_line *line;
@@ -45,22 +63,14 @@ void    draw_text(t_cam_ray *ray, t_win *win)
     }
     ft_bzero(line, sizeof(t_line));
     line->line_x = ray->pix;
-    if (ray->side == 0)
+    if (ray->side == 0 || ray->side == 1)
         wall_x = win->camera->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
     else
         wall_x = win->camera->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
     wall_x -= floor(wall_x);
     if (win->map->map[ray->map_y][ray->map_x] == '1')
         draw_side(ray, win, line, wall_x);
-    // line->y0 = ray->draw_start;
-    // line->y1 = ray->draw_end;
-    // vertical_line_color(line, win, color);
-    line->y0 = 0;
-	line->y1 = ray->draw_start;
-	vertical_line_color(line, win, RED);
-	line->y0 = win->height;
-	line->y1 = ray->draw_end;
-	vertical_line_color(line, win, GREEN);
+    draw_ceiling_floor(win, line, ray);
 }
 
 int     set_texture(t_win *win, const char *path, int index)
@@ -73,11 +83,16 @@ int     set_texture(t_win *win, const char *path, int index)
 
 int     load_texture(t_win *win) // test
 {
-    int a;
-    int b;
-    a = set_texture(win, "./textures/north.xpm", 0);
-    b = set_texture(win, "./textures/east.xpm", 1);
-    if (!a || !b)
+    int tex_1;
+    int tex_2;
+    int tex_3;
+    int tex_4;
+
+    tex_1 = set_texture(win, "./textures/north.xpm", 0);
+    tex_2 = set_texture(win, "./textures/south.xpm", 1);
+    tex_3 = set_texture(win, "./textures/east.xpm", 2);
+    tex_4 = set_texture(win, "./textures/west.xpm", 3);
+    if (!tex_1 || !tex_2 || !tex_3 || !tex_4)
         return (ERROR);
     return (SUCCESS);
 }

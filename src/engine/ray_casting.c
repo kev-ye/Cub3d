@@ -21,7 +21,7 @@ static void     ray_casting_regroup(t_win *win, t_cam_ray *ray)
     step_calc_init_side_dist(cam, ray);
     wall_hit(ray, win);
     perpwalldist_and_heightline(cam, ray, win);
-    draw_text(ray, win);
+    mapping(ray, win);
 }
 
 int ray_casting(t_win *win)

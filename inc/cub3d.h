@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/05 19:44:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/06 13:20:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,21 @@ typedef struct      s_win
     t_img       **texture;
 }                   t_win;
 
-// COLOR FUNCTION
+// DESC CHECK STRUCT
+typedef struct      s_desc
+{
+    int map;
+    int r;
+    int no;
+    int so;
+    int we;
+    int ea;
+    int s;
+    int f;
+    int c;
+}                   t_desc;
+
+// COLOR FUNCTION -> to remove
 int		create_trgb(int t, int r, int g, int b);
 int		get_t(int trgb);
 int		get_r(int trgb);
@@ -188,5 +202,8 @@ int    test_draw_move(t_win *win, t_img *img, int color);
 void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
 void   draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray);
 void   mapping(t_cam_ray *ray, t_win *win);
+
+// UTILS
+void    msg_error(char *msg);
 
 #endif

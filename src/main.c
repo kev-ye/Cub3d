@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/05 19:10:24 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/06 13:22:15 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,26 +139,26 @@ int init_tex(t_win *win)
     return (SUCCESS);
 }
 
-// int main()
-// {
-//     t_win *win;
-//     t_img *img;
+int main()
+{
+    t_win *win;
+    t_img *img;
 
-//     if (!(win = init_mlx_win()))
-//         exit(0);
-//     if (!(init_window(win)))
-//         exit(0);
-//     if (!(init_key(win)))
-//         exit(0);
-//     if (!(init_camera(win)))
-//         exit(0);
-//     if (!(init_tex(win)))
-//         exit(0);
-//     load_texture(win);
-//     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
-//     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
-//     mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
-//     mlx_loop_hook(win->mlx_ptr, event_loop, win);
-//     mlx_loop(win->mlx_ptr);
-//     return (0);
-// }
+    if (!(win = init_mlx_win()))
+        exit(0);
+    if (!(init_window(win)))
+        exit(0);
+    if (!(init_key(win)))
+        exit(0);
+    if (!(init_camera(win)))
+        exit(0);
+    if (!(init_tex(win)))
+        exit(0);
+    load_texture(win);
+    mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
+    mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
+    mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
+    mlx_loop_hook(win->mlx_ptr, event_loop, win);
+    mlx_loop(win->mlx_ptr);
+    return (0);
+}

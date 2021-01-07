@@ -6,11 +6,11 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/06 13:22:08 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/07 13:11:05 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "cub3d.h"
+#include "cub3d.h"   
 
 // // void shut_down(t_win *win)
 // // {
@@ -446,28 +446,76 @@
 
 // //////////////////////////////////////////// parser file
 
-// void    init_desc(t_desc *d)
-// {
-//     ft_bzero()
-// }
+t_desc    init_desc()
+{
+    t_desc desc;
+    
+    ft_bzero(&desc, sizeof(desc));
+    return (desc);
+}
 
-// int check_file_name(char *path)
-// {
-//     char *tmp_path;
+int check_file_name(const char *path)
+{
+    const char *tmp_path;
 
-//     tmp_path = path;
-//     while (*path && *path != '.')
-//         ++path;
-//     if (*path && !ft_strcmp(path, ".cub"))
-//     {
-//         path = tmp_path;
-//         return (1);
-//     }
-//     msg_error("Map file no valid\n");
-//     return (0);   
-// }
+    tmp_path = path;
+    while (*path && *path != '.')
+        ++path;
+    if (*path && !ft_strcmp(path, ".cub"))
+    {
+        path = tmp_path;
+        return (1);
+    }
+    msg_error("Map file name no valid\n");
+    return (0);   
+}
 
-// int main(int ac, char **av)
-// {
-//     check_file_name(av[1]);
-// }
+int check_file_line_element()
+
+int check_file_line(char *line)
+{
+    t_desc desc;
+    int i;
+
+    if (!*line)
+        return (SUCCESS);
+    desc = init_desc();
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == ' ')
+            ++i;
+        else if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' )
+        {
+            if (line[i] == 'R' && line[i + 1] == ' ')
+                desc.r = 1;
+            else if (line[i] == 'S' && !ft_strncmp(*(line + i), "SO", 2))
+                desc.s = 1;
+            else if (line[i] == 'F' && line[i + 1] == ' ')
+                desc.f = 1;
+        }
+        else
+            return (ERROR);
+    }
+    return (SUCCESS);
+}
+
+int check_file_norme(const char *path)
+{
+    char *line;
+    int r;
+    int fd;
+
+    if ((fd = open(path, O_RDONLY)) == -1)
+        return (ERROR);
+    r = 1;
+    while (r)
+    {
+        r = get_next_line(fd, &line);
+    }
+}
+
+int main(int ac, char **av)
+{
+    return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/07 13:11:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/08 12:45:51 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,37 +81,6 @@
 // //     return (0);
 // // }
 
-// // int map_x(char **map, int x, int y)
-// // {
-// //     while (map[y][x])
-// //     {
-// //         if (map[y][x] == '1')
-// //             return (1);
-// //         ++x;
-// //     }
-// //     return (0);
-// // }
-
-// // int map_check(char **map)
-// // {
-// //     int x;
-// //     int y;
-
-// //     x = 0;
-// //     y = 0;
-// //     while (1)
-// //     {
-// //         if (map[y][x] && map[y][x] == '1')
-// //             x++;
-// //         if (map[y][x] == '\0')
-// //             y++;
-// //         if (map[y][x] == '0')
-// //         {
-            
-// //         }
-// //     }
-// // }
-
 // int check_map(char **map, int px, int py);
 // int check_map_1(char **map, int px, int py);
 // int check_map_2(char **map, int px, int py);
@@ -142,7 +111,7 @@
 // //     {
 // //         r1 = get_next_line(fd, &line);
 // //         i = 0;
-// //         while (line[i] != '\0' && line[i] != '\n')
+// //         while (line[i] != '\0')
 // //         {
 // //             ++i;
 // //             if (len_max_x < i)
@@ -454,6 +423,8 @@ t_desc    init_desc()
     return (desc);
 }
 
+//////////////////////////////////////////// function check file name
+
 int check_file_name(const char *path)
 {
     const char *tmp_path;
@@ -470,29 +441,61 @@ int check_file_name(const char *path)
     return (0);   
 }
 
-int check_file_line_element()
+//////////////////////////////////////////// function check file info line
 
-int check_file_line(char *line)
+int check_file_line_info_done(t_desc desc)
 {
-    t_desc desc;
+    if (desc.r == 0 || desc.no == 0 || desc.so == 0 || desc.we == 0 ||
+        desc.ea == 0 || desc.s == 0 || desc.f == 0 || desc.c == 0)
+        return (SUCCESS);
+    else if (desc.r == 1 && desc.no == 1 && desc.so == 1 && desc.we == 1 &&
+        desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1)
+        return (SUCCESS);
+    return (ERROR);
+}
+
+int check_file_line_info(char *line, int i, t_desc *desc)
+{
+    if (line[i] == 'R' && line[i + 1] == ' ')
+        desc->r++;
+    else if (line[i] == 'S' && line[i + 1] == ' ')
+        desc->s++;
+    else if (line[i] == 'F' && line[i + 1] == ' ')
+        desc->f++;
+    else if (line[i] == 'C' && line[i + 1] == ' ')
+        desc->c++;
+    else if (line[i] == 'N' && !ft_strncmp((line + i), "NO", 2))
+        desc->no++;
+    else if (line[i] == 'S' && !ft_strncmp((line + i), "SO", 2))
+        desc->so++;
+    else if (line[i] == 'W' && !ft_strncmp((line + i), "WE", 2))
+        desc->we++;
+    else if (line[i] == 'E' && !ft_strncmp((line + i), "EA", 2))
+        desc->ea++;
+    else
+        return (ERROR);
+    return (SUCCESS);
+}
+
+int check_file_line(char *line, t_desc *desc)
+{
     int i;
 
     if (!*line)
         return (SUCCESS);
-    desc = init_desc();
     i = 0;
     while (line[i])
     {
         if (line[i] == ' ')
             ++i;
-        else if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' )
+        else if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
+                line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
+                line[i] == 'C')
         {
-            if (line[i] == 'R' && line[i + 1] == ' ')
-                desc.r = 1;
-            else if (line[i] == 'S' && !ft_strncmp(*(line + i), "SO", 2))
-                desc.s = 1;
-            else if (line[i] == 'F' && line[i + 1] == ' ')
-                desc.f = 1;
+            if (check_file_line_info(line, i, desc) && check_file_line_info_done(*desc))
+                return (SUCCESS);
+            else
+                return (ERROR);
         }
         else
             return (ERROR);
@@ -500,22 +503,108 @@ int check_file_line(char *line)
     return (SUCCESS);
 }
 
-int check_file_norme(const char *path)
+//////////////////////////////////////////// function check map norme
+
+int check_map_ready(t_desc desc)
+{
+    if (desc.r == 1 && desc.no == 1 && desc.so == 1 && desc.we == 1 &&
+        desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1)
+        return (SUCCESS);
+    return (ERROR);
+}
+
+int check_map_exist(char *line)
+{
+    int i;
+
+    i = 0;
+    if (!line[i])
+        return (SUCCESS);
+    while (line[i])
+    {
+        if (line[i] == ' ')
+            ++i;
+        else if (line[i] == '0' || line[i] == '1' || line[i] == '2' ||
+                line[i] == 'N'|| line[i] == 'S' || line[i] == 'E' ||
+                line[i] == 'W')
+            return (SUCCESS);
+        else 
+            return (ERROR);
+    }
+    return (ERROR);
+}
+
+int check_map_norm(char *line, t_desc *desc)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2')
+            i++;
+        else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+            i++;
+        else
+        {
+            desc->map = 0;
+            free (line);
+            return (ERROR);
+        }
+    }
+    desc->map = 1;
+    free(line);
+    return (SUCCESS);
+}
+
+//////////////////////////////////////////// function check file norme global
+
+int check_file(const char *path)
 {
     char *line;
     int r;
     int fd;
+    int check;
+    t_desc desc;
 
     if ((fd = open(path, O_RDONLY)) == -1)
         return (ERROR);
     r = 1;
+    check = 0;
+    desc = init_desc();
     while (r)
     {
         r = get_next_line(fd, &line);
+        if (!check_file_line(line, &desc))
+        {
+            free(line);
+            return (ERROR);
+        }
+        free(line);
+        if (check_map_ready(desc))
+            break;
     }
+    while (r)
+    {
+        r = get_next_line(fd, &line);
+        if (!check_map_exist(line))
+        {
+            free(line);
+            return (ERROR);
+        }
+        free(line);
+    }
+    // if (desc.map == 0)
+    //     return (ERROR);
+    return (SUCCESS);
 }
 
 int main(int ac, char **av)
 {
+    int i = check_file(av[1]);
+    if (!i)
+        printf("ERROR");
+    else
+        printf("SUCESS");
     return (0);
 }

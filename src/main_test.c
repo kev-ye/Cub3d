@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/11 13:34:29 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/11 21:50:08 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,6 +441,7 @@ void    free_split(char **s)
     count = 0;
     while (s[count] != NULL)
         free(s[count++]);
+    free(s[count]);
     free(s);
 }
 
@@ -450,36 +451,55 @@ t_desc_info *init_desc_info()
 
     if (!(new_info = malloc(sizeof(t_desc_info))))
         return (void *)0;
-    ft_bzero(new_info, sizeof(t_desc_info));
+    new_info->r_x = -1;
+    new_info->r_y = -1;
+    new_info->path_no = NULL;
+    new_info->path_so = NULL;
+    new_info->path_we = NULL;
+    new_info->path_ea = NULL;
+    new_info->path_s = NULL;
+    new_info->color_f = -1;
+    new_info->color_c = -1;
     return (new_info);
 }
 
-t_desc_info *get_resoltion(char *line, t_desc_info *desc_info) // forget free split when error return
+void get_resoltion(char *line, t_desc_info **desc_info)
 {
     int count;
     char **s;
     
     count = 0;
     if (!(s = ft_split(line, ' ')))
-        return (void *)0;
+        return ;
     while (s[count] != NULL)
         ++count;
     if (count != 3)
-        return (void *)0;
+    {
+        free_split(s);
+        return ;
+    }
     if (ft_strcmp(s[0], "R"))
-        return (void *)0;
+    {
+        free_split(s);
+        return ;
+    }
     count = 0;
     while (s[1][count])
         if (!ft_isdigit(s[1][count++]))
-            return (void *)0;
+        {
+            free_split(s);
+            return ;
+        }
     count = 0;
     while (s[2][count])
         if (!ft_isdigit(s[2][count++]))
-            return (void *)0;
-    desc_info->r_x = ft_atoi(s[1]);
-    desc_info->r_y = ft_atoi(s[2]);
+        {
+            free_split(s);
+            return ;
+        }
+    (*desc_info)->r_x = ft_atoi(s[1]);
+    (*desc_info)->r_y = ft_atoi(s[2]);
     free_split(s);
-    return (desc_info);
 }
 
 int get_color(char **s)
@@ -496,7 +516,7 @@ int get_color(char **s)
     return (color);
 }
 
-int check_and_get_color(char *s) // forget free split when error return
+int check_and_get_color(char *s)
 {
     char **color;
     int count;
@@ -508,46 +528,151 @@ int check_and_get_color(char *s) // forget free split when error return
     while (color[count] != NULL)
         ++count;
     if (count != 3)
+    {
+        free_split(color);
         return (-1);
+    }
     count = 0;
     while (color[0][count] || color[1][count] || color[2][count])
     {
         if ((color[0][count] && !ft_isdigit(color[0][count])) ||
             (color[1][count] && !ft_isdigit(color[1][count])) ||
             (color[2][count] && !ft_isdigit(color[2][count])))
+        {
+            free_split(color);
             return (-1);
+        }
         ++count;
     }
-    c = get_color(c);
+    c = get_color(color);
     free_split(color);
     return (c);
 }
 
-t_desc_info *get_floor_color(char *line, t_desc_info *desc_info) // forget free split when error return
+void get_floor_color(char *line, t_desc_info **desc_info)
 {
     int count;
     char **s;
 
     count = 0;
     if (!(s = ft_split(line, ' ')))
-        return (void *)0;
+        return ;
     while (s[count] != NULL)
         ++count;
     if (count != 2)
-        return (void *)0;
+    {
+        free_split(s);
+        return ;
+    }
     if (ft_strcmp(s[0], "F"))
-        return (void *)0;
-    desc_info->color_f = check_and_get_color(s[1]);
+    {
+        free_split(s);
+        return ;
+    }
+    (*desc_info)->color_f = check_and_get_color(s[1]);
+    if ((*desc_info)->color_f == -1)
+    {
+        free_split(s);
+        return ;
+    }
     free_split(s);
-    if (desc_info->color_f == -1)
-        return (void *)0;
-    return (desc_info);
 }
 
-// t_desc_info *get_desc_info()
-// {
-    
-// }
+void get_ceiling_color(char *line, t_desc_info **desc_info)
+{
+    int count;
+    char **s;
+
+    count = 0;
+    if (!(s = ft_split(line, ' ')))
+        return ;
+    while (s[count] != NULL)
+        ++count;
+    if (count != 2)
+    {
+        free_split(s);
+        return ;
+    }
+    if (ft_strcmp(s[0], "C"))
+    {
+        free_split(s);
+        return ;
+    }
+    (*desc_info)->color_c = check_and_get_color(s[1]);
+    if ((*desc_info)->color_c == -1)
+    {
+        free_split(s);
+        return ;
+    }
+    free_split(s);
+}
+
+int get_path_2(char **s, t_desc_info **desc_info)
+{
+    char *tmp;
+    if (!ft_strncmp(s[0], "NO", 2))
+    {
+        (*desc_info)->path_no = ft_strdup(s[1]);
+        return (1);
+    }
+    else if (!ft_strncmp(s[0], "SO", 2))
+    {
+        (*desc_info)->path_so = ft_strdup(s[1]);
+        return (1);
+    }
+    else if (!ft_strncmp(s[0], "WE", 2))
+    {
+        (*desc_info)->path_we = ft_strdup(s[1]);
+        return (1);
+    }
+    else if (!ft_strncmp(s[0], "EA", 2))
+    {
+        (*desc_info)->path_ea = ft_strdup(s[1]);
+        return (1);
+    }
+    else if (!ft_strcmp(s[0], "S"))
+    {
+        (*desc_info)->path_s = ft_strdup(s[1]);
+        return (1);
+    }
+    return (0);
+}
+
+void get_path(char *line, t_desc_info **desc_info)
+{
+    int count;
+    char **s;
+
+    count = 0;
+    if (!(s = ft_split(line, ' ')))
+        return ;
+    while (s[count] != NULL)
+        ++count;
+    if (count != 2)
+    {
+        free_split(s);
+        return ;
+    }
+    if (!get_path_2(s, &*desc_info))
+    {
+        free_split(s);
+        return ;
+    }
+    free_split(s);
+}
+
+t_desc_info *get_desc_info(char *line)
+{
+    t_desc_info *desc_info;
+
+    if (!(desc_info = init_desc_info()))
+        return (void *)0;
+    get_resoltion(line, &desc_info);
+    get_floor_color(line, &desc_info);
+    get_ceiling_color(line, &desc_info);
+    get_path(line, &desc_info);
+    return (desc_info);
+}
 
 //////////////////////////////////////////// function check file name
 
@@ -739,7 +864,22 @@ int main(int ac, char **av)
     //     printf("ERROR");
     // else
     //     printf("SUCESS");
-    int i = ft_atoi("123,123");
-    printf("%d\n", i);
+    t_desc_info *desc_info;
+    char *s = "NO ./path_to_the_north_texture";
+    desc_info = get_desc_info(s);
+    if (desc_info != 0)
+    {
+        printf("Rx : %d\n", desc_info->r_x);
+        printf("Ry : %d\n", desc_info->r_y);
+        printf("F : %d\n", desc_info->color_f);
+        printf("C : %d\n", desc_info->color_c);
+        printf("NO : %s\n", desc_info->path_no);
+        printf("SO : %s\n", desc_info->path_so);
+        printf("WE : %s\n", desc_info->path_we);
+        printf("EA : %s\n", desc_info->path_ea);
+        printf("S : %s\n", desc_info->path_s);
+    }
+    else
+        printf("ERROR\n");
     return (0);
 }

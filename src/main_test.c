@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/11 12:19:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/11 13:34:29 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,21 +432,6 @@ int		create_rgb(int r, int g, int b)
 	return(r << 16 | g << 8 | b);
 }
 
-int		get_r(int rgb)
-{
-	return (rgb & (0xFF << 16));
-}
-
-int		get_g(int rgb)
-{
-	return (rgb & (0xFF << 8));
-}
-
-int		get_b(int rgb)
-{
-	return (rgb & 0xFF);
-}
-
 //////////////////////////////////////////// get element info
 
 void    free_split(char **s)
@@ -469,7 +454,7 @@ t_desc_info *init_desc_info()
     return (new_info);
 }
 
-t_desc_info *get_resoltion(char *line, t_desc_info *desc_info)
+t_desc_info *get_resoltion(char *line, t_desc_info *desc_info) // forget free split when error return
 {
     int count;
     char **s;
@@ -497,43 +482,51 @@ t_desc_info *get_resoltion(char *line, t_desc_info *desc_info)
     return (desc_info);
 }
 
-t_desc_info *get_color(char **s)
+int get_color(char **s)
 {
-    
+    int r;
+    int g;
+    int b;
+    int color;
+
+    r = ft_atoi(s[0]);
+    g = ft_atoi(s[1]);
+    b = ft_atoi(s[2]);
+    color = create_rgb(r, g, b);
+    return (color);
 }
 
-int check_color(char *s)
+int check_and_get_color(char *s) // forget free split when error return
 {
     char **color;
     int count;
+    int c;
 
     count = 0;
     if (!(color = ft_split(s, ',')))
-        return (0);
+        return (-1);
     while (color[count] != NULL)
         ++count;
     if (count != 3)
-        return (0);
+        return (-1);
     count = 0;
     while (color[0][count] || color[1][count] || color[2][count])
     {
         if ((color[0][count] && !ft_isdigit(color[0][count])) ||
             (color[1][count] && !ft_isdigit(color[1][count])) ||
-            (color[2][count] && ft_isdigit(color[2][count])))
-            return (0);
+            (color[2][count] && !ft_isdigit(color[2][count])))
+            return (-1);
         ++count;
     }
+    c = get_color(c);
     free_split(color);
-    return (1);
+    return (c);
 }
 
-t_desc_info *get_floor_color(char *line, t_desc_info *desc_info)
+t_desc_info *get_floor_color(char *line, t_desc_info *desc_info) // forget free split when error return
 {
     int count;
     char **s;
-    int r;
-    int g;
-    int b;
 
     count = 0;
     if (!(s = ft_split(line, ' ')))
@@ -543,6 +536,10 @@ t_desc_info *get_floor_color(char *line, t_desc_info *desc_info)
     if (count != 2)
         return (void *)0;
     if (ft_strcmp(s[0], "F"))
+        return (void *)0;
+    desc_info->color_f = check_and_get_color(s[1]);
+    free_split(s);
+    if (desc_info->color_f == -1)
         return (void *)0;
     return (desc_info);
 }

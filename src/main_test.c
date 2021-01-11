@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/11 09:39:58 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/11 12:19:25 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,6 +415,8 @@
 
 //////////////////////////////////////////// parser file
 
+//////////////////////////////////////////// init description value
+
 t_desc    init_desc()
 {
     t_desc desc;
@@ -422,6 +424,133 @@ t_desc    init_desc()
     ft_bzero(&desc, sizeof(desc));
     return (desc);
 }
+
+//////////////////////////////////////////// color function
+
+int		create_rgb(int r, int g, int b)
+{
+	return(r << 16 | g << 8 | b);
+}
+
+int		get_r(int rgb)
+{
+	return (rgb & (0xFF << 16));
+}
+
+int		get_g(int rgb)
+{
+	return (rgb & (0xFF << 8));
+}
+
+int		get_b(int rgb)
+{
+	return (rgb & 0xFF);
+}
+
+//////////////////////////////////////////// get element info
+
+void    free_split(char **s)
+{
+    int count;
+
+    count = 0;
+    while (s[count] != NULL)
+        free(s[count++]);
+    free(s);
+}
+
+t_desc_info *init_desc_info()
+{
+    t_desc_info *new_info;
+
+    if (!(new_info = malloc(sizeof(t_desc_info))))
+        return (void *)0;
+    ft_bzero(new_info, sizeof(t_desc_info));
+    return (new_info);
+}
+
+t_desc_info *get_resoltion(char *line, t_desc_info *desc_info)
+{
+    int count;
+    char **s;
+    
+    count = 0;
+    if (!(s = ft_split(line, ' ')))
+        return (void *)0;
+    while (s[count] != NULL)
+        ++count;
+    if (count != 3)
+        return (void *)0;
+    if (ft_strcmp(s[0], "R"))
+        return (void *)0;
+    count = 0;
+    while (s[1][count])
+        if (!ft_isdigit(s[1][count++]))
+            return (void *)0;
+    count = 0;
+    while (s[2][count])
+        if (!ft_isdigit(s[2][count++]))
+            return (void *)0;
+    desc_info->r_x = ft_atoi(s[1]);
+    desc_info->r_y = ft_atoi(s[2]);
+    free_split(s);
+    return (desc_info);
+}
+
+t_desc_info *get_color(char **s)
+{
+    
+}
+
+int check_color(char *s)
+{
+    char **color;
+    int count;
+
+    count = 0;
+    if (!(color = ft_split(s, ',')))
+        return (0);
+    while (color[count] != NULL)
+        ++count;
+    if (count != 3)
+        return (0);
+    count = 0;
+    while (color[0][count] || color[1][count] || color[2][count])
+    {
+        if ((color[0][count] && !ft_isdigit(color[0][count])) ||
+            (color[1][count] && !ft_isdigit(color[1][count])) ||
+            (color[2][count] && ft_isdigit(color[2][count])))
+            return (0);
+        ++count;
+    }
+    free_split(color);
+    return (1);
+}
+
+t_desc_info *get_floor_color(char *line, t_desc_info *desc_info)
+{
+    int count;
+    char **s;
+    int r;
+    int g;
+    int b;
+
+    count = 0;
+    if (!(s = ft_split(line, ' ')))
+        return (void *)0;
+    while (s[count] != NULL)
+        ++count;
+    if (count != 2)
+        return (void *)0;
+    if (ft_strcmp(s[0], "F"))
+        return (void *)0;
+    return (desc_info);
+}
+
+// t_desc_info *get_desc_info()
+// {
+    
+// }
 
 //////////////////////////////////////////// function check file name
 
@@ -536,27 +665,6 @@ int check_no_map(char *line, t_desc *desc)
     return (ERROR);
 }
 
-// int check_map_exist(char *line)
-// {
-//     int i;
-
-//     i = 0;
-//     if (!line[i])
-//         return (SUCCESS);
-//     while (line[i])
-//     {
-//         if (line[i] == ' ')
-//             ++i;
-//         else if (line[i] == '0' || line[i] == '1' || line[i] == '2' ||
-//                 line[i] == 'N'|| line[i] == 'S' || line[i] == 'E' ||
-//                 line[i] == 'W')
-//             return (SUCCESS);
-//         else 
-//             return (ERROR);
-//     }
-//     return (ERROR);
-// }
-
 int check_map_norm(char *line, t_desc *desc)
 {
     int i;
@@ -629,10 +737,12 @@ int check_file(const char *path)
 
 int main(int ac, char **av)
 {
-    int i = check_file(av[1]);
-    if (!i)
-        printf("ERROR");
-    else
-        printf("SUCESS");
+    // int i = check_file(av[1]);
+    // if (!i)
+    //     printf("ERROR");
+    // else
+    //     printf("SUCESS");
+    int i = ft_atoi("123,123");
+    printf("%d\n", i);
     return (0);
 }

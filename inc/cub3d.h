@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/07 12:31:41 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/11 11:10:19 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,20 @@ typedef struct      s_desc
     int f;
     int c;
 }                   t_desc;
+
+// DESC INFO
+typedef struct       s_desc_info
+{
+    int r_x;
+    int r_y;
+    char *path_no;
+    char *path_so;
+    char *path_we;
+    char *path_ea;
+    char *path_s;
+    int color_f;
+    int color_c;
+}                   t_desc_info;
 
 // COLOR FUNCTION -> to remove
 int		create_trgb(int t, int r, int g, int b);

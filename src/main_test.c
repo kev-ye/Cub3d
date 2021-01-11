@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/08 12:45:51 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/11 09:39:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,7 +413,7 @@
 // //         return (0);
 // // }
 
-// //////////////////////////////////////////// parser file
+//////////////////////////////////////////// parser file
 
 t_desc    init_desc()
 {
@@ -513,47 +513,65 @@ int check_map_ready(t_desc desc)
     return (ERROR);
 }
 
-int check_map_exist(char *line)
+int check_no_map(char *line, t_desc *desc)
 {
     int i;
 
     i = 0;
-    if (!line[i])
+    if (!line[0])
+    {
+        desc->map = 0;
         return (SUCCESS);
+    }
     while (line[i])
     {
-        if (line[i] == ' ')
-            ++i;
-        else if (line[i] == '0' || line[i] == '1' || line[i] == '2' ||
-                line[i] == 'N'|| line[i] == 'S' || line[i] == 'E' ||
-                line[i] == 'W')
+        if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2'
+            || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+        {
+            desc->map = 1;
             return (SUCCESS);
-        else 
-            return (ERROR);
+        }
+        ++i;
     }
     return (ERROR);
 }
+
+// int check_map_exist(char *line)
+// {
+//     int i;
+
+//     i = 0;
+//     if (!line[i])
+//         return (SUCCESS);
+//     while (line[i])
+//     {
+//         if (line[i] == ' ')
+//             ++i;
+//         else if (line[i] == '0' || line[i] == '1' || line[i] == '2' ||
+//                 line[i] == 'N'|| line[i] == 'S' || line[i] == 'E' ||
+//                 line[i] == 'W')
+//             return (SUCCESS);
+//         else 
+//             return (ERROR);
+//     }
+//     return (ERROR);
+// }
 
 int check_map_norm(char *line, t_desc *desc)
 {
     int i;
 
     i = 0;
+    if (!line[0])
+        return (ERROR);
     while (line[i])
     {
-        if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2')
-            i++;
-        else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+        if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2'
+            || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
             i++;
         else
-        {
-            desc->map = 0;
-            free (line);
             return (ERROR);
-        }
     }
-    desc->map = 1;
-    free(line);
     return (SUCCESS);
 }
 
@@ -587,15 +605,25 @@ int check_file(const char *path)
     while (r)
     {
         r = get_next_line(fd, &line);
-        if (!check_map_exist(line))
+        if (!check_no_map(line, &desc))
+        {
+            free(line);
+            return (ERROR);
+        }
+        free(line);
+        if (desc.map)
+            break;
+    }
+    while (r)
+    {
+        r = get_next_line(fd, &line);
+        if (!check_map_norm(line, &desc))
         {
             free(line);
             return (ERROR);
         }
         free(line);
     }
-    // if (desc.map == 0)
-    //     return (ERROR);
     return (SUCCESS);
 }
 

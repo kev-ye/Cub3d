@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/11 21:50:08 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/12 12:02:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,43 +463,46 @@ t_desc_info *init_desc_info()
     return (new_info);
 }
 
-void get_resoltion(char *line, t_desc_info **desc_info)
+int get_resoltion(char *line, t_desc_info *desc_info)
 {
     int count;
     char **s;
     
     count = 0;
     if (!(s = ft_split(line, ' ')))
-        return ;
+        return (ERROR);
     while (s[count] != NULL)
         ++count;
     if (count != 3)
     {
         free_split(s);
-        return ;
+        return (ERROR);
     }
     if (ft_strcmp(s[0], "R"))
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
     count = 0;
     while (s[1][count])
         if (!ft_isdigit(s[1][count++]))
         {
             free_split(s);
-            return ;
+            return (ERROR);;
         }
     count = 0;
     while (s[2][count])
         if (!ft_isdigit(s[2][count++]))
         {
             free_split(s);
-            return ;
+            return (ERROR);;
         }
-    (*desc_info)->r_x = ft_atoi(s[1]);
-    (*desc_info)->r_y = ft_atoi(s[2]);
+    desc_info->r_x = ft_atoi(s[1]);
+    desc_info->r_y = ft_atoi(s[2]);
     free_split(s);
+    if (desc_info->r_x < 1 || desc_info->r_y < 1)
+        return (ERROR);
+    return (SUCCESS);
 }
 
 int get_color(char **s)
@@ -512,6 +515,8 @@ int get_color(char **s)
     r = ft_atoi(s[0]);
     g = ft_atoi(s[1]);
     b = ft_atoi(s[2]);
+    if (r > 255 || g > 255 || b > 255)
+        return (-1);
     color = create_rgb(r, g, b);
     return (color);
 }
@@ -523,6 +528,8 @@ int check_and_get_color(char *s)
     int c;
 
     count = 0;
+    if (ft_charinstr(s, ',') != 2)
+        return (-1);
     if (!(color = ft_split(s, ',')))
         return (-1);
     while (color[count] != NULL)
@@ -533,11 +540,29 @@ int check_and_get_color(char *s)
         return (-1);
     }
     count = 0;
-    while (color[0][count] || color[1][count] || color[2][count])
+    while (color[0][count])
     {
-        if ((color[0][count] && !ft_isdigit(color[0][count])) ||
-            (color[1][count] && !ft_isdigit(color[1][count])) ||
-            (color[2][count] && !ft_isdigit(color[2][count])))
+        if (color[0][count] && !ft_isdigit(color[0][count]))
+        {
+            free_split(color);
+            return (-1);
+        }
+        ++count;
+    }
+    count = 0;
+    while (color[1][count])
+    {
+        if (color[1][count] && !ft_isdigit(color[1][count]))
+        {
+            free_split(color);
+            return (-1);
+        }
+        ++count;
+    }
+    count = 0;
+    while (color[2][count])
+    {
+        if (color[2][count] && !ft_isdigit(color[2][count]))
         {
             free_split(color);
             return (-1);
@@ -546,65 +571,69 @@ int check_and_get_color(char *s)
     }
     c = get_color(color);
     free_split(color);
+    if (c == -1)
+        return (-1);
     return (c);
 }
 
-void get_floor_color(char *line, t_desc_info **desc_info)
+int get_floor_color(char *line, t_desc_info *desc_info)
 {
     int count;
     char **s;
 
     count = 0;
     if (!(s = ft_split(line, ' ')))
-        return ;
+        return (ERROR);
     while (s[count] != NULL)
         ++count;
     if (count != 2)
     {
         free_split(s);
-        return ;
+        return (ERROR);
     }
     if (ft_strcmp(s[0], "F"))
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
-    (*desc_info)->color_f = check_and_get_color(s[1]);
-    if ((*desc_info)->color_f == -1)
+    desc_info->color_f = check_and_get_color(s[1]);
+    if (desc_info->color_f == -1)
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
     free_split(s);
+    return (SUCCESS);
 }
 
-void get_ceiling_color(char *line, t_desc_info **desc_info)
+int get_ceiling_color(char *line, t_desc_info *desc_info)
 {
     int count;
     char **s;
 
     count = 0;
     if (!(s = ft_split(line, ' ')))
-        return ;
+        return (ERROR);;
     while (s[count] != NULL)
         ++count;
     if (count != 2)
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
     if (ft_strcmp(s[0], "C"))
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
-    (*desc_info)->color_c = check_and_get_color(s[1]);
-    if ((*desc_info)->color_c == -1)
+    desc_info->color_c = check_and_get_color(s[1]);
+    if (desc_info->color_c == -1)
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
     free_split(s);
+    return (SUCCESS);
 }
 
 int get_path_2(char **s, t_desc_info **desc_info)
@@ -613,64 +642,61 @@ int get_path_2(char **s, t_desc_info **desc_info)
     if (!ft_strncmp(s[0], "NO", 2))
     {
         (*desc_info)->path_no = ft_strdup(s[1]);
-        return (1);
+        return (SUCCESS);
     }
     else if (!ft_strncmp(s[0], "SO", 2))
     {
         (*desc_info)->path_so = ft_strdup(s[1]);
-        return (1);
+        return (SUCCESS);
     }
     else if (!ft_strncmp(s[0], "WE", 2))
     {
         (*desc_info)->path_we = ft_strdup(s[1]);
-        return (1);
+        return (SUCCESS);
     }
     else if (!ft_strncmp(s[0], "EA", 2))
     {
         (*desc_info)->path_ea = ft_strdup(s[1]);
-        return (1);
+        return (SUCCESS);
     }
     else if (!ft_strcmp(s[0], "S"))
     {
         (*desc_info)->path_s = ft_strdup(s[1]);
-        return (1);
+        return (SUCCESS);
     }
-    return (0);
+    return (ERROR);
 }
 
-void get_path(char *line, t_desc_info **desc_info)
+int get_path(char *line, t_desc_info *desc_info)
 {
     int count;
     char **s;
 
     count = 0;
     if (!(s = ft_split(line, ' ')))
-        return ;
+        return (ERROR);;
     while (s[count] != NULL)
         ++count;
     if (count != 2)
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
-    if (!get_path_2(s, &*desc_info))
+    if (!get_path_2(s, &desc_info))
     {
         free_split(s);
-        return ;
+        return (ERROR);;
     }
     free_split(s);
+    return (SUCCESS);
 }
 
-t_desc_info *get_desc_info(char *line)
+t_desc_info *get_desc_info(char *line, t_desc_info *desc_info) // delete
 {
-    t_desc_info *desc_info;
-
-    if (!(desc_info = init_desc_info()))
-        return (void *)0;
-    get_resoltion(line, &desc_info);
-    get_floor_color(line, &desc_info);
-    get_ceiling_color(line, &desc_info);
-    get_path(line, &desc_info);
+    get_resoltion(line, desc_info);
+    get_floor_color(line, desc_info);
+    get_ceiling_color(line, desc_info);
+    get_path(line, desc_info);
     return (desc_info);
 }
 
@@ -686,10 +712,10 @@ int check_file_name(const char *path)
     if (*path && !ft_strcmp(path, ".cub"))
     {
         path = tmp_path;
-        return (1);
+        return (SUCCESS);
     }
     msg_error("Map file name no valid\n");
-    return (0);   
+    return (ERROR);   
 }
 
 //////////////////////////////////////////// function check file info line
@@ -705,30 +731,62 @@ int check_file_line_info_done(t_desc desc)
     return (ERROR);
 }
 
-int check_file_line_info(char *line, int i, t_desc *desc)
+int check_file_line_info(char *line, int i, t_desc *desc, t_desc_info *desc_info)
 {
     if (line[i] == 'R' && line[i + 1] == ' ')
+    {
+        if (!(get_resoltion(line, desc_info)))
+            return (ERROR);
         desc->r++;
+    }
     else if (line[i] == 'S' && line[i + 1] == ' ')
+    {
+        if (!(get_path(line, desc_info)))
+            return (ERROR);
         desc->s++;
+    }
     else if (line[i] == 'F' && line[i + 1] == ' ')
+    {
+        if (!(get_floor_color(line, desc_info)))
+            return (ERROR);
         desc->f++;
+    }
     else if (line[i] == 'C' && line[i + 1] == ' ')
+    {
+        if (!(get_ceiling_color(line, desc_info)))
+            return (ERROR);
         desc->c++;
+    }
     else if (line[i] == 'N' && !ft_strncmp((line + i), "NO", 2))
+    {
+        if (!(get_path(line, desc_info)))
+            return (ERROR);
         desc->no++;
+    }
     else if (line[i] == 'S' && !ft_strncmp((line + i), "SO", 2))
+    {
+        if (!(get_path(line, desc_info)))
+            return (ERROR);
         desc->so++;
+    }
     else if (line[i] == 'W' && !ft_strncmp((line + i), "WE", 2))
+    {
+        if (!(get_path(line, desc_info)))
+            return (ERROR);
         desc->we++;
+    }
     else if (line[i] == 'E' && !ft_strncmp((line + i), "EA", 2))
+    {
+        if (!(get_path(line, desc_info)))
+            return (ERROR);
         desc->ea++;
+    }
     else
         return (ERROR);
     return (SUCCESS);
 }
 
-int check_file_line(char *line, t_desc *desc)
+int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
 {
     int i;
 
@@ -743,7 +801,7 @@ int check_file_line(char *line, t_desc *desc)
                 line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
                 line[i] == 'C')
         {
-            if (check_file_line_info(line, i, desc) && check_file_line_info_done(*desc))
+            if (check_file_line_info(line, i, desc, desc_info) && check_file_line_info_done(*desc))
                 return (SUCCESS);
             else
                 return (ERROR);
@@ -760,7 +818,9 @@ int check_map_ready(t_desc desc)
 {
     if (desc.r == 1 && desc.no == 1 && desc.so == 1 && desc.we == 1 &&
         desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1)
+    {
         return (SUCCESS);
+    }
     return (ERROR);
 }
 
@@ -807,26 +867,27 @@ int check_map_norm(char *line, t_desc *desc)
 
 //////////////////////////////////////////// function check file norme global
 
-int check_file(const char *path)
+t_desc_info *check_file(const char *path)
 {
     char *line;
     int r;
     int fd;
-    int check;
     t_desc desc;
+    t_desc_info *desc_info;
 
     if ((fd = open(path, O_RDONLY)) == -1)
-        return (ERROR);
+        return (NULL);
     r = 1;
-    check = 0;
     desc = init_desc();
+    if (!(desc_info = init_desc_info()))
+        return (NULL);
     while (r)
     {
         r = get_next_line(fd, &line);
-        if (!check_file_line(line, &desc))
+        if (!check_file_line(line, &desc, desc_info))
         {
             free(line);
-            return (ERROR);
+            return (NULL);
         }
         free(line);
         if (check_map_ready(desc))
@@ -838,7 +899,7 @@ int check_file(const char *path)
         if (!check_no_map(line, &desc))
         {
             free(line);
-            return (ERROR);
+            return (NULL);
         }
         free(line);
         if (desc.map)
@@ -850,29 +911,29 @@ int check_file(const char *path)
         if (!check_map_norm(line, &desc))
         {
             free(line);
-            return (ERROR);
+            return (NULL);
         }
         free(line);
     }
-    return (SUCCESS);
+    close(fd);
+    return (desc_info);
 }
+
+//////////////////////////////////////////// main
 
 int main(int ac, char **av)
 {
-    // int i = check_file(av[1]);
-    // if (!i)
-    //     printf("ERROR");
-    // else
-    //     printf("SUCESS");
-    t_desc_info *desc_info;
-    char *s = "NO ./path_to_the_north_texture";
-    desc_info = get_desc_info(s);
+    t_desc_info *desc_info = check_file(av[1]);
+    if (desc_info == NULL)
+        printf("ERROR\n");
+    else
+        printf("SUCESS\n");
     if (desc_info != 0)
     {
         printf("Rx : %d\n", desc_info->r_x);
         printf("Ry : %d\n", desc_info->r_y);
-        printf("F : %d\n", desc_info->color_f);
-        printf("C : %d\n", desc_info->color_c);
+        printf("F : %x\n", desc_info->color_f);
+        printf("C : %x\n", desc_info->color_c);
         printf("NO : %s\n", desc_info->path_no);
         printf("SO : %s\n", desc_info->path_so);
         printf("WE : %s\n", desc_info->path_we);
@@ -881,5 +942,6 @@ int main(int ac, char **av)
     }
     else
         printf("ERROR\n");
+    getchar();
     return (0);
 }

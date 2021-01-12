@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/12 12:02:33 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/12 12:20:03 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,6 +445,21 @@ void    free_split(char **s)
     free(s);
 }
 
+void    free_desc_info(t_desc_info *desc_info)
+{
+    if (desc_info->path_no)
+        free(desc_info->path_no);
+    if (desc_info->path_so)
+        free(desc_info->path_so);
+    if (desc_info->path_we)
+        free(desc_info->path_we);
+    if (desc_info->path_ea)
+        free(desc_info->path_ea);
+    if (desc_info->path_s)
+        free(desc_info->path_s);
+    free(desc_info);
+}
+
 t_desc_info *init_desc_info()
 {
     t_desc_info *new_info;
@@ -865,6 +880,35 @@ int check_map_norm(char *line, t_desc *desc)
     return (SUCCESS);
 }
 
+//////////////////////////////////////////// check path
+
+int check_path(t_desc_info *desc_info)
+{
+    int fd;
+    
+    if ((fd = open(desc_info->path_no, O_RDONLY)) == -1)
+        return (ERROR);
+    else
+        close(fd);
+    if ((fd = open(desc_info->path_so, O_RDONLY)) == -1)
+        return (ERROR);
+    else
+        close(fd);
+    if ((fd = open(desc_info->path_we, O_RDONLY)) == -1)
+        return (ERROR);
+    else
+        close(fd);
+    if ((fd = open(desc_info->path_ea, O_RDONLY)) == -1)
+        return (ERROR);
+    else
+        close(fd);
+    if ((fd = open(desc_info->path_s, O_RDONLY)) == -1)
+        return (ERROR);
+    else
+        close(fd);
+    return (SUCCESS);
+}
+
 //////////////////////////////////////////// function check file norme global
 
 t_desc_info *check_file(const char *path)
@@ -887,6 +931,7 @@ t_desc_info *check_file(const char *path)
         if (!check_file_line(line, &desc, desc_info))
         {
             free(line);
+            free_desc_info(desc_info);
             return (NULL);
         }
         free(line);
@@ -899,6 +944,7 @@ t_desc_info *check_file(const char *path)
         if (!check_no_map(line, &desc))
         {
             free(line);
+            free_desc_info(desc_info);
             return (NULL);
         }
         free(line);
@@ -911,11 +957,17 @@ t_desc_info *check_file(const char *path)
         if (!check_map_norm(line, &desc))
         {
             free(line);
+            free_desc_info(desc_info);
             return (NULL);
         }
         free(line);
     }
     close(fd);
+    if (!check_path(desc_info))
+    {
+        free_desc_info(desc_info);
+        return (NULL);
+    }
     return (desc_info);
 }
 
@@ -942,6 +994,5 @@ int main(int ac, char **av)
     }
     else
         printf("ERROR\n");
-    getchar();
     return (0);
 }

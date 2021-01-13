@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 17:01:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 19:02:53 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,13 +163,6 @@ typedef struct       s_desc_info
     int color_c;
 }                   t_desc_info;
 
-// COLOR FUNCTION -> to remove
-int		create_trgb(int t, int r, int g, int b);
-int		get_t(int trgb);
-int		get_r(int trgb);
-int		get_g(int trgb);
-int		get_b(int trgb);
-
 // CLOSE FUNCTION
 void shut_down(t_win *win);
 
@@ -218,7 +211,46 @@ void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
 void   draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray);
 void   mapping(t_cam_ray *ray, t_win *win);
 
+// PARSER FILE
+    // Parser -> init
+t_desc    init_desc();
+t_desc_info *init_desc_info();
+    // Parser -> get resolution
+int get_resoltion(char *line, t_desc_info *desc_info);
+    // Parser -> get color
+int check_and_get_color(char *s);
+    // Parser -> floor ceiling
+int get_floor_color(char *line, t_desc_info *desc_info);
+int get_ceiling_color(char *line, t_desc_info *desc_info);
+    // Parser -> get path
+int get_path(char *line, t_desc_info *desc_info);
+    // Parser -> check file name
+int check_file_name(const char *path);
+    // Parser -> check file line id
+int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info);
+    // parser -> check file line map
+int check_map_ready(t_desc desc);
+int check_no_map(char *line, t_desc *desc);
+int check_map_norm(char *line, t_desc *desc);
+    // Parser -> check path
+int check_path(t_desc_info *desc_info);
+    // Parser -> check file
+t_desc_info *check_file(const char *path);
+
+// PARSER MAP
+char **get_map(const char *path, int *len_max_x, int *len_max_y);
+char **get_player_place(char **map, int *p_x, int *p_y);
+    // Parser -> check
+int check_map_x(char **map, int y, int x);
+int check_map_y(char **map, int y, int x);
+int check_map(char **map, int px, int py);
+
+
+
 // UTILS
 void    msg_error(char *msg);
+int		create_rgb(int r, int g, int b);
+void    free_split(char **s);
+void    free_desc_info(t_desc_info *desc_info);
 
 #endif

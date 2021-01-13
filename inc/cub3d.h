@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/11 11:10:19 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 17:01:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct      s_win
 typedef struct      s_desc
 {
     int map;
+    int player;
     int r;
     int no;
     int so;

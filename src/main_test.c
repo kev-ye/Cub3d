@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 18:06:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 15:38:06 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 17:05:07 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,331 +91,420 @@
 // int check_map_y(char **map, int y, int x);
 // int check_map_y2(char **map, int y, int x, int get_wall);
 
-// // int main()
-// // {
-// // //////////////////////////////////////////// get map len
-// //     int fd;
-// //     char*line;
-// //     int len_max_x;
-// //     int len_max_y;
-// //     int i;
-// //     int r1;
+// int get_map_y_max(const char *path, int *fd)
+// {
+//     char *line;
+//     int y_max;
+//     int r;
+
+//     if ((*fd = open(path, O_RDONLY)) == -1)
+//         return (ERROR);
+//     y_max = 0;
+//     r = 1;
+//     while (r)
+//     {
+//         r = get_next_line(*fd, &line);
+//         ++y_max;
+//         free(line);
+//     }
+//     close(*fd);
+//     return (y_max);
+// }
+
+// char **get_map2(const char *path, int *fd, int y_max)
+// {
+//     char *line;
+//     char **map;
+//     int r;
+//     int i;
+
+//     if (!(map = malloc(sizeof(char *) * (y_max + 1))))
+//         return (NULL);
+//     if ((*fd = open(path, O_RDONLY)) == -1)
+//         return (NULL);
+//     map[y_max] = NULL;
+//     r = 1;
+//     i = 0;
+//     while (r)
+//     {
+//         r = get_next_line(*fd, &line);
+//         map[i++] = ft_strdup(line);
+//         free(line);
+//     }
+//     close(*fd);
+//     return (map);
+// }
+
+// char **get_map(const char *path, int *len_max_x, int *len_max_y)
+// {
+//     int fd;
+//     char **map;
+//     int y;
+//     int x;
     
-// //     fd = open("./src/map", O_RDONLY);
-// //     if (fd == -1)
-// //         return (0);
-// //     len_max_x = 0;
-// //     len_max_y = 0;
-// //     r1 = 1;
-// //     while (r1)
-// //     {
-// //         r1 = get_next_line(fd, &line);
-// //         i = 0;
-// //         while (line[i] != '\0')
-// //         {
-// //             ++i;
-// //             if (len_max_x < i)
-// //                 len_max_x = i;
-// //         }
-// //         ++len_max_y;
-// //         free(line);
-// //     }
-// //     // printf("%d %d\n", len_max_x, len_max_y);    
-// //     close(fd);
+//     if (!(*len_max_y = get_map_y_max(path, &fd)))
+//         return (NULL);
+//     if (!(map = get_map2(path, &fd, *len_max_y)))
+//         return (NULL);
+//     *len_max_x = 0;
+//     x = 0;
+//     y = 0;
+//     while (map[y] != NULL)
+//     {
+//         while (map[y][x] != '\0')
+//         {
+//             ++x;
+//             if (*len_max_x < x)
+//                 *len_max_x = x;
+//         }
+//         ++y;
+//     }
+//     return (map);
+// }
+
+// int get_map_len(const char *path, int *len_max_x, int *len_max_y)
+// {
+//     int fd;
+//     int r;
+//     int i;
+//     char *line;
     
-// // //////////////////////////////////////////// malloc map with size max
-// //     char **map;
+//     if ((fd = open(path, O_RDONLY)) == -1)
+//         return (ERROR);
+//     *len_max_x = 0;
+//     *len_max_y = 0;
+//     r = 1;
+//     while (r)
+//     {
+//         r = get_next_line(fd, &line);
+//         i = 0;
+//         while (line[i] != '\0')
+//         {
+//             ++i;
+//             if (*len_max_x < i)
+//                 *len_max_x = i;
+//         }
+//         ++*len_max_y;
+//         free(line);
+//     }
+//     close(fd);
+//     return (SUCCESS);
+// }
+
+// char **malloc_and_init_map(int size_x, int size_y)
+// {
+//     char **map;
+//     int i;
+//     int x;
+//     int y;
+
+//     i = 0;
+//     if (!(map = malloc(sizeof(char *) * (size_y + 1))))
+//         return (NULL);
+//     map[size_y] = NULL;
+//     while (i < size_y)
+//         if (!(map[i++] = malloc(sizeof(char) * size_x + 1)))
+//             return (NULL);
+//     y = 0;
+//     while (map[y] != NULL)
+//     {
+//         x = 0;
+//         while (x < size_x)
+//             map[y][x++] = 0;
+//         map[y++][x] = '\0';
+//     }
+//     return (map);
+// }
+
+// int main()
+// {
+// //////////////////////////////////////////// get map len
+//     int len_max_x;
+//     int len_max_y;
+//     int i = 0;
+//     int j = 0;
     
-// //     int i_malloc;
+//     // get_map_len("./src/map.cub", &len_max_x, &len_max_y);
+//     char **map = get_map("./src/map.cub", &len_max_x, &len_max_y);
+//     // while (map1[i] != NULL)
+//     // {
+//     //     printf("%s\n", map1[i++]);
+//     // }
     
-// //     i_malloc = 0;
-// //     map = malloc(sizeof(char *) * len_max_y + 1);
-// //     if (!map)
-// //         return (0);
-// //     map[len_max_y] = NULL;
-// //     while (i_malloc < len_max_y)
-// //         if (!(map[i_malloc++] = malloc(sizeof(char) * len_max_x + 1)))
-// //             return (0);
+// //////////////////////////////////////////// malloc and init map with size max
+//     // char **map;
 
-// // //////////////////////////////////////////// init map -> give valu 0
-// //     int map_i;
-// //     int map_j;
+//     // map = malloc_and_init_map(len_max_x, len_max_y);
+//     // if (map == NULL)
+//     //     return (0);
 
-// //     map_i = 0;
-// //     while (map[map_i] != NULL)
-// //     {
-// //         map_j = 0;
-// //         while (map_j < len_max_x)
-// //             map[map_i][map_j++] = 0;
-// //         map[map_i++][map_j] = '\0';
-// //     }
-// // //////////////////////////////////////////// get and fill map
+// //////////////////////////////////////////// get and fill map
 
-// //     int map_fd;
-// //     int fill_i;
-// //     int r2;
-// //     char *map_line;
+//     // int map_fd;
+//     // int fill_i;
+//     // int r2;
+//     // char *map_line;
 
-// //     map_fd = open("./src/map.cub", O_RDONLY);
-// //     if (map_fd == -1)
-// //         return (0);
-// //     fill_i = 0;
-// //     r2 = 1;
-// //     while (r2)
-// //     {
-// //         r2 = get_next_line(map_fd, &map_line);
-// //         strcpy(map[fill_i++], map_line);
-// //         free(map_line);
-// //     }
-// //     close(map_fd);
+//     // map_fd = open("./src/map.cub", O_RDONLY);
+//     // if (map_fd == -1)
+//     //     return (0);
+//     // fill_i = 0;
+//     // r2 = 1;
+//     // while (r2)
+//     // {
+//     //     r2 = get_next_line(map_fd, &map_line);
+//     //     strcpy(map[fill_i++], map_line);
+//     //     free(map_line);
+//     // }
+//     // close(map_fd);
 
-// //     // fill_i = 0;
-// //     // while (map[fill_i] != NULL)
-// //     // {
-// //     //     printf("%s\n", map[fill_i]);
-// //     //     fill_i++;
-// //     // }
+//     // fill_i = 0;
+//     // while (map[fill_i] != NULL)
+//     // {
+//     //     printf("%s\n", map[fill_i]);
+//     //     fill_i++;
+//     // }
 
-// // //////////////////////////////////////////// get player point
+// //////////////////////////////////////////// get player point
 
-// //     int p_x;
-// //     int p_y;
-// //     int m_x;
-// //     int m_y;
+//     int p_x;
+//     int p_y;
+//     int m_x;
+//     int m_y;
 
-// //     p_x = -99;
-// //     p_y = -99;
-// //     m_y = 0;
-// //     while (map[m_y] != NULL)
-// //     {
-// //         m_x = 0;
-// //         while (map[m_y][m_x])
-// //         {
-// //             if (map[m_y][m_x] == 'N')
-// //             {
-// //                 p_x = m_x;
-// //                 p_y = m_y;
-// //                 map[m_y][m_x] = '0';
-// //             }
-// //             ++m_x;
-// //         }
-// //         ++m_y;
-// //     }
+//     p_x = -99;
+//     p_y = -99;
+//     m_y = 0;
+//     while (map[m_y] != NULL)
+//     {
+//         m_x = 0;
+//         while (map[m_y][m_x])
+//         {
+//             if (map[m_y][m_x] == 'N')
+//             {
+//                 p_x = m_x;
+//                 p_y = m_y;
+//                 map[m_y][m_x] = '0';
+//             }
+//             ++m_x;
+//         }
+//         ++m_y;
+//     }
 
-// //     // printf("%d %d\n", p_x, p_y);
+//     // printf("%d %d\n", p_x, p_y);
 
-// // //////////////////////////////////////////// check map
-// //     int m = check_map(map, p_x, p_y);
-// //     printf("%d\n", m);
+// //////////////////////////////////////////// check map
+//     int m = check_map(map, p_x, p_y);
+//     printf("%d\n", m);
 
-// //     return 0;
-// // }
+//     return 0;
+// }
 
-// // int check_map_x(char **map, int y, int x)
-// // {
-// //     int tmp_x;
-// //     int get_wall;
+// int check_map_x(char **map, int y, int x)
+// {
+//     int tmp_x;
+//     int get_wall;
 
-// //     tmp_x = x;
-// //     get_wall = 0;
-// //     while (map[y][x])
-// //     {
-// //         if (map[y][x] == '1')
-// //         {
-// //             get_wall++;
-// //             break;
-// //         }
-// //         ++x;
-// //     }
-// //     x = tmp_x;
-// //     get_wall = check_map_x2(map, y, x, get_wall);
-// //     if (get_wall == 2)
-// //         return (1);
-// //     else
-// //         return (0);    
-// // }
+//     tmp_x = x;
+//     get_wall = 0;
+//     while (map[y][x])
+//     {
+//         if (map[y][x] == '1')
+//         {
+//             get_wall++;
+//             break;
+//         }
+//         ++x;
+//     }
+//     x = tmp_x;
+//     get_wall = check_map_x2(map, y, x, get_wall);
+//     if (get_wall == 2)
+//         return (1);
+//     else
+//         return (0);    
+// }
 
-// // int check_map_x2(char **map, int y, int x, int get_wall)
-// // {
-// //     while (x >= 0)
-// //     {
-// //         if (map[y][x] == '1')
-// //         {
-// //             get_wall++;
-// //             break;
-// //         }
-// //         --x;
-// //     }
-// //     return (get_wall);
-// // }
+// int check_map_x2(char **map, int y, int x, int get_wall)
+// {
+//     while (x >= 0)
+//     {
+//         if (map[y][x] == '1')
+//         {
+//             get_wall++;
+//             break;
+//         }
+//         --x;
+//     }
+//     return (get_wall);
+// }
 
-// // int check_map_y(char **map, int y, int x)
-// // {
-// //     int tmp_y;
-// //     int get_wall;
+// int check_map_y(char **map, int y, int x)
+// {
+//     int tmp_y;
+//     int get_wall;
 
-// //     tmp_y = y;
-// //     get_wall = 0;
-// //     while (map[y] != NULL)
-// //     {
-// //         if (map[y][x] == '1')
-// //         {
-// //             get_wall++;
-// //             break;
-// //         }
-// //         ++y;
-// //     }
-// //     y = tmp_y;
-// //     get_wall = check_map_y2(map, y, x, get_wall);
-// //     if (get_wall == 2)
-// //         return (1);
-// //     else
-// //         return (0);    
-// // }
+//     tmp_y = y;
+//     get_wall = 0;
+//     while (map[y] != NULL)
+//     {
+//         if (map[y][x] == '1')
+//         {
+//             get_wall++;
+//             break;
+//         }
+//         ++y;
+//     }
+//     y = tmp_y;
+//     get_wall = check_map_y2(map, y, x, get_wall);
+//     if (get_wall == 2)
+//         return (1);
+//     else
+//         return (0);    
+// }
 
-// // int check_map_y2(char **map, int y, int x, int get_wall)
-// // {
-// //     while (y >= 0)
-// //     {
-// //         if (map[y][x] == '1')
-// //         {
-// //             get_wall++;
-// //             break;
-// //         }
-// //         --y;
-// //     }
-// //     return (get_wall);
-// // }
+// int check_map_y2(char **map, int y, int x, int get_wall)
+// {
+//     while (y >= 0)
+//     {
+//         if (map[y][x] == '1')
+//         {
+//             get_wall++;
+//             break;
+//         }
+//         --y;
+//     }
+//     return (get_wall);
+// }
 
-// // int check_map_1(char **map, int px, int py)
-// // {
-// //     int check_x;
-// //     int check_y;
-// //     int resu_x;
-// //     int resu_y;
+// int check_map_1(char **map, int px, int py)
+// {
+//     int check_x;
+//     int check_y;
+//     int resu_x;
+//     int resu_y;
 
-// //     check_y = py;
-// //     resu_x = 0;
-// //     resu_y = 0;
-// //     while (check_y >= 0)
-// //     {
-// //         check_x = px;
-// //         while (check_x >= 0)
-// //         {
-// //             if (map[check_y][check_x] == '0')
-// //             {
-// //                 resu_x = check_map_x(map, check_y, check_x);
-// //                 resu_y = check_map_y(map, check_y, check_x);
-// //             }
-// //             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
-// //                 return (0);
-// //             --check_x;
-// //         }
-// //         --check_y;
-// //     }
-// //     return (1);
-// // }
+//     check_y = py;
+//     resu_x = 0;
+//     resu_y = 0;
+//     while (check_y >= 0)
+//     {
+//         check_x = px;
+//         while (check_x >= 0)
+//         {
+//             if (map[check_y][check_x] == '0')
+//             {
+//                 resu_x = check_map_x(map, check_y, check_x);
+//                 resu_y = check_map_y(map, check_y, check_x);
+//             }
+//             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
+//                 return (0);
+//             --check_x;
+//         }
+//         --check_y;
+//     }
+//     return (1);
+// }
 
-// // int check_map_2(char **map, int px, int py)
-// // {
-// //     int check_x;
-// //     int check_y;
-// //     int resu_x;
-// //     int resu_y;
+// int check_map_2(char **map, int px, int py)
+// {
+//     int check_x;
+//     int check_y;
+//     int resu_x;
+//     int resu_y;
 
-// //     check_y = py;
-// //     resu_x = 0;
-// //     resu_y = 0;
-// //     while (check_y >= 0)
-// //     {
-// //         check_x = px;
-// //         while (map[check_y][check_x] != '\0')
-// //         {
-// //             if (map[check_y][check_x] == '0')
-// //             {
-// //                 resu_x = check_map_x(map, check_y, check_x);
-// //                 resu_y = check_map_y(map, check_y, check_x);
-// //             }
-// //             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
-// //                 return (0);
-// //             ++check_x;
-// //         }
-// //         --check_y;
-// //     }
-// //     return (1);
-// // }
+//     check_y = py;
+//     resu_x = 0;
+//     resu_y = 0;
+//     while (check_y >= 0)
+//     {
+//         check_x = px;
+//         while (map[check_y][check_x] != '\0')
+//         {
+//             if (map[check_y][check_x] == '0')
+//             {
+//                 resu_x = check_map_x(map, check_y, check_x);
+//                 resu_y = check_map_y(map, check_y, check_x);
+//             }
+//             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
+//                 return (0);
+//             ++check_x;
+//         }
+//         --check_y;
+//     }
+//     return (1);
+// }
 
-// // int check_map_3(char **map, int px, int py)
-// // {
-// //     int check_x;
-// //     int check_y;
-// //     int resu_x;
-// //     int resu_y;
+// int check_map_3(char **map, int px, int py)
+// {
+//     int check_x;
+//     int check_y;
+//     int resu_x;
+//     int resu_y;
 
-// //     check_y = py;
-// //     resu_x = 0;
-// //     resu_y = 0;
-// //     while (map[check_y] != NULL)
-// //     {
-// //         check_x = px;
-// //         while (check_x >= 0)
-// //         {
-// //             if (map[check_y][check_x] == '0')
-// //             {
-// //                 resu_x = check_map_x(map, check_y, check_x);
-// //                 resu_y = check_map_y(map, check_y, check_x);
-// //             }
-// //             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
-// //                 return (0);
-// //             --check_x;
-// //         }
-// //         ++check_y;
-// //     }
-// //     return (1);
-// // }
+//     check_y = py;
+//     resu_x = 0;
+//     resu_y = 0;
+//     while (map[check_y] != NULL)
+//     {
+//         check_x = px;
+//         while (check_x >= 0)
+//         {
+//             if (map[check_y][check_x] == '0')
+//             {
+//                 resu_x = check_map_x(map, check_y, check_x);
+//                 resu_y = check_map_y(map, check_y, check_x);
+//             }
+//             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
+//                 return (0);
+//             --check_x;
+//         }
+//         ++check_y;
+//     }
+//     return (1);
+// }
 
-// // int check_map_4(char **map, int px, int py)
-// // {
-// //     int check_x;
-// //     int check_y;
-// //     int resu_x;
-// //     int resu_y;
+// int check_map_4(char **map, int px, int py)
+// {
+//     int check_x;
+//     int check_y;
+//     int resu_x;
+//     int resu_y;
 
-// //     check_y = py;
-// //     resu_x = 0;
-// //     resu_y = 0;
-// //     while (map[check_y] != NULL)
-// //     {
-// //         check_x = px;
-// //         while (map[check_y][check_x] != '\0')
-// //         {
-// //             if (map[check_y][check_x] == '0')
-// //             {
-// //                 resu_x = check_map_x(map, check_y, check_x);
-// //                 resu_y = check_map_y(map, check_y, check_x);
-// //             }
-// //             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
-// //                 return (0);
-// //             ++check_x;
-// //         }
-// //         ++check_y;
-// //     }
-// //     return (1);
-// // }
+//     check_y = py;
+//     resu_x = 0;
+//     resu_y = 0;
+//     while (map[check_y] != NULL)
+//     {
+//         check_x = px;
+//         while (map[check_y][check_x] != '\0')
+//         {
+//             if (map[check_y][check_x] == '0')
+//             {
+//                 resu_x = check_map_x(map, check_y, check_x);
+//                 resu_y = check_map_y(map, check_y, check_x);
+//             }
+//             if (map[check_y][check_x] == '0' && (!resu_x || !resu_y))
+//                 return (0);
+//             ++check_x;
+//         }
+//         ++check_y;
+//     }
+//     return (1);
+// }
 
-// // int check_map(char **map, int px, int py)
-// // {
-// //     if (px == -99 || py == -99)
-// //         return (0);
-// //     if (check_map_1(map, px, py) && check_map_2(map, px, py) && check_map_3(map, px, py) && check_map_4(map, px, py))
-// //         return (1);
-// //     else
-// //         return (0);
-// // }
+// int check_map(char **map, int px, int py)
+// {
+//     if (px == -99 || py == -99)
+//         return (0);
+//     if (check_map_1(map, px, py) && check_map_2(map, px, py) && check_map_3(map, px, py) && check_map_4(map, px, py))
+//         return (1);
+//     else
+//         return (0);
+// }
 
-// //////////////////////////////////////////// parser file
+//////////////////////////////////////////// parser file
 
-// //////////////////////////////////////////// init description value
+//////////////////////////////////////////// init description value
 
 // t_desc    init_desc()
 // {
@@ -873,7 +962,17 @@
 //     {
 //         if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2'
 //             || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+//         {
+//             if (line[i] == 'N')
+//                 ++desc->player;
+//             if (line[i] == 'S')
+//                 ++desc->player;
+//             if (line[i] == 'E')
+//                 ++desc->player;
+//             if (line[i] == 'W')
+//                 ++desc->player;
 //             i++;
+//         }
 //         else
 //             return (ERROR);
 //     }
@@ -959,6 +1058,12 @@
 //     {
 //         r = get_next_line(fd, &line);
 //         if (!check_map_norm(line, &desc))
+//         {
+//             free(line);
+//             free_desc_info(desc_info);
+//             return (NULL);
+//         }
+//         if (desc.player > 1)
 //         {
 //             free(line);
 //             free_desc_info(desc_info);

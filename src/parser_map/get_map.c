@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 18:47:48 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 21:18:37 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char **get_map2(const char *path, int *fd, int y_max)
     return (map);
 }
 
-char **get_map(const char *path, int *len_max_x, int *len_max_y)
+char **get_map(const char *path, int *len_max_y)
 {
     int fd;
     char **map;
@@ -87,18 +87,18 @@ char **get_map(const char *path, int *len_max_x, int *len_max_y)
         return (NULL);
     if (!(map = get_map2(path, &fd, *len_max_y)))
         return (NULL);
-    *len_max_x = 0;
-    x = 0;
-    y = 0;
-    while (map[y] != NULL)
-    {
-        while (map[y][x] != '\0')
-        {
-            ++x;
-            if (*len_max_x < x)
-                *len_max_x = x;
-        }
-        ++y;
-    }
+    // *len_max_x = 0;
+    // x = 0;
+    // y = 0;
+    // while (map[y] != NULL)
+    // {
+    //     while (map[y][x] != '\0')
+    //     {
+    //         ++x;
+    //         if (*len_max_x < x)
+    //             *len_max_x = x;
+    //     }
+    //     ++y;
+    // }
     return (map);
 }

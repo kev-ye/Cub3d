@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:57:11 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 17:57:42 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 21:20:56 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ t_desc_info *init_desc_info()
     new_info->path_s = NULL;
     new_info->color_f = -1;
     new_info->color_c = -1;
+    new_info->player_x = -99;
+    new_info->player_y = -99;
+    new_info->map = NULL;
     return (new_info);
 }

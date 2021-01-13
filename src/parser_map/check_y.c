@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:51:14 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 20:06:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 20:39:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int check_map_y2(char **map, int y, int x, int get_wall)
             get_wall++;
             break;
         }
-        if (map[y][x] == '\0')
+        if (map[y][x] != '0' && map[y][x] != '2')
             return (0);
         --y;
     }
@@ -41,7 +41,7 @@ int check_map_y(char **map, int y, int x)
             get_wall++;
             break;
         }
-        if (map[y][x] == '\0')
+        if (map[y][x] != '0' && map[y][x] != '2')
             return (0);
         ++y;
     }

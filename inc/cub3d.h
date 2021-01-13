@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 19:02:53 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/13 21:20:50 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ typedef struct       s_desc_info
     char *path_s;
     int color_f;
     int color_c;
+    int player_x;
+    int player_y;
+    char **map;
 }                   t_desc_info;
 
 // CLOSE FUNCTION
@@ -238,7 +241,7 @@ int check_path(t_desc_info *desc_info);
 t_desc_info *check_file(const char *path);
 
 // PARSER MAP
-char **get_map(const char *path, int *len_max_x, int *len_max_y);
+char **get_map(const char *path, int *len_max_y);
 char **get_player_place(char **map, int *p_x, int *p_y);
     // Parser -> check
 int check_map_x(char **map, int y, int x);

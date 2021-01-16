@@ -6,36 +6,17 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 18:13:13 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 20:04:32 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// static int parser_map(const char *path)
-// {
-//     char **map;
-//     int len_max_y;
-//     int p_x;
-//     int p_y;
-
-//     p_x = -99;
-//     p_y = -99;
-//     if (!(map = get_map(path, &len_max_y)))
-//         return (ERROR);
-//     map = get_player_place(map, &p_x, &p_y);
-//     if (!check_map(map, p_x, p_y))
-//         return (ERROR);
-//     return (SUCCESS);
-// }
-
 static int parser_map(const char *path, t_desc_info *desc_info)
 {
     char **map;
     int len_max_y;
-    int i;
-    
-    i = 0;
+
     if (!(map = get_map(path, &len_max_y)))
         return (ERROR);
     (*desc_info).map = get_player_place(map, &(*desc_info).player_x, &(*desc_info).player_y, desc_info);

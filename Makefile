@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 20:02:24 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 20:34:34 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAG = -Wall -Wextra -Werror
 IFLAG = -I./inc -I./libft/inc -I./mlx
 LFLAG = -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
 IFLAGS_LINUX = -I./inc -I./libft_linux/inc -I./mlx_linux
-LFLAG_LINUX = -Lmlx -lmlx -lXext -lX11 -lm --framework OpenGL -framework AppKit
+LFLAG_LINUX = -Lmlx -lmlx -lXext -lX11 -lm
 
 # DIRECTORY
 
@@ -112,7 +112,7 @@ $(NAME): $(OBJ)
 	$(MAKE) -C $(MLX_DIR_LINUX)
 	cp ./$(LFT_DIR_LINUX)/$(LIBFT) .
 	cp ./$(MLX_DIR_LINUX)/$(MLX_LINUX) .
-	$(CC) $(CFLAG) $(IFLAGS_LINUX) $(LFLAG_LINUX) $(LIBFT) $(MLX_LINUX) $^ -o $@
+	$(CC) $(CFLAG) $(IFLAGS_LINUX) $^ -o $@ $(LFLAG_LINUX) $(LIBFT) $(MLX_LINUX)
 endif
 ##################################
 

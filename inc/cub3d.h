@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 21:20:50 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 10:55:41 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,24 +115,9 @@ typedef struct      s_line
 typedef struct      s_map
 {
     char    **map;
-    char    *map_name;
     int     map_width;
     int     map_height;
 }                   t_map;
-
-// WINDOW STRUCT
-typedef struct      s_win
-{
-    void        *mlx_ptr;
-    void        *win_ptr;
-    int         width;
-    int         height;
-    t_key       *key_code;
-    t_img       *img;
-    t_camera    *camera;
-    t_map       *map;
-    t_img       **texture;
-}                   t_win;
 
 // DESC CHECK STRUCT
 typedef struct      s_desc
@@ -163,8 +148,26 @@ typedef struct       s_desc_info
     int color_c;
     int player_x;
     int player_y;
+    int player_dir;
     char **map;
+    int map_width;
+    int map_height;
 }                   t_desc_info;
+
+// WINDOW STRUCT
+typedef struct      s_win
+{
+    void        *mlx_ptr;
+    void        *win_ptr;
+    int         width;
+    int         height;
+    t_key       *key_code;
+    t_img       *img;
+    t_camera    *camera;
+    t_map       *map;
+    t_img       **texture;
+    t_desc_info *desc_info;
+}                   t_win;
 
 // CLOSE FUNCTION
 void shut_down(t_win *win);
@@ -242,18 +245,19 @@ t_desc_info *check_file(const char *path);
 
 // PARSER MAP
 char **get_map(const char *path, int *len_max_y);
-char **get_player_place(char **map, int *p_x, int *p_y);
+char **get_player_place(char **map, int *p_x, int *p_y, t_desc_info *desc_info);
     // Parser -> check
 int check_map_x(char **map, int y, int x);
 int check_map_y(char **map, int y, int x);
 int check_map(char **map, int px, int py);
-
-
 
 // UTILS
 void    msg_error(char *msg);
 int		create_rgb(int r, int g, int b);
 void    free_split(char **s);
 void    free_desc_info(t_desc_info *desc_info);
+
+// INIT
+int init_camera(t_win *win);
 
 #endif

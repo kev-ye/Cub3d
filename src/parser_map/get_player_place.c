@@ -6,13 +6,13 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:48:16 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 20:53:36 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 10:22:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char **get_player_place(char **map, int *p_x, int *p_y)
+char **get_player_place(char **map, int *p_x, int *p_y, t_desc_info *desc_info)
 {
     int x;
     int y;
@@ -27,6 +27,7 @@ char **get_player_place(char **map, int *p_x, int *p_y)
             {
                 *p_x = x;
                 *p_y = y;
+                desc_info->player_dir = (int)map[y][x];
                 map[y][x] = '0';
             }
             ++x;

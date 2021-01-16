@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 21:21:28 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 10:22:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int parser_map(const char *path, t_desc_info *desc_info)
     i = 0;
     if (!(map = get_map(path, &len_max_y)))
         return (ERROR);
-    (*desc_info).map = get_player_place(map, &(*desc_info).player_x, &(*desc_info).player_y);
+    (*desc_info).map = get_player_place(map, &(*desc_info).player_x, &(*desc_info).player_y, desc_info);
     if (!check_map(map, (*desc_info).player_x, (*desc_info).player_y))
         return (ERROR);
     return (SUCCESS);

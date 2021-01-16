@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/03 17:21:43 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 12:26:57 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void    wall_hit(t_cam_ray *ray, t_win *win)
             else if (ray->step_y == -1)
                 ray->side = 3;
         }
-        if (win->map->map[ray->map_y][ray->map_x] > '0')
+        if (win->desc_info->map[ray->map_y][ray->map_x] > '0')
             ray->hit = 1;
     }
 }

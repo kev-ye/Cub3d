@@ -1,1 +1,2 @@
-clang -I./inc -I./libft/inc -I./mlx -Lmlx -lmlx -Llibft -lft -lm -framework OpenGL -framework AppKit src/*.c src/*/*.c
+# clang -I./inc -I./libft/inc -I./mlx -Lmlx -lmlx -Llibft -lft -lm -framework OpenGL -framework AppKit src/*.c src/*/*.c
+clang -I./inc -I./libft/inc -I./mlx -lmlx -Llibft -lft -lm -framework OpenGL -framework AppKit src/*.c src/*/*.c

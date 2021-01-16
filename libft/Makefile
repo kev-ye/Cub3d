@@ -6,15 +6,17 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 19:28:33 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 19:39:37 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILATION
 
-CC		= gcc
-CFLAGS 	= -Wall -Wextra -Werror
-IFLAGS 	= -I./inc
+CC				= gcc
+CFLAGS 			= -Wall -Wextra -Werror
+IFLAGS 			= -I./inc/
+IFLAGS_LINUX 	= -I./inc_linux/
+
 
 # DIRECTORIES
 
@@ -158,8 +160,16 @@ $(BUILD):
 		@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
 		@mkdir $@ $(DIRS)
 
+ifeq ($(shell uname), Darwin)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD)
 		@echo "Compiling $(YELLOW_COLOR)$< $(DEFAULT_COLOR)..."
 		@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+endif
+
+ifeq ($(shell uname), Linux)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD)
+		@echo "Compiling $(YELLOW_COLOR)$< $(DEFAULT_COLOR)..."
+		@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+endif
 
 .PHONY: all clean fclean re

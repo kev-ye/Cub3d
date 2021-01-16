@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 22:38:27 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 22:39:31 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <mlx.h>
-#include <libc.h> // to delete
 #include <fcntl.h>
 #include "libft.h"
 

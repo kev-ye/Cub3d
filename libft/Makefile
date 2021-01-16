@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 19:39:37 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 19:40:43 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,7 +169,7 @@ endif
 ifeq ($(shell uname), Linux)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD)
 		@echo "Compiling $(YELLOW_COLOR)$< $(DEFAULT_COLOR)..."
-		@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+		@$(CC) $(CFLAGS) $(IFLAGS_LINUX) -c $< -o $@
 endif
 
 .PHONY: all clean fclean re

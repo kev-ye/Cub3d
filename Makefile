@@ -6,37 +6,41 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 22:41:05 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 23:05:43 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+###########################################################
+#                                                         #
 # Macos : #################################################
+#														  #
+###########################################################
 
 ifeq ($(shell uname), Darwin)
 
-# COMPILATION
+# COMPILATION #############################################
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
-IFLAG = -I./inc -I./libft/inc -I./mlx
-LFLAG = -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
+IFLAG = -I./inc/inc -I./libft/libft/inc -I./mlx/mlx
+LFLAG = -L./mlx/mlx -lmlx -lm -framework OpenGL -framework AppKit
 
-# DIRECTORY
+# DIRECTORY ###############################################
 
 BUILD 	:= .build
-INC_DIR := inc
+INC_DIR := inc/inc
 SRC_DIR := src
 SUB_DIR := engine \
 		   events \
 		   init_utils \
 		   parser_map \
 		   parser_map_file
-LFT_DIR := libft
-MLX_DIR := mlx
+LFT_DIR := libft/libft
+MLX_DIR := mlx/mlx
 OBJ_DIR := $(BUILD)/obj
 DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
-# FILE
+# FILE ####################################################
 
 NAME  	:= Cub3d
 LIBFT 	:= libft.a
@@ -79,7 +83,7 @@ SUB_SRC := check_file_line_id.c \
 SRC		+= $(addprefix parser_map_file/, $(SUB_SRC))
 OBJ	  	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-# COLORS
+# COLORS ##################################################
 
 DEFAULT_COLOR	= \033[0m
 BLACK_COLOR		= \033[1;30m
@@ -91,7 +95,7 @@ MAGENTA_COLOR 	= \033[1;35m
 CYAN_COLOR 		= \033[1;36m
 WHITE_COLOR 	= \033[1;107m
 
-# Makefile
+# Makefile ################################################
 
 $(NAME): $(OBJ)
 	$(MAKE) -C $(LFT_DIR)
@@ -124,38 +128,39 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
 endif
 
 ###########################################################
-
+#                                                         #
 # Linux : #################################################
+#														  #
+###########################################################
 
 ifeq ($(shell uname), Linux)
 
-# COMPILATION
+# COMPILATION #############################################
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
-IFLAGS_LINUX = -I./inc_linux -I./libft_linux/inc -I./mlx_linux
-LFLAG_LINUX = -Lmlx_linux -lmlx_Linux -lXext -lX11 -lm
+IFLAGS_LINUX = -I./inc/inc_linux -I./libft/libft_linux/inc -I./mlx/mlx_linux
+LFLAG_LINUX = -L./mlx/mlx_linux -lmlx_Linux -lXext -lX11 -lm
 
-# DIRECTORY
+# DIRECTORY ###############################################
 
 BUILD 	:= .build
-INC_DIR := inc
+INC_DIR := inc/inc_linux
 SRC_DIR := src
 SUB_DIR := engine \
 		   events \
 		   init_utils \
 		   parser_map \
 		   parser_map_file
-LFT_DIR_LINUX = libft_linux
-MLX_DIR_LINUX := mlx_linux
+LFT_DIR_LINUX = libft/libft_linux
+MLX_DIR_LINUX := mlx/mlx_linux
 OBJ_DIR := $(BUILD)/obj
 DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
-# FILE
+# FILE ####################################################
 
 NAME  	:= Cub3d
 LIBFT 	:= libft.a
-MLX   	:= libmlx.dylib
 MLX_LINUX := libmlx_Linux.a
 SRC	  	:= main.c
 SUB_SRC := img.c \
@@ -195,7 +200,7 @@ SUB_SRC := check_file_line_id.c \
 SRC		+= $(addprefix parser_map_file/, $(SUB_SRC))
 OBJ	  	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-# COLORS
+# COLORS ##################################################
 
 DEFAULT_COLOR	= \033[0m
 BLACK_COLOR		= \033[1;30m
@@ -207,7 +212,7 @@ MAGENTA_COLOR 	= \033[1;35m
 CYAN_COLOR 		= \033[1;36m
 WHITE_COLOR 	= \033[1;107m
 
-# Makefile
+# Makefile ################################################
 
 $(NAME): $(OBJ)
 	$(MAKE) -C $(LFT_DIR_LINUX)

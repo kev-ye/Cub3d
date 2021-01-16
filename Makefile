@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 18:53:21 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 19:08:23 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 NAME  	:= Cub3d
 LIBFT 	:= libft.a
 MLX   	:= libmlx.dylib
+MLX_LINUX := libmlx_Linux.a
 SRC	  	:= main.c
 SUB_SRC := img.c \
 		   mapping.c \
@@ -91,7 +92,7 @@ WHITE_COLOR 	= \033[1;107m
 
 # Makefile
 
-## Macos ##
+## Macos #########################
 ifeq ($(shell uname), Darwin)
 $(NAME): $(OBJ)
 	$(MAKE) -C $(LFT_DIR)
@@ -100,27 +101,51 @@ $(NAME): $(OBJ)
 	cp ./$(MLX_DIR)/$(MLX) .
 	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
 endif
+##################################
 
-## Linus ##
+## Linux #########################
 ifeq ($(shell uname), Linux)
 $(NAME): $(OBJ)
 	$(MAKE) -C $(LFT_DIR)
-	$(MAKE) -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR_LINUX)
 	cp ./$(LFT_DIR)/$(LIBFT) .
-	cp ./$(MLX_DIR)/$(MLX) .
-	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+	cp ./$(MLX_DIR)/$(MLX_LINUX) .
+	$(CC) $(CFLAG) $(IFLAG) $(LFLAG_LINUX) $(LIBFT) $(MLX_LINUX) $^ -o $@
 endif
+##################################
 
 all: $(NAME)
-	
+
+## Macos #########################
+ifeq ($(shell uname), Darwin)	
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
 	rm -rf $(BUILD)
+endif
 
+ifeq ($(shell uname), Darwin)
 fclean: clean
 	$(MAKE) -C $(LFT_DIR) fclean
 	rm -rf $(NAME) $(LIBFT) $(MLX)
+endif	
+##################################
+
+
+## Linux #########################
+ifeq ($(shell uname), Linux)	
+clean:
+	$(MAKE) -C $(LFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR_LINUX) clean
+	rm -rf $(BUILD)
+endif
+
+ifeq ($(shell uname), Linux)
+fclean: clean
+	$(MAKE) -C $(LFT_DIR) fclean
+	rm -rf $(NAME) $(LIBFT) $(MLX_LINUX)
+endif
+##################################
 
 re: fclean all
 

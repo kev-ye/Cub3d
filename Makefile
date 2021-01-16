@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 18:15:46 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 18:53:21 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 IFLAG = -I./inc -I./libft/inc -I./mlx
 LFLAG = -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
+LFLAG_LINUX = -Lmlx -lmlx -lXext -lX11 -lm --framework OpenGL -framework AppKit
 
 # DIRECTORY
 
@@ -29,6 +30,7 @@ SUB_DIR := engine \
 		   parser_map_file
 LFT_DIR := libft
 MLX_DIR := mlx
+MLX_DIR_LINUX := mlx_linux
 OBJ_DIR := $(BUILD)/obj
 DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
@@ -89,12 +91,25 @@ WHITE_COLOR 	= \033[1;107m
 
 # Makefile
 
+## Macos ##
+ifeq ($(shell uname), Darwin)
 $(NAME): $(OBJ)
 	$(MAKE) -C $(LFT_DIR)
 	$(MAKE) -C $(MLX_DIR)
 	cp ./$(LFT_DIR)/$(LIBFT) .
 	cp ./$(MLX_DIR)/$(MLX) .
 	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+endif
+
+## Linus ##
+ifeq ($(shell uname), Linux)
+$(NAME): $(OBJ)
+	$(MAKE) -C $(LFT_DIR)
+	$(MAKE) -C $(MLX_DIR)
+	cp ./$(LFT_DIR)/$(LIBFT) .
+	cp ./$(MLX_DIR)/$(MLX) .
+	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+endif
 
 all: $(NAME)
 	

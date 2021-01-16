@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 19:58:10 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 20:02:24 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,11 +160,13 @@ $(BUILD):
 ifeq ($(shell uname), Darwin)	
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
 	$(CC) $(CFLAG) $(IFLAG) -c $< -o $@
+endif
 ##################################
 
 ## Linux #########################
 ifeq ($(shell uname), Linux)	
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
 	$(CC) $(CFLAG) $(IFLAGS_LINUX) -c $< -o $@
+endif
 ##################################
 

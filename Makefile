@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 22:34:52 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 22:41:05 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,7 @@ ifeq ($(shell uname), Linux)
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
-IFLAGS_LINUX = -I./inc -I./libft_linux/inc -I./mlx_linux
+IFLAGS_LINUX = -I./inc_linux -I./libft_linux/inc -I./mlx_linux
 LFLAG_LINUX = -Lmlx_linux -lmlx_Linux -lXext -lX11 -lm
 
 # DIRECTORY

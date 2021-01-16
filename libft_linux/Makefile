@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 19:48:49 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 19:51:55 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,8 +77,7 @@ SUB_SRC := ft_putchar_fd.c \
 		   ft_putnbr_fd.c \
 		   ft_putchar.c \
 		   ft_putstr.c \
-		   get_next_line.c \
-		   ft_printf.c
+		   get_next_line.c
 SRC		+= $(addprefix io/, $(SUB_SRC))
 SUB_SRC	:= ft_lstnew.c \
 		   ft_lstadd_front.c \
@@ -92,28 +91,6 @@ SUB_SRC	:= ft_lstnew.c \
 SRC		+= $(addprefix list/, $(SUB_SRC))
 SUB_SRC := ft_intlen_base.c \
 		   get_next_line_utils.c \
-		   ft_convert_utils.c \
-		   ft_convert.c \
-		   ft_parse_char.c \
-		   ft_parse_check.c \
-		   ft_parse_flag_plus.c \
-		   ft_parse_flag.c \
-		   ft_parse_hex.c \
-		   ft_parse_int_p.c \
-		   ft_parse_int.c \
-		   ft_parse_octal.c \
-		   ft_parse_pointer.c \
-		   ft_parse_spec.c \
-		   ft_parse_string.c \
-		   ft_parse_uint.c \
-		   ft_parse_wchar.c \
-		   ft_parse_wstring.c \
-		   ft_parse.c \
-		   ft_process.c \
-		   ft_utils_pf.c \
-		   ft_utils_w_pf.c \
-		   ft_putwchar_pf.c \
-		   ft_vprintf.c
 SRC		+= $(addprefix utils/, $(SUB_SRC))
 OBJ 	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 

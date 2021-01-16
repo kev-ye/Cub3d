@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 19:08:23 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 19:58:10 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 IFLAG = -I./inc -I./libft/inc -I./mlx
 LFLAG = -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
+IFLAGS_LINUX = -I./inc -I./libft_linux/inc -I./mlx_linux
 LFLAG_LINUX = -Lmlx -lmlx -lXext -lX11 -lm --framework OpenGL -framework AppKit
 
 # DIRECTORY
@@ -30,6 +31,7 @@ SUB_DIR := engine \
 		   parser_map_file
 LFT_DIR := libft
 MLX_DIR := mlx
+LFT_DIR_LINUX = libft_linux
 MLX_DIR_LINUX := mlx_linux
 OBJ_DIR := $(BUILD)/obj
 DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
@@ -106,11 +108,11 @@ endif
 ## Linux #########################
 ifeq ($(shell uname), Linux)
 $(NAME): $(OBJ)
-	$(MAKE) -C $(LFT_DIR)
+	$(MAKE) -C $(LFT_DIR_LINUX)
 	$(MAKE) -C $(MLX_DIR_LINUX)
-	cp ./$(LFT_DIR)/$(LIBFT) .
-	cp ./$(MLX_DIR)/$(MLX_LINUX) .
-	$(CC) $(CFLAG) $(IFLAG) $(LFLAG_LINUX) $(LIBFT) $(MLX_LINUX) $^ -o $@
+	cp ./$(LFT_DIR_LINUX)/$(LIBFT) .
+	cp ./$(MLX_DIR_LINUX)/$(MLX_LINUX) .
+	$(CC) $(CFLAG) $(IFLAGS_LINUX) $(LFLAG_LINUX) $(LIBFT) $(MLX_LINUX) $^ -o $@
 endif
 ##################################
 
@@ -135,14 +137,14 @@ endif
 ## Linux #########################
 ifeq ($(shell uname), Linux)	
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
+	$(MAKE) -C $(LFT_DIR_LINUX) clean
 	$(MAKE) -C $(MLX_DIR_LINUX) clean
 	rm -rf $(BUILD)
 endif
 
 ifeq ($(shell uname), Linux)
 fclean: clean
-	$(MAKE) -C $(LFT_DIR) fclean
+	$(MAKE) -C $(LFT_DIR_LINUX) fclean
 	rm -rf $(NAME) $(LIBFT) $(MLX_LINUX)
 endif
 ##################################
@@ -154,5 +156,15 @@ re: fclean all
 $(BUILD):
 	mkdir $@ $(DIRS)
 
+## Macos #########################
+ifeq ($(shell uname), Darwin)	
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
 	$(CC) $(CFLAG) $(IFLAG) -c $< -o $@
+##################################
+
+## Linux #########################
+ifeq ($(shell uname), Linux)	
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
+	$(CC) $(CFLAG) $(IFLAGS_LINUX) -c $< -o $@
+##################################
+

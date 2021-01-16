@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 22:39:31 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 23:12:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 /*
 ** KEY CODE
 */
-#define KEY_CODE_ESC 9
-#define KEY_CODE_W 25
-#define KEY_CODE_S 38
-#define KEY_CODE_A 39
-#define KEY_CODE_D 40
-#define KEY_CODE_LEFT 113
-#define KEY_CODE_RIGHT 114
+#define KEY_CODE_ESC 1
+#define KEY_CODE_W 17
+#define KEY_CODE_S 31
+#define KEY_CODE_A 30
+#define KEY_CODE_D 32
+#define KEY_CODE_LEFT 105
+#define KEY_CODE_RIGHT 106
 
 /*
 ** COLOR CODE

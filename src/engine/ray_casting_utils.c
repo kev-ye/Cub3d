@@ -6,13 +6,16 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 12:26:57 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 17:26:53 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win)
+void    init_raycating_value_calc(
+    t_camera *cam,
+    t_cam_ray *ray,
+    t_win *win)
 {
     ray->camera_x = 2 * ray->pix / (double)win->width - 1;
     ray->ray_dir_x = cam->dir_x + cam->plane_x * ray->camera_x;
@@ -24,7 +27,9 @@ void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win)
     ray->hit = 0;
 }
 
-void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray)
+void    step_calc_init_side_dist(
+    t_camera *cam,
+    t_cam_ray *ray)
 {
     if (ray->ray_dir_x < 0)
     {
@@ -48,7 +53,9 @@ void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray)
     }
 }
 
-void    wall_hit(t_cam_ray *ray, t_win *win)
+void    wall_hit(
+    t_cam_ray *ray,
+    t_win *win)
 {
     while (ray->hit == 0)
     {
@@ -75,17 +82,24 @@ void    wall_hit(t_cam_ray *ray, t_win *win)
     }
 }
 
-void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win)
+void    perpwalldist_and_heightline(
+    t_camera *cam,
+    t_cam_ray *ray,
+    t_win *win)
 {
     if (ray->side == 0 || ray->side == 1)
-        ray->perp_wall_dist = (ray->map_x - cam->pos_x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
+        ray->perp_wall_dist = (ray->map_x - cam->pos_x
+                                + (1 - ray->step_x) / 2) / ray->ray_dir_x;
     else
-        ray->perp_wall_dist = (ray->map_y - cam->pos_y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
+        ray->perp_wall_dist = (ray->map_y - cam->pos_y
+                                + (1 - ray->step_y) / 2) / ray->ray_dir_y;
     ray->line_height = (int)(win->height / ray->perp_wall_dist);
-    ray->draw_start = (-ray->line_height / 2 + ((win->height / 2) * win->camera->cam_height));
+    ray->draw_start = (-ray->line_height / 2 + ((win->height / 2)
+    * win->camera->cam_height));
     if (ray->draw_start < 0)
         ray->draw_start = 0;
-    ray->draw_end = (ray->line_height / 2 + ((win->height / 2) * win->camera->cam_height));
+    ray->draw_end = (ray->line_height / 2 + ((win->height / 2)
+                        * win->camera->cam_height));
     if (ray->draw_end >= win->height)
         ray->draw_end = win->height - 1;
 }

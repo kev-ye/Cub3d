@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2020/12/17 16:19:09 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 18:15:46 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,21 +19,61 @@ LFLAG = -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
 
 # DIRECTORY
 
-BUILD 	= .build
-INC_DIR = inc
-SRC_DIR = src
-LFT_DIR = libft
-MLX_DIR = mlx
-OBJ_DIR = $(BUILD)/obj
-DIRS	= $(OBJ_DIR)
+BUILD 	:= .build
+INC_DIR := inc
+SRC_DIR := src
+SUB_DIR := engine \
+		   events \
+		   init_utils \
+		   parser_map \
+		   parser_map_file
+LFT_DIR := libft
+MLX_DIR := mlx
+OBJ_DIR := $(BUILD)/obj
+DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
 # FILE
 
-NAME  := Cub3d
-LIBFT := libft.a
-MLX   := libmlx.dylib
-SRC	  := main.c
-OBJ	  := $(SRC:%.c=$(OBJ_DIR)/%.o)
+NAME  	:= Cub3d
+LIBFT 	:= libft.a
+MLX   	:= libmlx.dylib
+SRC	  	:= main.c
+SUB_SRC := img.c \
+		   mapping.c \
+		   move.c \
+		   ray_casting_utils.c \
+		   ray_casting.c \
+		   set_camera.c \
+		   turn.c
+SRC 	+= $(addprefix engine/, $(SUB_SRC))
+SUB_SRC := event_key.c \
+		   event_loop.c \
+		   event_win.c
+SRC		+= $(addprefix events/, $(SUB_SRC))
+SUB_SRC := color.c \
+		   free.c \
+		   init.c \
+		   msg_error.c \
+		   quit.c
+SRC		+= $(addprefix init_utils/, $(SUB_SRC))
+SUB_SRC := check_map.c \
+		   check_x.c \
+		   check_y.c \
+		   get_map.c \
+		   get_player_place.c
+SRC		+= $(addprefix parser_map/, $(SUB_SRC))
+SUB_SRC := check_file_line_id.c \
+		   check_file_line_map.c \
+		   check_file_name.c \
+		   check_file.c \
+		   check_path.c \
+		   floor_ceiling.c \
+		   get_color.c \
+		   get_path.c \
+		   get_resolution.c \
+		   init_desc.c
+SRC		+= $(addprefix parser_map_file/, $(SUB_SRC))
+OBJ	  	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 # COLORS
 
@@ -50,7 +90,11 @@ WHITE_COLOR 	= \033[1;107m
 # Makefile
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $^ -o $@
+	$(MAKE) -C $(LFT_DIR)
+	$(MAKE) -C $(MLX_DIR)
+	cp ./$(LFT_DIR)/$(LIBFT) .
+	cp ./$(MLX_DIR)/$(MLX) .
+	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
 
 all: $(NAME)
 	
@@ -71,8 +115,4 @@ $(BUILD):
 	mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
-	$(MAKE) -C $(LFT_DIR)
-	$(MAKE) -C $(MLX_DIR)
-	cp ./$(LFT_DIR)/$(LIBFT) .
-	cp ./$(MLX_DIR)/$(MLX) .
 	$(CC) $(CFLAG) $(IFLAG) -c $< -o $@

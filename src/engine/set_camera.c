@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 09:52:20 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 13:46:48 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 17:44:43 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,16 @@ static  t_camera *set_player_dir(t_win *win, t_camera *camera_info)
     return (camera_info);
 }
 
-int init_camera(t_win **win)
+int init_camera(t_win *win)
 {
-    if (!((*win)->camera = malloc(sizeof(t_camera))))
+    if (!(win->camera = malloc(sizeof(t_camera))))
         return (ERROR);
-    ft_bzero((*win)->camera, sizeof(t_camera));
-    (*win)->camera->pos_x = (*win)->desc_info->player_x;
-    (*win)->camera->pos_y = (*win)->desc_info->player_y;
-    (*win)->camera = set_player_dir((*win), (*win)->camera);
-    (*win)->camera->rot_speed = 0.10;
-    (*win)->camera->speed = 0.10;
-    (*win)->camera->cam_height = 1.0;
+    ft_bzero(win->camera, sizeof(t_camera));
+    win->camera->pos_x = win->desc_info->player_x;
+    win->camera->pos_y = win->desc_info->player_y;
+    win->camera = set_player_dir(win, win->camera);
+    win->camera->rot_speed = 0.10;
+    win->camera->speed = 0.10;
+    win->camera->cam_height = 1.0;
     return (SUCCESS);
 }

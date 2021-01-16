@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:20:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 12:46:39 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 17:29:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,21 @@ void turn_left(t_win *win)
 
     old_dir_x = win->camera->dir_x;
     old_plane_x = win->camera->plane_x;
-    win->camera->dir_x = win->camera->dir_x * cos(-win->camera->rot_speed) - win->camera->dir_y * sin(-win->camera->rot_speed);
-    win->camera->dir_y = old_dir_x * sin(-win->camera->rot_speed) + win->camera->dir_y * cos(-win->camera->rot_speed);
-    win->camera->plane_x = win->camera->plane_x * cos(-win->camera->rot_speed) - win->camera->plane_y * sin(-win->camera->rot_speed);
-    win->camera->plane_y = old_plane_x * sin(-win->camera->rot_speed) + win->camera->plane_y * cos(-win->camera->rot_speed);
+    win->camera->dir_x = win->camera->dir_x
+                        * cos(-win->camera->rot_speed)- win->camera->dir_y
+                        * sin(-win->camera->rot_speed);
+    win->camera->dir_y = old_dir_x
+                        * sin(-win->camera->rot_speed)
+                        + win->camera->dir_y
+                        * cos(-win->camera->rot_speed);
+    win->camera->plane_x = win->camera->plane_x
+                        * cos(-win->camera->rot_speed)
+                        - win->camera->plane_y
+                        * sin(-win->camera->rot_speed);
+    win->camera->plane_y = old_plane_x 
+                        * sin(-win->camera->rot_speed)
+                        + win->camera->plane_y
+                        * cos(-win->camera->rot_speed);
 }
 
 void turn_right(t_win *win)
@@ -32,8 +43,20 @@ void turn_right(t_win *win)
 
     old_dir_x = win->camera->dir_x;
     old_plane_x = win->camera->plane_x;
-    win->camera->dir_x = win->camera->dir_x * cos(win->camera->rot_speed) - win->camera->dir_y * sin(win->camera->rot_speed);
-    win->camera->dir_y = old_dir_x * sin(win->camera->rot_speed) + win->camera->dir_y * cos(win->camera->rot_speed);
-    win->camera->plane_x = win->camera->plane_x * cos(win->camera->rot_speed) - win->camera->plane_y * sin(win->camera->rot_speed);
-    win->camera->plane_y = old_plane_x * sin(win->camera->rot_speed) + win->camera->plane_y * cos(win->camera->rot_speed);
+    win->camera->dir_x = win->camera->dir_x
+                        * cos(win->camera->rot_speed)
+                        - win->camera->dir_y
+                        * sin(win->camera->rot_speed);
+    win->camera->dir_y = old_dir_x
+                        * sin(win->camera->rot_speed)
+                        + win->camera->dir_y
+                        * cos(win->camera->rot_speed);
+    win->camera->plane_x = win->camera->plane_x
+                            * cos(win->camera->rot_speed)
+                            - win->camera->plane_y
+                            * sin(win->camera->rot_speed);
+    win->camera->plane_y = old_plane_x
+                            * sin(win->camera->rot_speed)
+                            + win->camera->plane_y
+                            * cos(win->camera->rot_speed);
 }

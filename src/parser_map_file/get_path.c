@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:04:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 18:04:44 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 18:14:13 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int get_path_2(char **s, t_desc_info **desc_info)
 {
-    char *tmp;
     if (!ft_strncmp(s[0], "NO", 2))
     {
         (*desc_info)->path_no = ft_strdup(s[1]);

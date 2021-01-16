@@ -6,37 +6,34 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/06 12:11:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 17:30:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    pixel_put_color(t_img *img, int x, int y, int color)
+void    pixel_put_color(
+    t_img *img,
+    int x,
+    int y,
+    int color)
 {
     char    *dst;
-    
+
     dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
     *(unsigned int*)dst = color;
 }
 
-void    vertical_line_color(t_line *line, t_win *win, int color)
+void    vertical_line_color(
+    t_line *line,
+    t_win *win,
+    int color)
 {
     int draw_start;
     int draw_end;
     
-    if (line->draw_start < line->draw_end)
-    {
-        draw_start = line->draw_start;
-        draw_end = line->draw_end;
-    }
-    else
-    {
-        draw_start = line->draw_end;
-        draw_end = line->draw_start;
-    }
-    // draw_start = line->draw_start;
-    // draw_end = line->draw_end;
+    draw_start = line->draw_start;
+    draw_end = line->draw_end;
     if (draw_start >= 0)
     {
         while (draw_start < draw_end)
@@ -47,31 +44,35 @@ void    vertical_line_color(t_line *line, t_win *win, int color)
     }
 }
 
-void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray)
+void    pixel_put_tex(
+    t_line *line,
+    t_img *texture,
+    t_win *win,
+    t_cam_ray *ray)
 {
     int draw;
 
-    draw = line->line_y * texture->line_len - win->height * texture->line_len / 2 + ray->line_height * texture->line_len / 2;
-    line->tex_y = ((draw * texture->height) / ray->line_height) / texture->line_len;
-    ft_memcpy(win->img->addr + line->line_y * win->img->line_len + line->line_x * win->img->bpp / 8, texture->addr + line->tex_y * texture->line_len + line->tex_x * (texture->bpp / 8), sizeof(int));
+    draw = line->line_y * texture->line_len - win->height
+            * texture->line_len / 2 + ray->line_height
+            * texture->line_len / 2;
+    line->tex_y = ((draw * texture->height) / ray->line_height)
+                                            / texture->line_len;
+    ft_memcpy(win->img->addr + line->line_y * win->img->line_len
+                            + line->line_x * win->img->bpp / 8,
+                            texture->addr + line->tex_y * texture->line_len
+                            + line->tex_x * (texture->bpp / 8), sizeof(int));
 }
 
-void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *ray)
+void    vertical_line_tex(
+    t_line *line,
+    t_win *win,
+    t_img *texture,
+    t_cam_ray *ray)
 {
     int draw_end;
 
-    if (line->draw_start < line->draw_end)
-    {
-        line->line_y = line->draw_start;
-        draw_end = line->draw_end;
-    }
-    else
-    {
-        line->line_y = line->draw_end;
-        draw_end = line->draw_start;
-    }
-    // line->line_y = line->draw_start;
-    // draw_end = line->draw_end;
+    line->line_y = line->draw_start;
+    draw_end = line->draw_end;
     if (line->line_y >= 0)
     {
         while (line->line_y < draw_end)
@@ -87,11 +88,13 @@ t_img *new_image(t_win *win, int size_width, int size_height)
     t_img *new_img;
 
     if (!(new_img = malloc(sizeof(t_img))))
-        return (void *)0;
+        return (NULL);
     ft_bzero(new_img, sizeof(t_img));
-    if (!(new_img->img_ptr = mlx_new_image(win->mlx_ptr, size_width, size_height)))
-        return (void *)0;
-    new_img->addr = mlx_get_data_addr(new_img->img_ptr, &new_img->bpp, &new_img->line_len, &new_img->endian);
+    if (!(new_img->img_ptr = mlx_new_image(win->mlx_ptr, size_width,
+                                                        size_height)))
+        return (NULL);
+    new_img->addr = mlx_get_data_addr(new_img->img_ptr, &new_img->bpp,
+                                &new_img->line_len, &new_img->endian);
     new_img->width = size_width;
     new_img->height = size_height;
     return (new_img);

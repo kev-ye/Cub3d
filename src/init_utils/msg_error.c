@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_loop.c                                       :+:      :+:    :+:   */
+/*   msg_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 23:01:56 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 16:06:54 by kaye             ###   ########.fr       */
+/*   Created: 2021/01/06 13:02:26 by kaye              #+#    #+#             */
+/*   Updated: 2021/01/16 16:20:13 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void draw(t_win *win)
+void    msg_error(char *msg)
 {
-    if (!(ray_casting(win)))
-        shut_down(win);
-}
-
-int    event_loop(t_win *win)
-{
-    draw(win);
-    event_key(win);
-    return (SUCCESS);
+    ft_putstr("Error\n");
+    ft_putstr(msg);
+    exit(1);
 }

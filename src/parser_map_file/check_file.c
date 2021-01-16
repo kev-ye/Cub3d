@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 10:22:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 18:13:13 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 static int parser_map(const char *path, t_desc_info *desc_info)
 {
     char **map;
-    int len_max_x;
     int len_max_y;
     int i;
     
@@ -53,6 +52,8 @@ t_desc_info *check_file(const char *path)
     t_desc desc;
     t_desc_info *desc_info;
 
+    if (!(check_file_name(path)))
+        msg_error("Error file name\n");
     if ((fd = open(path, O_RDONLY)) == -1)
         return (NULL);
     r = 1;
@@ -66,7 +67,7 @@ t_desc_info *check_file(const char *path)
         {
             free(line);
             free_desc_info(desc_info);
-            return (NULL);
+            msg_error("Error : File -> ID error\n");
         }
         free(line);
         if (check_map_ready(desc))
@@ -79,7 +80,7 @@ t_desc_info *check_file(const char *path)
         {
             free(line);
             free_desc_info(desc_info);
-            return (NULL);
+            msg_error("Error : File -> ID error\n");
         }
         free(line);
         if (desc.map)
@@ -92,13 +93,13 @@ t_desc_info *check_file(const char *path)
         {
             free(line);
             free_desc_info(desc_info);
-            return (NULL);
+            msg_error("Error : File -> Map error\n");
         }
         if (desc.player > 1)
         {
             free(line);
             free_desc_info(desc_info);
-            return (NULL);
+            msg_error("Error : File -> Player error\n");
         }
         free(line);
     }
@@ -106,9 +107,9 @@ t_desc_info *check_file(const char *path)
     if (!check_path(desc_info))
     {
         free_desc_info(desc_info);
-        return (NULL);
+        msg_error("Error : Path -> Path no exist\n");
     }
     if (!parser_map(path, desc_info))
-        return (NULL);
+        msg_error("Error : Map -> Map error\n");
     return (desc_info);
 }

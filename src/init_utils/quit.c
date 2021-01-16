@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msg_error.c                                        :+:      :+:    :+:   */
+/*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 13:02:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/06 13:03:58 by kaye             ###   ########.fr       */
+/*   Created: 2021/01/16 17:42:20 by kaye              #+#    #+#             */
+/*   Updated: 2021/01/16 17:42:26 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    msg_error(char *msg)
+void shut_down(t_win *win)
 {
-    ft_putstr("Error\n");
-    ft_putstr(msg);
+    mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+    exit(0);
 }

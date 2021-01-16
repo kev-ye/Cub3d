@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 13:48:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 17:45:34 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@
 #include <fcntl.h>
 #include "libft.h"
 
-// RETURN VALUE
+/*
+** TRUE/FALSE
+*/
 #define SUCCESS 1
 #define ERROR 0
 
-// KEYBOARD CODE
+/*
+** KEY CODE
+*/
 #define KEY_CODE_ESC 53
 #define KEY_CODE_W 13
 #define KEY_CODE_S 1
@@ -33,14 +37,18 @@
 #define KEY_CODE_LEFT 123
 #define KEY_CODE_RIGHT 124
 
-// COLOR CODE
+/*
+** COLOR CODE
+*/
 #define RED 0xFF0000
 #define GREEN 0x00FF00
 #define BLUE 0x0000FF
 #define YELLOW 0xFFFF00
 #define WHITE 0xFFFFFF
 
-// CAMERA STRUCT
+/*
+** STRUCT - CAMERA/PLAYER
+*/
 typedef struct      s_camera
 {
     double  pos_x;
@@ -54,7 +62,9 @@ typedef struct      s_camera
     double  rot_speed;
 }                   t_camera;
 
-// RAY STRUCT
+/*
+** STURCT - RAYCASTING
+*/
 typedef struct      s_cam_ray
 {
     int     pix;
@@ -77,7 +87,9 @@ typedef struct      s_cam_ray
     int     draw_end;
 }                   t_cam_ray;
 
-// DRAW IMAGE STRUCT
+/*
+** STRUCT - IMAGE
+*/
 typedef struct      s_img 
 {
     void    *img_ptr;
@@ -89,7 +101,9 @@ typedef struct      s_img
     int     height;
 }                   t_img;
 
-// KEYBOARD STRUCT
+/*
+** STRUCT - EVENT KEY
+*/
 typedef struct      s_key
 {
     int     key_w;
@@ -100,7 +114,9 @@ typedef struct      s_key
     int     key_right;
 }                   t_key;
 
-// LINE STRUCT
+/*
+** STRUCT - DRAW LINE
+*/
 typedef struct      s_line
 {
     int     line_x;
@@ -111,15 +127,9 @@ typedef struct      s_line
     int     tex_y;
 }                   t_line;
 
-// MAP STRUCT
-typedef struct      s_map
-{
-    char    **map;
-    int     map_width;
-    int     map_height;
-}                   t_map;
-
-// DESC CHECK STRUCT
+/*
+** STRUCT - DESCRITION UTILS
+*/
 typedef struct      s_desc
 {
     int map;
@@ -134,7 +144,9 @@ typedef struct      s_desc
     int c;
 }                   t_desc;
 
-// DESC INFO
+/*
+** STRUCT - DESCRIPTION INFORMATION
+*/
 typedef struct       s_desc_info
 {
     int r_x;
@@ -154,7 +166,9 @@ typedef struct       s_desc_info
     int map_height;
 }                   t_desc_info;
 
-// WINDOW STRUCT
+/*
+** STRUCT - REGROUP
+*/
 typedef struct      s_win
 {
     void        *mlx_ptr;
@@ -164,100 +178,116 @@ typedef struct      s_win
     t_key       *key_code;
     t_img       *img;
     t_camera    *camera;
-    t_map       *map;
     t_img       **texture;
     t_desc_info *desc_info;
 }                   t_win;
 
-// CLOSE FUNCTION
+/*
+** QUIT
+*/
 void shut_down(t_win *win);
 
-// EVENT FUNCTION
-    // Event -> window
-int event_destroy_win(t_win *win);
-    // Event -> keyboard
-int event_key_press(int keycode, t_win *win);
-int event_key_release(int keycode, t_win *win);
-int event_key(t_win *win);
-    // Event -> loop
-int    event_loop(t_win *win);
+/*
+** EVENT
+*/
+int     event_destroy_win(t_win *win);
+int     event_key_press(int keycode, t_win *win);
+int     event_key_release(int keycode, t_win *win);
+int     event_key(t_win *win);
+int     event_loop(t_win *win);
 
-// ENGINE FUNCION
-    // Engine -> img
+/*
+** IMAGE
+*/
 t_img   *new_image(t_win *win, int size_x, int size_y);
 void    pixel_put_color(t_img *img, int x, int y, int color);
 void    vertical_line_color(t_line *line, t_win *win, int color);
 void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *ray);
 void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
-    // Engine -> texture
+
+/*
+** TEXTURE
+*/
 int     set_texture(t_win *win, const char *path, int index);
-int     load_texture(t_win **win);
-    // Engine -> ray_casting
+int     load_texture(t_win *win);
+
+/*
+** RAYCASTING
+*/
 void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
 void    wall_hit(t_cam_ray *ray, t_win *win);
 void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win);
 int     ray_casting(t_win *win);
-    // Engine -> camera move
+
+/*
+** PLAYER MOUVEMENT
+*/
 void    move_w(t_win *win);
 void    move_s(t_win *win);
 void    move_a(t_win *win);
 void    move_d(t_win *win);
-    // Engine -> camera turn
+
+/*
+** CAMERA TURN
+*/
 void    turn_left(t_win *win);
 void    turn_right(t_win *win);
 
-// TEST FUNCTION
-    //Engine -> draw
-void    draw_something(t_win *win, t_img *img, int color);
-    // Engine -> draw -> move
-int    test_draw_move(t_win *win, t_img *img, int color);
-    // Engine -> draw -> wall
+/*
+** MAPPING
+*/
 void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
 void   draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray);
 void   mapping(t_cam_ray *ray, t_win *win);
 
-// PARSER FILE
-    // Parser -> init
-t_desc    init_desc();
-t_desc_info *init_desc_info();
-    // Parser -> get resolution
-int get_resoltion(char *line, t_desc_info *desc_info);
-    // Parser -> get color
-int check_and_get_color(char *s);
-    // Parser -> floor ceiling
-int get_floor_color(char *line, t_desc_info *desc_info);
-int get_ceiling_color(char *line, t_desc_info *desc_info);
-    // Parser -> get path
-int get_path(char *line, t_desc_info *desc_info);
-    // Parser -> check file name
-int check_file_name(const char *path);
-    // Parser -> check file line id
-int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info);
-    // parser -> check file line map
-int check_map_ready(t_desc desc);
-int check_no_map(char *line, t_desc *desc);
-int check_map_norm(char *line, t_desc *desc);
-    // Parser -> check path
-int check_path(t_desc_info *desc_info);
-    // Parser -> check file
-t_desc_info *check_file(const char *path);
+/*
+** PARSER - INIT
+*/
+t_desc          init_desc();
+t_desc_info     *init_desc_info();
 
-// PARSER MAP
-char **get_map(const char *path, int *len_max_y);
-char **get_player_place(char **map, int *p_x, int *p_y, t_desc_info *desc_info);
-    // Parser -> check
-int check_map_x(char **map, int y, int x);
-int check_map_y(char **map, int y, int x);
-int check_map(char **map, int px, int py);
+/*
+** PARSER - GET INFORMATION
+*/
+int             get_resoltion(char *line, t_desc_info *desc_info);
+int             check_and_get_color(char *s);
+int             get_floor_color(char *line, t_desc_info *desc_info);
+int             get_ceiling_color(char *line, t_desc_info *desc_info);
+int             get_path(char *line, t_desc_info *desc_info);
 
-// UTILS
+/*
+** PARSER - CHECK FILE
+*/
+int             check_file_name(const char *path);
+int             check_file_line(char *line, t_desc *desc,
+                                                    t_desc_info *desc_info);
+int             check_map_ready(t_desc desc);
+int             check_no_map(char *line, t_desc *desc);
+int             check_map_norm(char *line, t_desc *desc);
+int             check_path(t_desc_info *desc_info);
+t_desc_info     *check_file(const char *path);
+
+/*
+** PARSER - MAP
+*/
+char            **get_map(const char *path, int *len_max_y);
+char            **get_player_place(char **map, int *p_x, int *p_y,
+                                                    t_desc_info *desc_info);
+int             check_map_x(char **map, int y, int x);
+int             check_map_y(char **map, int y, int x);
+int             check_map(char **map, int px, int py);
+
+/*
+** INIT/UTILS
+*/
 void    msg_error(char *msg);
 int		create_rgb(int r, int g, int b);
 void    free_split(char **s);
 void    free_desc_info(t_desc_info *desc_info);
-
-// INIT
-int init_camera(t_win **win);
+void    shut_down(t_win *win);
+int     init_camera(t_win *win);
+int     init_key(t_win *win);
+int     init_tex(t_win *win);
 
 #endif

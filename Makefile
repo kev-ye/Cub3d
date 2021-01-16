@@ -1,16 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile copy                                      :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 20:41:40 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 22:34:52 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Macos : #################################################
+
+ifeq ($(shell uname), Darwin)
 
 # COMPILATION
 
@@ -39,7 +41,6 @@ DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 NAME  	:= Cub3d
 LIBFT 	:= libft.a
 MLX   	:= libmlx.dylib
-MLX_LINUX := libmlx_Linux.a
 SRC	  	:= main.c
 SUB_SRC := img.c \
 		   mapping.c \
@@ -101,7 +102,6 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
-ifeq ($(shell uname), Darwin)	
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
@@ -128,12 +128,13 @@ endif
 # Linux : #################################################
 
 ifeq ($(shell uname), Linux)
+
 # COMPILATION
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
 IFLAGS_LINUX = -I./inc -I./libft_linux/inc -I./mlx_linux
-LFLAG_LINUX = -Lmlx -lmlx -lXext -lX11 -lm
+LFLAG_LINUX = -Lmlx_linux -lmlx_Linux -lXext -lX11 -lm
 
 # DIRECTORY
 
@@ -235,5 +236,7 @@ $(BUILD):
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
 	$(CC) $(CFLAG) $(IFLAGS_LINUX) -c $< -o $@
+
 endif
+
 ###########################################################

@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 19:58:24 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 22:35:09 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ SUB_SRC	:= ft_lstnew.c \
 		   ft_lstmap.c
 SRC		+= $(addprefix list/, $(SUB_SRC))
 SUB_SRC := ft_intlen_base.c \
-		   get_next_line_utils.c \
+		   get_next_line_utils.c
 SRC		+= $(addprefix utils/, $(SUB_SRC))
 OBJ 	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 

@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 17:49:13 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/16 19:28:33 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,14 +106,22 @@ SUB_SRC := ft_intlen_base.c \
 		   ft_parse_spec.c \
 		   ft_parse_string.c \
 		   ft_parse_uint.c \
-		   ft_parse_wchar.c \
 		   ft_parse_wstring.c \
 		   ft_parse.c \
 		   ft_process.c \
 		   ft_utils_pf.c \
-		   ft_utils_w_pf.c \
 		   ft_putwchar_pf.c \
 		   ft_vprintf.c
+## wint_t in Macos
+ifeq ($(shell uname), Darwin)
+SUB_SRC += ft_utils_w_pf.c \
+		   ft_parse_wchar.c
+endif
+## wint_t -> int8_t in Linux
+ifeq ($(shell uname), Linux)
+SUB_SRC += ft_utils_w_pf_linux.c \
+		   ft_parse_wchar_linux.c
+endif
 SRC		+= $(addprefix utils/, $(SUB_SRC))
 OBJ 	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 

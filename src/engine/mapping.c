@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:21:27 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 13:14:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 13:47:51 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,17 @@ int     set_texture(t_win *win, const char *path, int index)
     return (SUCCESS);
 }
 
-int     load_texture(t_win *win) // test
+int     load_texture(t_win **win) // test
 {
     int tex_1;
     int tex_2;
     int tex_3;
     int tex_4;
 
-    tex_1 = set_texture(win, win->desc_info->path_no, 0);
-    tex_2 = set_texture(win, win->desc_info->path_so, 1);
-    tex_3 = set_texture(win, win->desc_info->path_ea, 2);
-    tex_4 = set_texture(win, win->desc_info->path_we, 3);
+    tex_1 = set_texture((*win), (*win)->desc_info->path_no, 0);
+    tex_2 = set_texture((*win), (*win)->desc_info->path_so, 1);
+    tex_3 = set_texture((*win), (*win)->desc_info->path_ea, 2);
+    tex_4 = set_texture((*win), (*win)->desc_info->path_we, 3);
     if (!tex_1 || !tex_2 || !tex_3 || !tex_4)
         return (ERROR);
     return (SUCCESS);

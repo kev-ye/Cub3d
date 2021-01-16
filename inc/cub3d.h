@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 10:55:41 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 13:48:05 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *r
 void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
     // Engine -> texture
 int     set_texture(t_win *win, const char *path, int index);
-int     load_texture(t_win *win);
+int     load_texture(t_win **win);
     // Engine -> ray_casting
 void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
@@ -258,6 +258,6 @@ void    free_split(char **s);
 void    free_desc_info(t_desc_info *desc_info);
 
 // INIT
-int init_camera(t_win *win);
+int init_camera(t_win **win);
 
 #endif

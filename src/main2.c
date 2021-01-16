@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 13:22:32 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/16 13:52:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,32 @@ void shut_down(t_win *win)
     exit(0);
 }
 
-int init_key(t_win *win)
+// int init_key(t_win *win)
+// {
+//     if (!(win->key_code = malloc(sizeof(t_key))))
+//         return (ERROR);
+//     ft_bzero(win->key_code, sizeof(t_key));
+//     win->key_code->key_w = 0;
+//     win->key_code->key_s = 0;
+//     win->key_code->key_a = 0;
+//     win->key_code->key_d = 0;
+//     win->key_code->key_left = 0;
+//     win->key_code->key_right = 0;
+//     return (SUCCESS);    
+// }
+
+int init_key(t_win **win)
 {
-    if (!(win->key_code = malloc(sizeof(t_key))))
+    if (!((*win)->key_code = malloc(sizeof(t_key))))
         return (ERROR);
-    ft_bzero(win->key_code, sizeof(t_key));
-    win->key_code->key_w = 0;
-    win->key_code->key_s = 0;
-    win->key_code->key_a = 0;
-    win->key_code->key_d = 0;
-    win->key_code->key_left = 0;
-    win->key_code->key_right = 0;
+    ft_bzero((*win)->key_code, sizeof(t_key));
+    (*win)->key_code->key_w = 0;
+    (*win)->key_code->key_s = 0;
+    (*win)->key_code->key_a = 0;
+    (*win)->key_code->key_d = 0;
+    (*win)->key_code->key_left = 0;
+    (*win)->key_code->key_right = 0;
     return (SUCCESS);    
-}
-
-static t_win *init_mlx_win(char *path)
-{
-    t_win *new_win;
-
-    if (!(new_win = malloc(sizeof(t_win))))
-        exit(1);
-    ft_bzero(new_win, sizeof(t_win));
-    if (!(new_win->mlx_ptr = mlx_init()))
-        return (ERROR);
-    if (!(new_win->desc_info = check_file(path)))
-        return (ERROR);
-    new_win->width = new_win->desc_info->r_x;
-    new_win->height = new_win->desc_info->r_y;
-    if (!(new_win->win_ptr = mlx_new_window(new_win->mlx_ptr, new_win->width, new_win->height, "Cub3d")))
-        return (ERROR);
-    if (!(new_win->img = new_image(new_win, new_win->width, new_win->height)))
-        return (ERROR);
-    // new_win->desc_info->map_width = 0;
-    // new_win->desc_info->map_height = 0;
-    init_key(new_win);
-    return (new_win);
 }
 
 int init_tex(t_win **win)
@@ -74,6 +65,39 @@ int init_tex(t_win **win)
     return (SUCCESS);
 }
 
+static t_win *init_mlx_win(char *path)
+{
+    t_win *new_win;
+
+    if (!(new_win = malloc(sizeof(t_win))))
+        exit(1);
+    ft_bzero(new_win, sizeof(t_win));
+    if (!(new_win->mlx_ptr = mlx_init()))
+        return (ERROR);
+    if (!(new_win->desc_info = check_file(path)))
+        return (ERROR);
+    new_win->width = new_win->desc_info->r_x;
+    new_win->height = new_win->desc_info->r_y;
+    if (!(new_win->win_ptr = mlx_new_window(new_win->mlx_ptr, new_win->width, new_win->height, "Cub3d")))
+        return (ERROR);
+    if (!(new_win->img = new_image(new_win, new_win->width, new_win->height)))
+        return (ERROR);
+    // new_win->desc_info->map_width = 0;
+    // new_win->desc_info->map_height = 0;
+    if (!(init_key(&new_win)))
+        exit(1);
+    if (!(init_camera(&new_win)))
+        exit(1);
+    if (!(init_tex(&new_win)))
+        exit(0);
+    return (new_win);
+}
+
+
+void _f(char *s)
+{
+    s = malloc(1);
+}
 int main(int ac, char **av)
 {
     t_win *win;
@@ -85,11 +109,9 @@ int main(int ac, char **av)
     //     exit(0);
     // if (!(init_key(win)))
     //     exit(0);
-    if (!(init_camera(win)))
-        exit(0);
-    if (!(init_tex(&win)))
-        exit(0);
-    load_texture(win);
+    // if (!(init_camera(win)))
+    //     exit(0);
+    load_texture(&win);
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
     mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 17:45:34 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/17 16:50:56 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 #define KEY_CODE_D 2
 #define KEY_CODE_LEFT 123
 #define KEY_CODE_RIGHT 124
+#define RED_CROSS 17
 
 /*
 ** COLOR CODE

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 18:01:58 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/17 16:50:45 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int ac, char **av)
         msg_error("Error : Malloc/mlx error");
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
-    mlx_hook(win->win_ptr, 17, 1L << 17, event_destroy_win, win);
+    mlx_hook(win->win_ptr, RED_CROSS, 1L << 2, event_destroy_win, win);
     mlx_loop_hook(win->mlx_ptr, event_loop, win);
     mlx_loop(win->mlx_ptr);
     return (0);

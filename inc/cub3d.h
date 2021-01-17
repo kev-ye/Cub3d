@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/17 16:52:09 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/17 17:02:26 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <mlx.h>
+// #include <libc.h> // to delete
 #include <fcntl.h>
 #include "libft.h"
 
@@ -26,16 +27,27 @@
 #define ERROR 0
 
 /*
-** KEY CODE
+** KEY CODE MACOS / LINUX
 */
-#define KEY_CODE_ESC 65307
-#define KEY_CODE_W 119
-#define KEY_CODE_S 115
-#define KEY_CODE_A 97
-#define KEY_CODE_D 100
-#define KEY_CODE_LEFT 65361
-#define KEY_CODE_RIGHT 65363
-#define RED_CROSS 33
+# if defined (__APPLE__) && (__MACH__)
+#  define KEY_CODE_ESC 53
+#  define KEY_CODE_W 13
+#  define KEY_CODE_S 1
+#  define KEY_CODE_A 0
+#  define KEY_CODE_D 2
+#  define KEY_CODE_LEFT 123
+#  define KEY_CODE_RIGHT 124
+#  define RED_CROSS 17
+#else
+#  define KEY_CODE_ESC 65307
+#  define KEY_CODE_W 119
+#  define KEY_CODE_S 115
+#  define KEY_CODE_A 97
+#  define KEY_CODE_D 100
+#  define KEY_CODE_LEFT 65361
+#  define KEY_CODE_RIGHT 65363
+#  define RED_CROSS 33
+#endif
 
 /*
 ** COLOR CODE

@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 23:25:12 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/17 17:01:34 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,13 @@ ifeq ($(shell uname), Darwin)
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
-IFLAG = -I./inc/inc -I./libft/libft/inc -I./mlx/mlx
+IFLAG = -I./inc -I./libft/libft/inc -I./mlx/mlx
 LFLAG = -L./mlx/mlx -lmlx -lm -framework OpenGL -framework AppKit
 
 # DIRECTORY ###############################################
 
 BUILD 	:= .build
-INC_DIR := inc/inc
+INC_DIR := inc
 SRC_DIR := src
 SUB_DIR := engine \
 		   events \
@@ -139,13 +139,13 @@ ifeq ($(shell uname), Linux)
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
-IFLAGS_LINUX = -I./inc/inc_linux -I./libft/libft_linux/inc -I./mlx/mlx_linux
+IFLAGS_LINUX = -I./inc -I./libft/libft_linux/inc -I./mlx/mlx_linux
 LFLAG_LINUX = -L./mlx/mlx_linux -lmlx_Linux -lXext -lX11 -lm
 
 # DIRECTORY ###############################################
 
 BUILD 	:= .build
-INC_DIR := inc/inc_linux
+INC_DIR := inc
 SRC_DIR := src
 SUB_DIR := engine \
 		   events \

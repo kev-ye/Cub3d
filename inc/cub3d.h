@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/17 17:02:26 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/17 19:02:56 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <mlx.h>
-// #include <libc.h> // to delete
 #include <fcntl.h>
 #include "libft.h"
+
+/*
+** Header file for some test, to delete later.
+*/
+#include <libc.h>
 
 /*
 ** TRUE/FALSE
@@ -60,6 +64,10 @@
 
 /*
 ** STRUCT - CAMERA/PLAYER
+**
+** Pos_* : The start position
+** Dir_* : The initial direction vector
+** Plane_* : The 2d raycaster version of camera plane
 */
 typedef struct      s_camera
 {
@@ -76,6 +84,21 @@ typedef struct      s_camera
 
 /*
 ** STURCT - RAYCASTING
+**
+** - Camera_x : The x coordinate on the camera plane that the current
+** x coordinate of the screen represents. 
+** (-1 : left side of the screen, 0 : center side and 1 right side).
+** - Ray_dir_* : Direction vector.
+** - Map_* : The current square of the map the ray is in.
+** - Side_dist_* : Initially the distance the ray has to travel from its start
+** position to the first x and y side.
+** - Delta_dist_* : The distance the ray has to travel to go from 1 x side
+** or y side to the next x or y side.
+** - Perp_wall_dist : The length of the ray.
+** - Step_* : Direction to step in x or y direction. (either +1 or -1)
+** - Hit : Wall hit.
+** - Side : North and south or west and east wall hit.
+** - Line_height : The height of line to draw on screen.
 */
 typedef struct      s_cam_ray
 {
@@ -101,6 +124,10 @@ typedef struct      s_cam_ray
 
 /*
 ** STRUCT - IMAGE
+**
+** Bpp : The number of bits per pixels.
+** Line_len : The size of a line.
+** Endian : Endian.
 */
 typedef struct      s_img 
 {
@@ -128,6 +155,10 @@ typedef struct      s_key
 
 /*
 ** STRUCT - DRAW LINE
+**
+** Line_* : Draw x/y coordinate.
+** Draw_* : Start/end draw point.
+** tex_* : About textured.
 */
 typedef struct      s_line
 {
@@ -158,6 +189,13 @@ typedef struct      s_desc
 
 /*
 ** STRUCT - DESCRIPTION INFORMATION
+**
+** R_* : The resolution of window.
+** Path_* : THe different picture path.
+** Color_* : Floor and ceiling color code on RGB.
+** Player_* : The start position.
+** player_dir : The start direction.
+** Map : Map
 */
 typedef struct       s_desc_info
 {

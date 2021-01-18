@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 10:16:35 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 18:52:45 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    pixel_put_color(
     char    *dst;
 
     dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-    *(int*)dst = color;
+    *(unsigned int*)dst = color;
 }
 
 void    vertical_line_color(
@@ -60,7 +60,7 @@ void    pixel_put_tex(
     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
                             + line->line_x * win->img->bpp / 8,
                             texture->addr + line->tex_y * texture->line_len
-                            + line->tex_x * (texture->bpp / 8), sizeof(int));
+                            + line->tex_x * (texture->bpp / 8), sizeof(unsigned int));
 }
 
 void    vertical_line_tex(

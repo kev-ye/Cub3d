@@ -6,13 +6,13 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:20:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 10:18:33 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 18:34:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void turn_right(t_win *win)
+void turn_left(t_win *win)
 {
     double old_dir_x;
     double old_plane_x;
@@ -37,7 +37,7 @@ void turn_right(t_win *win)
                         * cos(-win->camera->rot_speed);
 }
 
-void turn_left(t_win *win)
+void turn_right(t_win *win)
 {
     double old_dir_x;
     double old_plane_x;
@@ -53,11 +53,11 @@ void turn_left(t_win *win)
                         + win->camera->dir_y
                         * cos(win->camera->rot_speed);
     win->camera->plane_x = win->camera->plane_x
-                            * cos(win->camera->rot_speed)
-                            - win->camera->plane_y
-                            * sin(win->camera->rot_speed);
+                        * cos(win->camera->rot_speed)
+                        - win->camera->plane_y
+                        * sin(win->camera->rot_speed);
     win->camera->plane_y = old_plane_x
-                            * sin(win->camera->rot_speed)
-                            + win->camera->plane_y
-                            * cos(win->camera->rot_speed);
+                        * sin(win->camera->rot_speed)
+                        + win->camera->plane_y
+                        * cos(win->camera->rot_speed);
 }

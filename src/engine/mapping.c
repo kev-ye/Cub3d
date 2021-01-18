@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:21:27 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 12:05:04 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 18:49:53 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void    draw_side(
     int  tex_x;
     t_img *img;
 
-    img = win->texture[0];
+    img = win->texture[3];
     if (ray->side == 1)
-        img = win->texture[1];
-    if (ray->side == 2)
         img = win->texture[2];
+    if (ray->side == 2)
+        img = win->texture[0];
     if (ray->side == 3)
-        img = win->texture[3];
+        img = win->texture[1];
     tex_x = (int)(wall_x * (double)img->width);
     if ((ray->side == 0 || ray->side == 1)&& ray->ray_dir_x > 0)
         tex_x = img->width - tex_x - 1;

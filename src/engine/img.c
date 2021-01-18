@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 22:29:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 22:38:49 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ void    pixel_put_tex(
     t_cam_ray *ray)
 {
 
-    line->tex_y = (((line->line_y * 256 - win->height * 128 + texture->height * 128) * 64) / texture->height) / 256;
+    line->tex_y = abs((((line->line_y * 256 - win->height * 128 + ray->line_height * 128) * 64) / ray->line_height) / 256);
     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
                             + line->line_x * win->img->bpp / 8,
-                            texture->addr + line->tex_y * texture->line_len
-                            + line->tex_x * (texture->bpp / 8), sizeof(int));
+                            texture->addr + line->tex_y % 64 * texture->line_len
+                            + line->tex_x % 64 * (texture->bpp / 8), sizeof(int));
 }
 
 void    vertical_line_tex(

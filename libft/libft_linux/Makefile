@@ -6,13 +6,13 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/16 22:35:09 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/18 21:33:27 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILATION
 
-CC		= gcc
+CC		= gcc -g
 CFLAGS 	= -Wall -Wextra -Werror
 IFLAGS 	= -I./inc
 

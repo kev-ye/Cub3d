@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 18:52:45 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 22:29:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    pixel_put_color(
     char    *dst;
 
     dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-    *(unsigned int*)dst = color;
+    *(int*)dst = color;
 }
 
 void    vertical_line_color(
@@ -44,23 +44,38 @@ void    vertical_line_color(
     }
 }
 
+// void    pixel_put_tex(
+//     t_line *line,
+//     t_img *texture,
+//     t_win *win,
+//     t_cam_ray *ray)
+// {
+//     int draw;
+
+//     draw = line->line_y * texture->line_len - win->height
+//             * texture->line_len / 2 + ray->line_height
+//             * texture->line_len / 2;
+//     line->tex_y = ((draw * texture->height) / ray->line_height)
+//                                             / texture->line_len;
+//     //printf("draw : %d tex_y : %d\n", draw, line->tex_y);
+//     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
+//                             + line->line_x * win->img->bpp / 8,
+//                             texture->addr + line->tex_y * texture->line_len
+//                             + line->tex_x * (texture->bpp / 8), sizeof(int));
+// }
+
 void    pixel_put_tex(
     t_line *line,
     t_img *texture,
     t_win *win,
     t_cam_ray *ray)
 {
-    int draw;
 
-    draw = line->line_y * texture->line_len - win->height
-            * texture->line_len / 2 + ray->line_height
-            * texture->line_len / 2;
-    line->tex_y = ((draw * texture->height) / ray->line_height)
-                                            / texture->line_len;
+    line->tex_y = (((line->line_y * 256 - win->height * 128 + texture->height * 128) * 64) / texture->height) / 256;
     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
                             + line->line_x * win->img->bpp / 8,
                             texture->addr + line->tex_y * texture->line_len
-                            + line->tex_x * (texture->bpp / 8), sizeof(unsigned int));
+                            + line->tex_x * (texture->bpp / 8), sizeof(int));
 }
 
 void    vertical_line_tex(
@@ -82,6 +97,51 @@ void    vertical_line_tex(
         }
     }
 }
+
+// static void    pixel_put_tex1(
+//     t_line *line,
+//     t_img *texture,
+//     t_win *win,
+//     t_cam_ray *ray,
+//     double step,
+//     double tex_pos)
+// {
+//     // int draw;
+
+//     // draw = line->line_y * texture->line_len - win->height
+//     //         * texture->line_len / 2 + ray->line_height
+//     //         * texture->line_len / 2;
+//     // line->tex_y = ((draw * texture->height) / ray->line_height)
+//     //                                         / texture->line_len;
+//     line->tex_y = (int)tex_pos & (texture->height - 1);
+//     tex_pos += step;
+//     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
+//                             + line->line_x * win->img->bpp / 8,
+//                             texture->addr + line->tex_y * texture->line_len
+//                             + line->tex_x * (texture->bpp / 8), sizeof(int));
+// }
+
+// void    vertical_line_tex(
+//     t_line *line,
+//     t_win *win,
+//     t_img *texture,
+//     t_cam_ray *ray)
+// {
+//     int draw_end;
+//     double step = 1.0 * texture->height / ray->line_height;
+//     double tex_pos = (line->draw_start - win->height / 2 + ray->line_height / 2) * step;
+
+//     line->line_y = line->draw_start;
+//     draw_end = line->draw_end;
+//     if (line->line_y >= 0)
+//     {
+//         while (line->line_y < draw_end)
+//         {
+//             pixel_put_tex1(line, texture, win, ray, step, tex_pos);
+//             ++line->line_y;
+//         }
+//     }
+// }
 
 t_img *new_image(t_win *win, int size_width, int size_height)
 {

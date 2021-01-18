@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:11:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 18:16:24 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 23:08:03 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
     i = 0;
     while (line[i])
     {
-        if (line[i] == ' ')
-            ++i;
-        else if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
+        if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
                 line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
                 line[i] == 'C')
         {

@@ -6,13 +6,13 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:51:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 18:15:55 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 19:43:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int check_map_1(char **map, int px, int py, int len_y_max)
+static int check_map_1(char **map, int px, int py)
 {
     int check_x;
     int check_y;
@@ -41,7 +41,7 @@ static int check_map_1(char **map, int px, int py, int len_y_max)
     return (1);
 }
 
-static int check_map_2(char **map, int px, int py, int len_y_max)
+static int check_map_2(char **map, int px, int py)
 {
     int check_x;
     int check_y;
@@ -132,7 +132,7 @@ int check_map(char **map, int px, int py, int len_y_max)
 {
     if (px == -99 || py == -99)
         return (0);
-    if (check_map_1(map, px, py, len_y_max) && check_map_2(map, px, py, len_y_max) && check_map_3(map, px, py, len_y_max) && check_map_4(map, px, py, len_y_max))
+    if (check_map_1(map, px, py) && check_map_2(map, px, py) && check_map_3(map, px, py, len_y_max) && check_map_4(map, px, py, len_y_max))
         return (1);
     return (0);
 }

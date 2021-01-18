@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:48:16 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 10:22:10 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 12:36:44 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char **get_player_place(char **map, int *p_x, int *p_y, t_desc_info *desc_info)
     int y;
 
     y = 0;
-    while (map[y] != NULL)
+    while (y < desc_info->map_y)
     {
         x = 0;
         while (map[y][x])

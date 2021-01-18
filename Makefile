@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/17 17:01:34 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/18 09:00:24 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,7 @@ ifeq ($(shell uname), Linux)
 
 # COMPILATION #############################################
 
-CC = gcc
+CC = clang
 CFLAG = -Wall -Wextra -Werror
 IFLAGS_LINUX = -I./inc -I./libft/libft_linux/inc -I./mlx/mlx_linux
 LFLAG_LINUX = -L./mlx/mlx_linux -lmlx_Linux -lXext -lX11 -lm

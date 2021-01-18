@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 17:27:17 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 11:40:45 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int ray_casting(t_win *win)
 {
     t_cam_ray *ray;
 
+    //printf("%f %f %f %f\n", win->camera->dir_x, win->camera->dir_y, win->camera->plane_x, win->camera->plane_y);
     if (!(ray = malloc(sizeof(t_cam_ray))))
         return (ERROR);
     ft_bzero(ray, sizeof(t_cam_ray));

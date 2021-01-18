@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 18:07:34 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 12:33:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int get_map_y_max(const char *path, int *fd)
             ++y_max;
         free(line);
     }
+    
     close(*fd);
     return (y_max);
 }
@@ -58,18 +59,19 @@ static char **get_map2(const char *path, int *fd, int y_max)
     int r;
     int i;
 
-    if (!(map = malloc(sizeof(char *) * (y_max + 1))))
+    if (!(map = malloc(sizeof(char *) * (y_max))))
         return (NULL);
     if ((*fd = open(path, O_RDONLY)) == -1)
         return (NULL);
-    map[y_max] = NULL;
     r = 1;
     i = 0;
     while (r)
     {
         r = get_next_line(*fd, &line);
         if (map_line(line))
+        {
             map[i++] = ft_strdup(line);
+        }
         free(line);
     }
     close(*fd);
@@ -85,5 +87,10 @@ char **get_map(const char *path, int *len_max_y)
         return (NULL);
     if (!(map = get_map2(path, &fd, *len_max_y)))
         return (NULL);
+    // int i = 0;
+    // while (i < *len_max_y)
+    // {
+    //     printf("%s\n", map[i++]);
+    // }
     return (map);
 }

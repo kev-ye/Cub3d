@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:17:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 18:18:42 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 11:00:31 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static int check_path_name(char *path, int *fd)
         return (ERROR);
     if ((*fd = open(path, O_RDONLY)) == -1)
         return (ERROR);
-    else
-        close(*fd);
+    close(*fd);
     return (SUCCESS);
 }
 

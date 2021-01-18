@@ -6,32 +6,82 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 09:52:20 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/16 17:44:43 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 11:07:28 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// static  t_camera *set_player_dir_y(t_camera *camera_info, int dir)
+// {
+//     if (dir == 'N')
+//     {
+//         camera_info->dir_y = 0.0;
+//         camera_info->plane_y = -0.66;
+//     }
+//     else if (dir == 'S')
+//     {
+//         camera_info->dir_y = 0.0;
+//         camera_info->plane_y = 0.66;
+//     }
+//     else if (dir == 'W')
+//     {
+//         camera_info->dir_y = 1.0;
+//         camera_info->plane_y = 0.0;
+//     }
+//     else if (dir == 'E')
+//     {
+//         camera_info->dir_y = -1.0;
+//         camera_info->plane_y = 0.0;
+//     }
+//     return (camera_info);
+// }
+
+// static  t_camera *set_player_dir_x(t_camera *camera_info, int dir)
+// {
+//     if (dir == 'N')
+//     {
+//         camera_info->dir_x = -1.0;
+//         camera_info->plane_x = 0.0;
+//     }
+//     else if (dir == 'S')
+//     {
+//         camera_info->dir_x = 1.0;
+//         camera_info->plane_x = 0.0;
+//     }
+//     else if (dir == 'W')
+//     {
+//         camera_info->dir_x = 0.0;
+//         camera_info->plane_x = -0.66;
+//     }
+//     else if (dir == 'E')
+//     {
+//         camera_info->dir_x = 0.0;
+//         camera_info->plane_x = 0.66;
+//     }
+//     return (camera_info);
+// }
 
 static  t_camera *set_player_dir_y(t_camera *camera_info, int dir)
 {
     if (dir == 'N')
     {
         camera_info->dir_y = 0.0;
-        camera_info->plane_y = -0.66;
+        camera_info->plane_y = 0.66;
     }
     else if (dir == 'S')
     {
         camera_info->dir_y = 0.0;
-        camera_info->plane_y = 0.66;
+        camera_info->plane_y = -0.66;
     }
     else if (dir == 'W')
     {
-        camera_info->dir_y = 1.0;
+        camera_info->dir_y = -1.0;
         camera_info->plane_y = 0.0;
     }
     else if (dir == 'E')
     {
-        camera_info->dir_y = -1.0;
+        camera_info->dir_y = 1.0;
         camera_info->plane_y = 0.0;
     }
     return (camera_info);
@@ -95,6 +145,10 @@ int init_camera(t_win *win)
     win->camera->pos_x = win->desc_info->player_x;
     win->camera->pos_y = win->desc_info->player_y;
     win->camera = set_player_dir(win, win->camera);
+    // win->camera->dir_x = -1.0;
+    // win->camera->dir_y = 0.0;
+    // win->camera->plane_x = 0.0;
+    // win->camera->plane_y = 0.66;
     win->camera->rot_speed = 0.10;
     win->camera->speed = 0.10;
     win->camera->cam_height = 1.0;

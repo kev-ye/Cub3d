@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/17 19:02:56 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/18 12:19:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,21 +199,28 @@ typedef struct      s_desc
 */
 typedef struct       s_desc_info
 {
+    char **map;
+    int map_y;
     int r_x;
     int r_y;
-    char *path_no;
-    char *path_so;
-    char *path_we;
-    char *path_ea;
-    char *path_s;
     int color_f;
     int color_c;
     int player_x;
     int player_y;
     int player_dir;
-    char **map;
-    int map_width;
-    int map_height;
+    char *path_no;
+    char *path_so;
+    char *path_we;
+    char *path_ea;
+    char *path_s;
+    // int color_f;
+    // int color_c;
+    // int player_x;
+    // int player_y;
+    // int player_dir;
+    // // char **map;
+    // int map_width;
+    // int map_height;
 }                   t_desc_info;
 
 /*
@@ -225,6 +232,7 @@ typedef struct      s_win
     void        *win_ptr;
     int         width;
     int         height;
+    char        **map;
     t_key       *key_code;
     t_img       *img;
     t_camera    *camera;

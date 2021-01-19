@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/18 19:57:02 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/19 11:24:58 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,26 +25,32 @@ CFLAG = -Wall -Wextra -Werror
 IFLAG = -I./inc -I./libft/libft/inc -I./mlx/mlx
 LFLAG = -L./mlx/mlx -lmlx -lm -framework OpenGL -framework AppKit
 
+# FLAG WITH OLD MLX
+OLD_IFLAG = -I./inc -I./libft/libft/inc -I./mlx/mlx_old_version
+OLD_LFLAG = -L./mlx/mlx_old_version -lmlx -lm -framework OpenGL -framework AppKit
+
 # DIRECTORY ###############################################
 
-BUILD 	:= .build
-INC_DIR := inc
-SRC_DIR := src
-SUB_DIR := engine \
-		   events \
-		   init_utils \
-		   parser_map \
-		   parser_map_file
-LFT_DIR := libft/libft
-MLX_DIR := mlx/mlx
-OBJ_DIR := $(BUILD)/obj
-DIRS	:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
+BUILD 		:= .build
+INC_DIR 	:= inc
+SRC_DIR 	:= src
+SUB_DIR 	:= engine \
+		   	   events \
+			   init_utils \
+		   	   parser_map \
+			   parser_map_file
+LFT_DIR 	:= libft/libft
+MLX_DIR 	:= mlx/mlx
+OLD_MLX_DIR := mlx/mlx_old_version#
+OBJ_DIR 	:= $(BUILD)/obj
+DIRS		:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
 # FILE ####################################################
 
 NAME  	:= Cub3d
 LIBFT 	:= libft.a
 MLX   	:= libmlx.dylib
+OLD_MLX := libmlx.a#
 SRC	  	:= main.c
 SUB_SRC := img.c \
 		   mapping.c \
@@ -98,22 +104,32 @@ WHITE_COLOR 	= \033[1;107m
 # Makefile ################################################
 
 $(NAME): $(OBJ)
+	# $(MAKE) -C $(LFT_DIR)
+	# $(MAKE) -C $(MLX_DIR)
+	# cp ./$(LFT_DIR)/$(LIBFT) .
+	# cp ./$(MLX_DIR)/$(MLX) .
+	#$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
 	$(MAKE) -C $(LFT_DIR)
-	$(MAKE) -C $(MLX_DIR)
+	$(MAKE) -C $(OLD_MLX_DIR)
 	cp ./$(LFT_DIR)/$(LIBFT) .
-	cp ./$(MLX_DIR)/$(MLX) .
-	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+	cp ./$(OLD_MLX_DIR)/$(OLD_MLX) .
+	$(CC) $(CFLAG) $(OLD_IFLAG) $(OLD_LFLAG) $(LIBFT) $^ -o $@
 
 all: $(NAME)
 
 clean:
+	# $(MAKE) -C $(LFT_DIR) clean
+	# $(MAKE) -C $(MLX_DIR) clean
+	# rm -rf $(BUILD)
 	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(OLD_MLX_DIR) clean
 	rm -rf $(BUILD)
 
 fclean: clean
+	# $(MAKE) -C $(LFT_DIR) fclean
+	# rm -rf $(NAME) $(LIBFT) $(MLX)
 	$(MAKE) -C $(LFT_DIR) fclean
-	rm -rf $(NAME) $(LIBFT) $(MLX)
+	rm -rf $(NAME) $(LIBFT) $(OLD_MLX)
 
 re: fclean all
 
@@ -123,7 +139,7 @@ $(BUILD):
 	mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
-	$(CC) $(CFLAG) $(IFLAG) -c $< -o $@
+	$(CC) $(CFLAG) $(OLD_IFLAG) -c $< -o $@
 
 endif
 

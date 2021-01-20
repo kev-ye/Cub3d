@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 19:43:44 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 20:51:03 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,7 @@ char            **get_map(const char *path, int *len_max_y);
 char            **get_player_place(char **map, int *p_x, int *p_y,
                                                     t_desc_info *desc_info);
 int             check_map_x(char **map, int y, int x);
-int             check_map_y(char **map, int y, int x);
+int             check_map_y(char **map, int y, int x, int len_y_max);
 int             check_map(char **map, int px, int py, int len_y_max);
 
 /*

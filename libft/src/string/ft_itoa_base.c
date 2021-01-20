@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:55:23 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/12 11:22:21 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 18:55:49 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ char			*ft_itoa_base(int n, int base)
 	char			*str;
 	unsigned int	n_tmp;
 
-	n_tmp = (n < 0) ? -(unsigned int)n : n;
+	if (n < 0)
+		n_tmp = -n;
+	else
+		n_tmp = n;
 	len = (n < 0) ? ft_intlen_base(n_tmp, base) + 1 :
 					ft_intlen_base(n_tmp, base);
 	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))

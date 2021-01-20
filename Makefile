@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/20 18:48:27 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/20 18:58:29 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ MAGENTA_COLOR 	= \033[1;35m
 CYAN_COLOR 		= \033[1;36m
 WHITE_COLOR 	= \033[1;107m
 
-# Makefile Macos / Linux###################################
+# Makefile Macos / Linux ##################################
 
 ifeq ($(shell uname), Darwin)
 

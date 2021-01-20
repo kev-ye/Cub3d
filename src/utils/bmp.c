@@ -6,32 +6,36 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:40:36 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 18:49:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 20:03:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// static void load_bar(long long current, long long max)
-// {
-//     long long bar_len;
-//     long long i;
+static void load_bar(long long current, long long max)
+{
+    long long bar_len;
+    long long i;
 
-//     bar_len = 100;
-//     i = 0;
-//     while (i++ < (current / max) * bar_len)
-//         write(1, "|", 1);
-//     while (i++ < bar_len)
-//         write(1, " ", 1);
-//     printf(" %lld %%", (current / max) * 100);
-// }
+    bar_len = 30;
+    i = -1;
+    ft_putstr(S_CLRLINE);
+    while (++i < ((double)current / max) * bar_len)
+        ft_putchar('|');
+    while (i++ < bar_len)
+        ft_putchar(' ');
+    ft_putchar(' ');
+    ft_putnbr_fd(((double)current / max) * 100, 1);
+    ft_putchar(' ');
+}
 
 static void     bmp_file_header(t_win *win, int fd)
 {
     int size;
     
-    size = win->img->bpp * win->img->width * win->img->height + 54 * 8;
     write(fd, "BM", 2);
+    size = win->img->bpp * win->img->width * win->img->height + 54 * 8;
+    printf("Loading "S_CYAN"%s"S_NONE" ...\n", "save.bmp");
     write(fd, &size, 4);
     size = 0;
     write(fd, &size, 2);
@@ -75,6 +79,7 @@ static void bmp_data(t_win *win, int fd)
             ptr = win->img->addr + (y * win->img->line_len + x * (win->img->bpp / 8));
             write(fd, &(*(int *)ptr), 4);
         }
+        load_bar(win->img->height - y, win->img->height);
     }
 }
 
@@ -87,9 +92,11 @@ void    make_bmp(t_win *win)
     if ((fd = open("./save.bmp", O_WRONLY | O_CREAT)) == -1)
         msg_error(win, "Malloc in mode --save\n");
     bmp_file_header(win, fd);
+    load_bar(0, win->img->height);
     bmp_infomation(win, fd);
     bmp_data(win, fd);
     close(fd);
     free_win(win);
+    printf("-> "S_CYAN"DONE !\n"S_NONE);
     exit(0);
 }

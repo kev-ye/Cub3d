@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 18:24:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 19:43:44 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@
 #  define KEY_CODE_RIGHT 65363
 #  define RED_CROSS 33
 #endif
+
+/*
+** SHELL PRINT CODE
+*/
+#define S_NONE "\033[0m"
+#define S_BLACK "\033[0;30m"
+#define S_RED "\033[0;31m"
+#define S_GREEN "\033[0;32m"
+#define S_YELLOW "\033[0;33m"
+#define S_BLUE "\033[0;34m"
+#define S_PURPLE "\033[0;35m"
+#define S_CYAN "\033[0;36m"
+#define S_CLRLINE "\033[K\r"
 
 /*
 ** COLOR CODE

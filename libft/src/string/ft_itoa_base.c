@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:55:23 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 18:55:49 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 18:58:05 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char			*ft_itoa_base(int n, int base)
 	unsigned int	n_tmp;
 
 	if (n < 0)
-		n_tmp = -n;
+		n_tmp = -(unsigned int)n;
 	else
 		n_tmp = n;
 	len = (n < 0) ? ft_intlen_base(n_tmp, base) + 1 :

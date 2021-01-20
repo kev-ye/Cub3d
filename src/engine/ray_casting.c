@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 19:11:37 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 18:03:46 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int ray_casting(t_win *win)
         ray_casting_regroup(win, ray);
         ++ray->pix;
     }
-    mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
-                            win->img->img_ptr, 0, 0);
+    if (!win->save)
+        mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
+                                    win->img->img_ptr, 0, 0);
     free(ray);
     return (SUCCESS);
 }

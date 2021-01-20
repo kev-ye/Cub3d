@@ -6,23 +6,19 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 19:05:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/20 18:24:25 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <mlx.h>
 #include <fcntl.h>
 #include "libft.h"
-
-/*
-** Header file for some test, to delete later.
-*/
-#include <libc.h>
 
 /*
 ** TRUE/FALSE
@@ -232,7 +228,7 @@ typedef struct      s_win
     void        *win_ptr;
     int         width;
     int         height;
-    char        **map;
+    int         save;
     t_key       *key_code;
     t_img       *img;
     t_camera    *camera;
@@ -324,7 +320,7 @@ int             check_map_ready(t_desc desc);
 int             check_no_map(char *line, t_desc *desc);
 int             check_map_norm(char *line, t_desc *desc);
 int             check_path(t_desc_info *desc_info);
-t_desc_info     *check_file(const char *path);
+t_desc_info     *check_file(t_win *win, const char *path);
 
 /*
 ** PARSER - MAP
@@ -339,13 +335,15 @@ int             check_map(char **map, int px, int py, int len_y_max);
 /*
 ** INIT/UTILS
 */
-void    msg_error(char *msg);
+void    msg_error(t_win* win, char *msg);
 int		create_rgb(int r, int g, int b);
 void    free_split(char **s);
 void    free_desc_info(t_desc_info *desc_info);
+void    free_win(t_win *win);
 void    shut_down(t_win *win);
 int     init_camera(t_win *win);
 int     init_key(t_win *win);
 int     init_tex(t_win *win);
+void    make_bmp(t_win *win);
 
 #endif

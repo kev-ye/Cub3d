@@ -6,16 +6,18 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:51:14 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 21:21:03 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 12:57:15 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int check_map_y2(char **map, int y, int x, int len_y_max,int get_wall)
+static int check_map_y2(char **map, int y, int x, int get_wall)
 {
-    while (y >= 0 && map[y][x])
+    while (y >= 0)
     {
+        if (map[y][x] == ' ')
+            return (0);
         if (map[y][x] == '1')
         {
             get_wall++;
@@ -35,8 +37,10 @@ int check_map_y(char **map, int y, int x, int len_y_max)
 
     tmp_y = y;
     get_wall = 0;
-    while (y < len_y_max && map[y][x])
+    while (y < len_y_max)
     {
+        if (map[y][x] == ' ')
+            return (0);
         if (map[y][x] == '1')
         {
             get_wall++;
@@ -47,7 +51,7 @@ int check_map_y(char **map, int y, int x, int len_y_max)
         ++y;
     }
     y = tmp_y;
-    get_wall = check_map_y2(map, y, x, len_y_max, get_wall);
+    get_wall = check_map_y2(map, y, x, get_wall);
     if (get_wall == 2)
         return (1);
     return (0);    

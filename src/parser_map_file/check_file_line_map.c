@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:16:25 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/13 18:16:45 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 13:48:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,6 @@ int check_map_norm(char *line, t_desc *desc)
         if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2'
             || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
         {
-            if (line[i] == 'N')
-                ++desc->player;
-            if (line[i] == 'S')
-                ++desc->player;
-            if (line[i] == 'E')
-                ++desc->player;
-            if (line[i] == 'W')
-                ++desc->player;
             i++;
         }
         else

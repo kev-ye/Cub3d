@@ -6,22 +6,29 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 17:26:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 13:50:08 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int parser_map(const char *path, t_desc_info *desc_info)
+static int parser_map(const char *path, t_desc_info *desc_info, t_desc desc, t_win *win)
 {
     char **map;
     int len_max_y;
+    int len_max_x;
 
-    if (!(map = get_map(path, &len_max_y)))
+    if (!(map = get_map(path, &len_max_y, &len_max_x)))
         return (ERROR);
     (*desc_info).map_y = len_max_y;
-    (*desc_info).map = get_player_place(map, &(*desc_info).player_x, &(*desc_info).player_y, desc_info);
-    if (!check_map(map, (*desc_info).player_x, (*desc_info).player_y, len_max_y))
+    (*desc_info).map_x = len_max_x;
+    (*desc_info).map = get_player_place(map, &(*desc_info).player_x, &(*desc_info).player_y, desc_info, desc);
+    if ((*desc_info).map == NULL)
+    {
+        free_desc_info(desc_info);
+        msg_error(win, "File -> Player error\n");
+    }
+    if (!check_map(map, len_max_y))
         return (ERROR);
     return (SUCCESS);
 }
@@ -77,12 +84,12 @@ t_desc_info *check_file(t_win *win, const char *path)
             free_desc_info(desc_info);
             msg_error(win, "File -> Map error\n");
         }
-        if (desc.player > 1)
-        {
-            free(line);
-            free_desc_info(desc_info);
-            msg_error(win, "File -> Player error\n");
-        }
+        // if (desc.player > 1 || desc.player < 1)
+        // {
+        //     free(line);
+        //     free_desc_info(desc_info);
+        //     msg_error(win, "File -> Player error\n");
+        // }
         free(line);
     }
     close(fd);
@@ -91,7 +98,7 @@ t_desc_info *check_file(t_win *win, const char *path)
         free_desc_info(desc_info);
         msg_error(win, "Path -> Path no exist\n");
     }
-    if (!parser_map(path, desc_info))
+    if (!parser_map(path, desc_info, desc, win))
         msg_error(win, "Map -> Map error\n");
     return (desc_info);
 }

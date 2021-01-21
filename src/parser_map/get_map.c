@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 12:33:10 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 12:56:35 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,43 @@ static int get_map_y_max(const char *path, int *fd)
             ++y_max;
         free(line);
     }
-    
     close(*fd);
     return (y_max);
 }
 
-static char **get_map2(const char *path, int *fd, int y_max)
+static int get_map_x_max(const char *path, int *fd)
+{
+    char *line;
+    int x_max;
+    int r;
+    int i;
+
+    if ((*fd = open(path, O_RDONLY)) == -1)
+        return (ERROR);
+    x_max = 0;
+    r = 1;
+    while (r)
+    {
+        i = 0;
+        r = get_next_line(*fd, &line);
+        while (line[i])
+            i++;
+        if (x_max < i)
+            x_max = i;
+        free(line);
+    }
+    close(*fd);
+    return (x_max);
+}
+
+static char **get_map2(const char *path, int *fd, int y_max, int x_max)
 {
     char *line;
     char **map;
     int r;
     int i;
+    int j;
+    int len;
 
     if (!(map = malloc(sizeof(char *) * (y_max))))
         return (NULL);
@@ -67,10 +93,18 @@ static char **get_map2(const char *path, int *fd, int y_max)
     i = 0;
     while (r)
     {
+        j = 0;
         r = get_next_line(*fd, &line);
         if (map_line(line))
         {
-            map[i++] = ft_strdup(line);
+            map[i] = ft_strdup(line);
+            len = ft_strlen(map[i]);
+            while (len + j < x_max)
+            {
+                map[i] = ft_strjoin_gnl(map[i], " ");
+                j++;
+            }
+            i++;
         }
         free(line);
     }
@@ -78,19 +112,16 @@ static char **get_map2(const char *path, int *fd, int y_max)
     return (map);
 }
 
-char **get_map(const char *path, int *len_max_y)
+char **get_map(const char *path, int *len_max_y, int *len_max_x)
 {
     int fd;
     char **map;
     
     if (!(*len_max_y = get_map_y_max(path, &fd)))
         return (NULL);
-    if (!(map = get_map2(path, &fd, *len_max_y)))
+    if (!(*len_max_x = get_map_x_max(path, &fd)))
         return (NULL);
-    // int i = 0;
-    // while (i < *len_max_y)
-    // {
-    //     printf("%s\n", map[i++]);
-    // }
+    if (!(map = get_map2(path, &fd, *len_max_y, *len_max_x)))
+        return (NULL);
     return (map);
 }

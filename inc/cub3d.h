@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 20:51:03 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 13:41:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ typedef struct       s_desc_info
 {
     char **map;
     int map_y;
+    int map_x;
     int r_x;
     int r_y;
     int color_f;
@@ -222,14 +223,6 @@ typedef struct       s_desc_info
     char *path_we;
     char *path_ea;
     char *path_s;
-    // int color_f;
-    // int color_c;
-    // int player_x;
-    // int player_y;
-    // int player_dir;
-    // // char **map;
-    // int map_width;
-    // int map_height;
 }                   t_desc_info;
 
 /*
@@ -338,12 +331,12 @@ t_desc_info     *check_file(t_win *win, const char *path);
 /*
 ** PARSER - MAP
 */
-char            **get_map(const char *path, int *len_max_y);
+char            **get_map(const char *path, int *len_max_y, int *len_max_x);
 char            **get_player_place(char **map, int *p_x, int *p_y,
-                                                    t_desc_info *desc_info);
+                                        t_desc_info *desc_info, t_desc desc);
 int             check_map_x(char **map, int y, int x);
 int             check_map_y(char **map, int y, int x, int len_y_max);
-int             check_map(char **map, int px, int py, int len_y_max);
+int             check_map(char **map, int len_y_max);
 
 /*
 ** INIT/UTILS

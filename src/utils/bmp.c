@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:40:36 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 20:05:41 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 22:11:43 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void load_bar(long long current, long long max)
         ft_putchar(' ');
     ft_putchar(' ');
     ft_putnbr_fd(((double)current / max) * 100, 1);
+    ft_putchar('%');
     ft_putchar(' ');
 }
 

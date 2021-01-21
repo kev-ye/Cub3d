@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 17:12:51 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 22:02:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int get_map_x_max(const char *path, int *fd)
     {
         i = 0;
         r = get_next_line(*fd, &line);
-        while (line[i])
+        while (line[i] && map_line(line))
             i++;
         if (x_max < i)
             x_max = i;

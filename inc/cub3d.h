@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 13:41:33 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 17:14:31 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,7 +324,7 @@ int             check_file_line(char *line, t_desc *desc,
                                                     t_desc_info *desc_info);
 int             check_map_ready(t_desc desc);
 int             check_no_map(char *line, t_desc *desc);
-int             check_map_norm(char *line, t_desc *desc);
+int             check_map_norm(char *line);
 int             check_path(t_desc_info *desc_info);
 t_desc_info     *check_file(t_win *win, const char *path);
 

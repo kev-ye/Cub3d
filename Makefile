@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/21 12:32:05 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/21 21:50:57 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,7 @@ SUB_SRC := img.c \
 		   turn.c
 SRC 	+= $(addprefix engine/, $(SUB_SRC))
 SUB_SRC := event_key.c \
-		   event_loop.c \
-		   event_win.c
+		   events.c
 SRC		+= $(addprefix events/, $(SUB_SRC))
 SUB_SRC := color.c \
 		   free.c \

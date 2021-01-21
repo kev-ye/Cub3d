@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:00:07 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 15:22:56 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 21:53:43 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ int get_resoltion(char *line, t_desc_info *desc_info)
     desc_info->r_x = ft_atoi(s[1]);
     desc_info->r_y = ft_atoi(s[2]);
     free_split(s);
-    if (desc_info->r_x > 2560)
-        desc_info->r_x = 2560;
-    if (desc_info->r_y > 1440)
-        desc_info->r_y = 1440;
     if (desc_info->r_x < 1 || desc_info->r_y < 1)
         return (ERROR);
     return (SUCCESS);

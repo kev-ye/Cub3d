@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 13:50:08 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 17:17:29 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,12 @@ t_desc_info *check_file(t_win *win, const char *path)
     while (r)
     {
         r = get_next_line(fd, &line);
-        if (!check_map_norm(line, &desc))
+        if (!check_map_norm(line))
         {
             free(line);
             free_desc_info(desc_info);
             msg_error(win, "File -> Map error\n");
         }
-        // if (desc.player > 1 || desc.player < 1)
-        // {
-        //     free(line);
-        //     free_desc_info(desc_info);
-        //     msg_error(win, "File -> Player error\n");
-        // }
         free(line);
     }
     close(fd);

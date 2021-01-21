@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_win.c                                        :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/26 19:33:53 by kaye              #+#    #+#             */
-/*   Updated: 2020/12/26 19:38:56 by kaye             ###   ########.fr       */
+/*   Created: 2020/12/27 23:01:56 by kaye              #+#    #+#             */
+/*   Updated: 2021/01/21 21:50:36 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void draw(t_win *win)
+{
+    if (!(ray_casting(win)))
+        shut_down(win);
+}
+
+int    event_loop(t_win *win)
+{
+    draw(win);
+    event_key(win);
+    return (SUCCESS);
+}
 
 int event_destroy_win(t_win *win)
 {

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 13:00:32 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/21 17:27:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int main(int ac, char **av)
             msg_error(win, "The second argumnets isn't --save\n");
         make_bmp(win);
     }
-    printf("ok\n");
-    exit(0);
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);
     mlx_hook(win->win_ptr, RED_CROSS, 1L << 2, event_destroy_win, win);

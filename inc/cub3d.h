@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 11:33:47 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 12:09:19 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ typedef struct       s_desc_info
 }                   t_desc_info;
 
 /*
-** STRUCT - REGROUP
+** STRUCT - GLOBAL
 */
 typedef struct      s_win
 {
@@ -237,21 +237,7 @@ typedef struct      s_win
 }                   t_win;
 
 /*
-** QUIT
-*/
-void shut_down(t_win *win);
-
-/*
-** EVENT
-*/
-int     event_destroy_win(t_win *win);
-int     event_key_press(int keycode, t_win *win);
-int     event_key_release(int keycode, t_win *win);
-int     event_key(t_win *win);
-int     event_loop(t_win *win);
-
-/*
-** IMAGE
+** ENGINE - IMAGE
 */
 t_img   *new_image(t_win *win, int size_x, int size_y);
 void    pixel_put_color(t_img *img, int x, int y, int color);
@@ -260,17 +246,19 @@ void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *r
 void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
 
 /*
-** TEXTURE
+** ENGINE - TEXTURE
 */
 int     set_texture(t_win *win, const char *path, int index);
 int     load_texture(t_win *win);
+int     init_tex(t_win *win);
 
 /*
-** SPRITE
+** ENGINE - SPRITE
 */
+int     int_sprite(t_win *win);
 
 /*
-** RAY CASTING
+** ENGINE - RAYCASTING
 */
 void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
@@ -279,7 +267,12 @@ void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win);
 int     ray_casting(t_win *win);
 
 /*
-** PLAYER MOUVEMENT
+** ENGINE - INIT CAMERA / PLAYER
+*/
+int     init_camera(t_win *win);
+
+/*
+** ENGINE - PLAYER MOUVEMENT
 */
 void    move_w(t_win *win);
 void    move_s(t_win *win);
@@ -287,20 +280,34 @@ void    move_a(t_win *win);
 void    move_d(t_win *win);
 
 /*
-** CAMERA TURN
+** ENGINE - CAMERA TURN
 */
 void    turn_left(t_win *win);
 void    turn_right(t_win *win);
 
 /*
-** MAPPING
+** ENGINE - MAPPING
 */
 void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
 void   draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray);
 void   mapping(t_cam_ray *ray, t_win *win);
 
 /*
-** PARSER - INIT
+** EVENTS - KEYS
+*/
+int     event_key_press(int keycode, t_win *win);
+int     event_key_release(int keycode, t_win *win);
+int     event_key(t_win *win);
+int     init_key(t_win *win);
+
+/*
+** EVENTS - EVENTS
+*/
+int     event_destroy_win(t_win *win);
+int     event_loop(t_win *win);
+
+/*
+** PARSER - INIT DESCRIPTION
 */
 t_desc          init_desc();
 t_desc_info     *init_desc_info();
@@ -345,10 +352,6 @@ void    free_split(char **s);
 void    free_desc_info(t_desc_info *desc_info);
 void    free_win(t_win *win);
 void    shut_down(t_win *win);
-int     init_camera(t_win *win);
-int     init_key(t_win *win);
-int     init_tex(t_win *win);
-int     int_sprite(t_win *win);
 void    make_bmp(t_win *win);
 
 #endif

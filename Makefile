@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/22 11:38:47 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/22 12:10:15 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INC_DIR 	:= inc
 SRC_DIR 	:= src
 SUB_DIR 	:= engine \
 		   	   events \
-			   utils_init \
+			   utils \
 		   	   parser_map \
 			   parser_map_file
 LFT_DIR 	:= libft
@@ -49,19 +49,13 @@ SUB_SRC := img.c \
 		   ray_casting_utils.c \
 		   ray_casting.c \
 		   set_camera.c \
+		   set_sprites.c \
+		   set_textures.c \
 		   turn.c
 SRC 	+= $(addprefix engine/, $(SUB_SRC))
 SUB_SRC := event_key.c \
 		   events.c
 SRC		+= $(addprefix events/, $(SUB_SRC))
-SUB_SRC := color.c \
-		   free.c \
-		   init.c \
-		   init_desc.c \
-		   msg_error.c \
-		   quit.c \
-		   bmp.c
-SRC		+= $(addprefix utils_init/, $(SUB_SRC))
 SUB_SRC := check_map.c \
 		   check_x.c \
 		   check_y.c \
@@ -76,8 +70,15 @@ SUB_SRC := check_file_line_id.c \
 		   floor_ceiling.c \
 		   get_color.c \
 		   get_path.c \
-		   get_resolution.c
+		   get_resolution.c \
+		   init_desc.c
 SRC		+= $(addprefix parser_map_file/, $(SUB_SRC))
+SUB_SRC := color.c \
+		   free.c \
+		   msg_error.c \
+		   quit.c \
+		   bmp.c
+SRC		+= $(addprefix utils/, $(SUB_SRC))
 OBJ	  	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 # COLORS ##################################################

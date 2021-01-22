@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 19:04:13 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 10:10:22 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 12:05:21 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,18 @@ int event_key(t_win *win)
     if (win->key_code->key_right == 1)
         turn_right(win);
     return (1);
+}
+
+int init_key(t_win *win)
+{
+    if (!(win->key_code = malloc(sizeof(t_key))))
+        return (0);
+    ft_bzero(win->key_code, sizeof(t_key));
+    win->key_code->key_w = 0;
+    win->key_code->key_s = 0;
+    win->key_code->key_a = 0;
+    win->key_code->key_d = 0;
+    win->key_code->key_left = 0;
+    win->key_code->key_right = 0;
+    return (1);    
 }

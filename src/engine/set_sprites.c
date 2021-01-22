@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites.c                                          :+:      :+:    :+:   */
+/*   set_sprites.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:23:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 11:28:39 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 11:51:40 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,18 @@ int     set_sprites(
 
 int     load_sprites(t_win *win)
 {
-
     int sprite;
 
     sprite = set_sprites(win, win->desc_info->path_s);
     if (!sprite)
         return (0);
+    return (1);
+}
+
+int int_sprite(t_win *win)
+{
+    if (!(win->sprite = malloc(sizeof(t_img))))
+        return (0);
+    ft_bzero(win->sprite, sizeof(t_img));
     return (1);
 }

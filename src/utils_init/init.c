@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:41:33 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 10:14:23 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 11:32:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int init_tex(t_win *win)
     return (1);
 }
 
-// int int_sprite(t_win *win)
-// {
-    
-// }
+int int_sprite(t_win *win)
+{
+    if (!(win->sprite = malloc(sizeof(t_img))))
+        return (0);
+    ft_bzero(win->sprite, sizeof(t_img));
+    return (1);
+}

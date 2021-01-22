@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 10:14:02 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 11:33:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 #define WHITE 0xFFFFFF
 
 /*
-** STRUCT - CAMERA/PLAYER
+** STRUCT - CAMERA / PLAYER
 **
 ** Pos_*    : The start position
 ** Dir_*    : The initial direction vector
@@ -88,20 +88,19 @@ typedef struct      s_camera
 /*
 ** STURCT - RAYCASTING
 **
-** - Camera_x : The x coordinate on the camera plane that the current
-** x coordinate of the screen represents. 
-** (-1 : left side of the screen, 0 : center side and 1 right side).
-** - Ray_dir_* : Direction vector.
-** - Map_* : The current square of the map the ray is in.
-** - Side_dist_* : Initially the distance the ray has to travel from its start
-** position to the first x and y side.
-** - Delta_dist_* : The distance the ray has to travel to go from 1 x side
-** or y side to the next x or y side.
+** - Camera_x       : The camera plane current x coordinate of
+**                    the screen represents.
+** - Ray_dir_*      : Direction vector.
+** - Map_*          : The current square of the map the ray is in.
+** - Side_dist_*    : The distance the ray has to travel from its start
+**                    position to the first x and y side.
+** - Delta_dist_*   : The distance the ray has to travel to go from 1 x side
+**                    or y side to the next x or y side.
 ** - Perp_wall_dist : The length of the ray.
-** - Step_* : Direction to step in x or y direction. (either +1 or -1)
-** - Hit : Wall hit.
-** - Side : North and south or west and east wall hit.
-** - Line_height : The height of line to draw on screen.
+** - Step_*         : Direction to step in x or y direction. (either +1 or -1)
+** - Hit            : Wall hit.
+** - Side           : North and south or west and east wall hit.
+** - Line_height    : The height of line to draw on screen.
 */
 typedef struct      s_cam_ray
 {
@@ -128,9 +127,9 @@ typedef struct      s_cam_ray
 /*
 ** STRUCT - IMAGE
 **
-** Bpp : The number of bits per pixels.
+** Bpp      : The number of bits per pixels.
 ** Line_len : The size of a line.
-** Endian : Endian.
+** Endian   : Endian.
 */
 typedef struct      s_img 
 {
@@ -229,11 +228,12 @@ typedef struct      s_win
     int         width;
     int         height;
     int         save;
+    t_desc_info *desc_info;
+    t_camera    *camera;
     t_key       *key_code;
     t_img       *img;
-    t_camera    *camera;
     t_img       **texture;
-    t_desc_info *desc_info;
+    t_img       *sprite;
 }                   t_win;
 
 /*
@@ -264,6 +264,10 @@ void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
 */
 int     set_texture(t_win *win, const char *path, int index);
 int     load_texture(t_win *win);
+
+/*
+** SPRITE
+*/
 
 /*
 ** RAY CASTING
@@ -344,6 +348,7 @@ void    shut_down(t_win *win);
 int     init_camera(t_win *win);
 int     init_key(t_win *win);
 int     init_tex(t_win *win);
+int     int_sprite(t_win *win);
 void    make_bmp(t_win *win);
 
 #endif

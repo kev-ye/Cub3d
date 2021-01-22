@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:21:27 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 22:01:00 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:08:45 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ int     set_texture(
     if (!(win->texture[index]->img_ptr = mlx_xpm_file_to_image(win->mlx_ptr,
                                     (char *)path, &win->texture[index]->width,
                                     &win->texture[index]->height)))
-        return (ERROR);
+        return (0);
     win->texture[index]->addr = mlx_get_data_addr(win->texture[index]->img_ptr,
                     &win->texture[index]->bpp, &win->texture[index]->line_len,
                     &win->texture[index]->endian);
-    return (SUCCESS);
+    return (1);
 }
 
 int     load_texture(t_win *win)
@@ -101,6 +101,6 @@ int     load_texture(t_win *win)
     tex_3 = set_texture(win, win->desc_info->path_ea, 2);
     tex_4 = set_texture(win, win->desc_info->path_we, 3);
     if (!tex_1 || !tex_2 || !tex_3 || !tex_4)
-        return (ERROR);
-    return (SUCCESS);
+        return (0);
+    return (1);
 }

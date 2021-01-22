@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 17:14:31 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:14:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 #include <mlx.h>
 #include <fcntl.h>
 #include "libft.h"
-
-/*
-** TRUE/FALSE
-*/
-#define SUCCESS 1
-#define ERROR 0
 
 /*
 ** KEY CODE MACOS / LINUX
@@ -74,9 +68,9 @@
 /*
 ** STRUCT - CAMERA/PLAYER
 **
-** Pos_* : The start position
-** Dir_* : The initial direction vector
-** Plane_* : The 2d raycaster version of camera plane
+** Pos_*    : The start position
+** Dir_*    : The initial direction vector
+** Plane_*  : The 2d raycaster version of camera plane
 */
 typedef struct      s_camera
 {
@@ -165,9 +159,9 @@ typedef struct      s_key
 /*
 ** STRUCT - DRAW LINE
 **
-** Line_* : Draw x/y coordinate.
-** Draw_* : Start/end draw point.
-** tex_* : About textured.
+** Line_*   : Draw x/y coordinate.
+** Draw_*   : Start/end draw point.
+** tex_*    : About textured.
 */
 typedef struct      s_line
 {
@@ -199,12 +193,12 @@ typedef struct      s_desc
 /*
 ** STRUCT - DESCRIPTION INFORMATION
 **
-** R_* : The resolution of window.
-** Path_* : THe different picture path.
-** Color_* : Floor and ceiling color code on RGB.
-** Player_* : The start position.
-** player_dir : The start direction.
-** Map : Map
+** R_*          : The resolution of window.
+** Path_*       : THe different picture path.
+** Color_*      : Floor and ceiling color code on RGB.
+** Player_*     : The start position.
+** player_dir   : The start direction.
+** Map          : Map
 */
 typedef struct       s_desc_info
 {
@@ -272,7 +266,7 @@ int     set_texture(t_win *win, const char *path, int index);
 int     load_texture(t_win *win);
 
 /*
-** RAYCASTING
+** RAY CASTING
 */
 void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
@@ -339,7 +333,7 @@ int             check_map_y(char **map, int y, int x, int len_y_max);
 int             check_map(char **map, int len_y_max);
 
 /*
-** INIT/UTILS
+** INIT / UTILS
 */
 void    msg_error(t_win* win, char *msg);
 int		create_rgb(int r, int g, int b);

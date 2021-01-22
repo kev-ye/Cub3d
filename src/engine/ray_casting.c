@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 18:03:46 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:09:07 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int ray_casting(t_win *win)
     t_cam_ray *ray;
     
     if (!(ray = malloc(sizeof(t_cam_ray))))
-        return (ERROR);
+        return (0);
     ft_bzero(ray, sizeof(t_cam_ray));
     while (ray->pix < win->width)
     {
@@ -42,5 +42,5 @@ int ray_casting(t_win *win)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);
     free(ray);
-    return (SUCCESS);
+    return (1);
 }

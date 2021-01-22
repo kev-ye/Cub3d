@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:11:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 17:11:52 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:11:11 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static int check_file_line_info_done(t_desc desc)
 {
     if (desc.r == 0 || desc.no == 0 || desc.so == 0 || desc.we == 0 ||
         desc.ea == 0 || desc.s == 0 || desc.f == 0 || desc.c == 0)
-        return (SUCCESS);
+        return (1);
     else if (desc.r == 1 && desc.no == 1 && desc.so == 1 && desc.we == 1 &&
         desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1)
-        return (SUCCESS);
-    return (ERROR);
+        return (1);
+    return (0);
 }
 
 static int check_file_line_info(char *line, int i, t_desc *desc, t_desc_info *desc_info)
@@ -28,54 +28,54 @@ static int check_file_line_info(char *line, int i, t_desc *desc, t_desc_info *de
     if (line[i] == 'R' && line[i + 1] == ' ')
     {
         if (!(get_resoltion(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->r++;
     }
     else if (line[i] == 'S' && line[i + 1] == ' ')
     {
         if (!(get_path(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->s++;
     }
     else if (line[i] == 'F' && line[i + 1] == ' ')
     {
         if (!(get_floor_color(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->f++;
     }
     else if (line[i] == 'C' && line[i + 1] == ' ')
     {
         if (!(get_ceiling_color(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->c++;
     }
     else if (line[i] == 'N' && !ft_strncmp((line + i), "NO", 2))
     {
         if (!(get_path(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->no++;
     }
     else if (line[i] == 'S' && !ft_strncmp((line + i), "SO", 2))
     {
         if (!(get_path(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->so++;
     }
     else if (line[i] == 'W' && !ft_strncmp((line + i), "WE", 2))
     {
         if (!(get_path(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->we++;
     }
     else if (line[i] == 'E' && !ft_strncmp((line + i), "EA", 2))
     {
         if (!(get_path(line, desc_info)))
-            return (ERROR);
+            return (0);
         desc->ea++;
     }
     else
-        return (ERROR);
-    return (SUCCESS);
+        return (0);
+    return (1);
 }
 
 int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
@@ -83,7 +83,7 @@ int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
     int i;
 
     if (!*line)
-        return (SUCCESS);
+        return (1);
     i = 0;
     while (line[i])
     {
@@ -93,12 +93,12 @@ int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
         {
             if (check_file_line_info(line, i, desc, desc_info)
                 && check_file_line_info_done(*desc))
-                return (SUCCESS);
+                return (1);
             else
-                return (ERROR);
+                return (0);
         }
         else
-            return (ERROR);
+            return (0);
     }
-    return (SUCCESS);
+    return (1);
 }

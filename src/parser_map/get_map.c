@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 22:02:10 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:10:52 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static int map_line(char *line)
 
     i = 0;
     if (!line[0])
-        return (ERROR);
+        return (0);
     while (line[i])
     {
         if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2'
             || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
             ++i;
         else
-            return (ERROR);
+            return (0);
     }
-    return (SUCCESS);
+    return (1);
 }
 
 static int get_map_y_max(const char *path, int *fd)
@@ -37,7 +37,7 @@ static int get_map_y_max(const char *path, int *fd)
     int r;
 
     if ((*fd = open(path, O_RDONLY)) == -1)
-        return (ERROR);
+        return (0);
     y_max = 0;
     r = 1;
     while (r)
@@ -59,7 +59,7 @@ static int get_map_x_max(const char *path, int *fd)
     int i;
 
     if ((*fd = open(path, O_RDONLY)) == -1)
-        return (ERROR);
+        return (0);
     x_max = 0;
     r = 1;
     while (r)

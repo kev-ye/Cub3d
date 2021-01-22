@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:17:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 11:00:31 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:12:22 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static int check_path_name(char *path, int *fd)
 
     s = ft_strrchr(path, '.');
     if (ft_strcmp(s, ".xpm") != 0)
-        return (ERROR);
+        return (0);
     if ((*fd = open(path, O_RDONLY)) == -1)
-        return (ERROR);
+        return (0);
     close(*fd);
-    return (SUCCESS);
+    return (1);
 }
 
 int check_path(t_desc_info *desc_info)
@@ -30,14 +30,14 @@ int check_path(t_desc_info *desc_info)
     int fd;
     
     if (!(check_path_name(desc_info->path_no, &fd)))
-        return (ERROR);
+        return (0);
     if (!(check_path_name(desc_info->path_so, &fd)))
-        return (ERROR);
+        return (0);
     if (!(check_path_name(desc_info->path_we, &fd)))
-        return (ERROR);
+        return (0);
     if (!(check_path_name(desc_info->path_ea, &fd)))
-        return (ERROR);
+        return (0);
     if (!(check_path_name(desc_info->path_s, &fd)))
-        return (ERROR);
-    return (SUCCESS);
+        return (0);
+    return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 17:17:29 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:11:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int parser_map(const char *path, t_desc_info *desc_info, t_desc desc, t_w
     int len_max_x;
 
     if (!(map = get_map(path, &len_max_y, &len_max_x)))
-        return (ERROR);
+        return (0);
     (*desc_info).map_y = len_max_y;
     (*desc_info).map_x = len_max_x;
     (*desc_info).map = get_player_place(map, &(*desc_info).player_x, &(*desc_info).player_y, desc_info, desc);
@@ -29,8 +29,8 @@ static int parser_map(const char *path, t_desc_info *desc_info, t_desc desc, t_w
         msg_error(win, "File -> Player error\n");
     }
     if (!check_map(map, len_max_y))
-        return (ERROR);
-    return (SUCCESS);
+        return (0);
+    return (1);
 }
 
 t_desc_info *check_file(t_win *win, const char *path)

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:01:56 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 21:50:36 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/22 10:10:27 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int    event_loop(t_win *win)
 {
     draw(win);
     event_key(win);
-    return (SUCCESS);
+    return (1);
 }
 
 int event_destroy_win(t_win *win)
 {
     shut_down(win);
-    return (SUCCESS);
+    return (1);
 }

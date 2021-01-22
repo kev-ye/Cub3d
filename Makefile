@@ -6,11 +6,11 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/22 12:10:15 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/22 12:12:18 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# COMPILATION #############################################
+# COMPILATION ##################################################################
 
 CC = gcc
 CFLAG = -Ofast -Wall -Wextra -Werror
@@ -20,7 +20,7 @@ IFLAGS_L = -I./inc -I./libft/inc -I./mlx/mlx_linux
 LFLAG_L = -L./mlx/mlx_linux -lmlx_Linux -lXext -lX11 -lm
 
 
-# DIRECTORY ###############################################
+# DIRECTORY ####################################################################
 
 BUILD 		:= .build
 INC_DIR 	:= inc
@@ -36,7 +36,7 @@ MLX_DIR_L 	:= mlx/mlx_linux
 OBJ_DIR 	:= $(BUILD)/obj
 DIRS		:= $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUB_DIR))
 
-# FILE ####################################################
+# FILE #########################################################################
 
 NAME  	:= Cub3d
 LIBFT 	:= libft.a
@@ -81,7 +81,7 @@ SUB_SRC := color.c \
 SRC		+= $(addprefix utils/, $(SUB_SRC))
 OBJ	  	:= $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-# COLORS ##################################################
+# COLORS #######################################################################
 
 DEFAULT_COLOR	= \033[0m
 BLACK_COLOR		= \033[1;30m
@@ -92,7 +92,7 @@ BLUE_COLOR		= \033[1;34m
 MAGENTA_COLOR 	= \033[1;35m
 CYAN_COLOR 		= \033[1;36m
 
-# Makefile Macos / Linux ##################################
+# Makefile Macos / Linux #######################################################
 
 ifeq ($(shell uname), Darwin)
 

@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/21 21:50:57 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/22 09:43:29 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,70 +90,77 @@ YELLOW_COLOR	= \033[1;33m
 BLUE_COLOR		= \033[1;34m
 MAGENTA_COLOR 	= \033[1;35m
 CYAN_COLOR 		= \033[1;36m
-WHITE_COLOR 	= \033[1;107m
 
 # Makefile Macos / Linux ##################################
 
 ifeq ($(shell uname), Darwin)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C $(LFT_DIR)
-	$(MAKE) -C $(MLX_DIR)
-	cp ./$(LFT_DIR)/$(LIBFT) .
-	cp ./$(MLX_DIR)/$(MLX) .
-	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+	@$(MAKE) -C $(LFT_DIR)
+	@$(MAKE) -C $(MLX_DIR)
+	@cp ./$(LFT_DIR)/$(LIBFT) .
+	@cp ./$(MLX_DIR)/$(MLX) .
+	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
+	@$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 all: $(NAME)
 
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(MLX_DIR) clean
-	rm -rf $(BUILD)
+	@$(MAKE) -C $(LFT_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
+	rm -Rf $(BUILD)
 
 fclean: clean
-	$(MAKE) -C $(LFT_DIR) fclean
-	rm -rf $(NAME) $(LIBFT) $(MLX)
+	@$(MAKE) -C $(LFT_DIR) fclean
+	rm -Rf $(NAME) $(LIBFT) $(MLX)
 
 re: fclean all
 
 .PHONY: all clean fclean re
 	
 $(BUILD):
-	mkdir $@ $(DIRS)
+	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
+	@mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
-	$(CC) $(CFLAG) $(IFLAG) -c $< -o $@
+	@echo "Compiling $(CYAN_COLOR)$< $(DEFAULT_COLOR)..."
+	@$(CC) $(CFLAG) $(IFLAG) -c $< -o $@
 	
 endif
 
 ifeq ($(shell uname), Linux)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C $(LFT_DIR)
-	$(MAKE) -C $(MLX_DIR_L)
-	cp ./$(LFT_DIR)/$(LIBFT) .
-	cp ./$(MLX_DIR_L)/$(MLX_L) .
-	$(CC) $(CFLAG) $(IFLAGS_L) $^ -o $@ $(LFLAG_L) $(LIBFT) $(MLX_L)
+	@$(MAKE) -C $(LFT_DIR)
+	@$(MAKE) -C $(MLX_DIR_L)
+	@cp ./$(LFT_DIR)/$(LIBFT) .
+	@cp ./$(MLX_DIR_L)/$(MLX_L) .
+	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
+	@$(CC) $(CFLAG) $(IFLAGS_L) $^ -o $@ $(LFLAG_L) $(LIBFT) $(MLX_L)
+	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 all: $(NAME)
 
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(MLX_DIR_L) clean
-	rm -rf $(BUILD)
+	@$(MAKE) -C $(LFT_DIR) clean
+	@$(MAKE) -C $(MLX_DIR_L) clean
+	rm -Rf $(BUILD)
 
 fclean: clean
-	$(MAKE) -C $(LFT_DIR) fclean
-	rm -rf $(NAME) $(LIBFT) $(MLX_L)
+	@$(MAKE) -C $(LFT_DIR) fclean
+	rm -Rf $(NAME) $(LIBFT) $(MLX_L)
 
 re: fclean all
 
 .PHONY: all clean fclean re
 	
 $(BUILD):
-	mkdir $@ $(DIRS)
+	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
+	@mkdir $@ $(DIRS)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c | $(BUILD)
-	$(CC) $(CFLAG) $(IFLAGS_L) -c $< -o $@
+	@echo "Compiling $(CYAN_COLOR)$< $(DEFAULT_COLOR)..."
+	@$(CC) $(CFLAG) $(IFLAGS_L) -c $< -o $@
 
 endif

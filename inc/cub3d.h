@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 12:09:19 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 12:16:27 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,12 @@ typedef struct       s_desc_info
     char *path_s;
 }                   t_desc_info;
 
+typedef struct      s_sprite
+{
+        int x;
+        int y;
+}                   t_sprite;
+
 /*
 ** STRUCT - GLOBAL
 */
@@ -255,7 +261,10 @@ int     init_tex(t_win *win);
 /*
 ** ENGINE - SPRITE
 */
-int     int_sprite(t_win *win);
+int     set_sprites(t_win *win, const char *path);
+int     load_sprites(t_win *win);
+int     init_sprite(t_win *win);
+t_list  *get_sprite_info(t_win *win);
 
 /*
 ** ENGINE - RAYCASTING

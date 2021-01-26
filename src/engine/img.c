@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 18:42:14 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 11:22:30 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    pixel_put_color(
     char    *dst;
 
     dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-    *(int*)dst = color;
+    *(unsigned int*)dst = color;
 }
 
 void    vertical_line_color(
@@ -44,26 +44,9 @@ void    vertical_line_color(
     }
 }
 
-// void    pixel_put_tex(
-//     t_line *line,
-//     t_img *texture,
-//     t_win *win,
-//     t_cam_ray *ray)
-// {
-//     int draw;
-
-//     draw = line->line_y * texture->line_len - win->height
-//             * texture->line_len / 2 + ray->line_height
-//             * texture->line_len / 2;
-//     line->tex_y = ((draw * texture->height) / ray->line_height)
-//                                             / texture->line_len;
-//     //printf("draw : %d tex_y : %d\n", draw, line->tex_y);
-//     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
-//                             + line->line_x * win->img->bpp / 8,
-//                             texture->addr + line->tex_y * texture->line_len
-//                             + line->tex_x * (texture->bpp / 8), sizeof(int));
-// }
-
+/*
+**  Note : 256 -> the size of line texure image, 64 (width of one line of pixel is 64) * 4 (coded on 4 chars) = 256.
+*/
 void    pixel_put_tex(
     t_line *line,
     t_img *texture,
@@ -71,11 +54,11 @@ void    pixel_put_tex(
     t_cam_ray *ray)
 {
 
-    line->tex_y = abs((((line->line_y * 256 - win->height * 128 + ray->line_height * 128) * 64) / ray->line_height) / 256);
+    line->tex_y = (((line->line_y * 256 - win->height * 128 + ray->line_height * 128) * texture->height) / ray->line_height) / 256;
     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
                             + line->line_x * win->img->bpp / 8,
-                            texture->addr + line->tex_y % 64 * texture->line_len
-                            + line->tex_x % 64 * (texture->bpp / 8), sizeof(int));
+                            texture->addr + line->tex_y * texture->line_len
+                            + line->tex_x * (texture->bpp / 8), sizeof(unsigned int));
 }
 
 void    vertical_line_tex(

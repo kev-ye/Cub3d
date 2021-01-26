@@ -6,14 +6,14 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:21:27 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 11:49:30 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 19:06:53 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 void    draw_side(
-    t_cam_ray *ray,
+    t_ray_cast *ray,
     t_win *win,
     t_line *line,
     double wall_x)
@@ -42,7 +42,7 @@ void    draw_side(
 void    draw_ceiling_floor(
     t_win *win,
     t_line *line,
-    t_cam_ray *ray)
+    t_ray_cast *ray)
 {
     line->draw_start = 0;
 	line->draw_end = ray->draw_start;
@@ -53,7 +53,7 @@ void    draw_ceiling_floor(
 }
 
 void    mapping(
-    t_cam_ray *ray,
+    t_ray_cast *ray,
     t_win *win)
 {
     t_line *line;

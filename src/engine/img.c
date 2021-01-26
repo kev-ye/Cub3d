@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/26 11:22:30 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 23:02:51 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void    pixel_put_tex(
     t_line *line,
     t_img *texture,
     t_win *win,
-    t_cam_ray *ray)
+    t_ray_cast *ray)
 {
 
     line->tex_y = (((line->line_y * 256 - win->height * 128 + ray->line_height * 128) * texture->height) / ray->line_height) / 256;
@@ -65,7 +65,7 @@ void    vertical_line_tex(
     t_line *line,
     t_win *win,
     t_img *texture,
-    t_cam_ray *ray)
+    t_ray_cast *ray)
 {
     int draw_end;
 

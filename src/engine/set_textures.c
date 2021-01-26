@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:49:21 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 11:51:48 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 23:18:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int init_tex(t_win *win)
     ft_bzero(win->texture[1], sizeof(t_img));
     ft_bzero(win->texture[2], sizeof(t_img));
     ft_bzero(win->texture[3], sizeof(t_img));
-    load_texture(win);
+    if (!(load_texture(win)))
+        return (0);
     return (1);
 }

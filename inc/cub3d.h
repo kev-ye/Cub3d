@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/26 12:16:27 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 23:24:09 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct      s_camera
 ** - Side           : North and south or west and east wall hit.
 ** - Line_height    : The height of line to draw on screen.
 */
-typedef struct      s_cam_ray
+typedef struct      s_ray_cast
 {
     int     pix;
     double  camera_x;
@@ -122,7 +122,8 @@ typedef struct      s_cam_ray
     int     line_height;
     int     draw_start;
     int     draw_end;
-}                   t_cam_ray;
+    int     *zbuffer;
+}                   t_ray_cast;
 
 /*
 ** STRUCT - IMAGE
@@ -220,9 +221,32 @@ typedef struct       s_desc_info
 
 typedef struct      s_sprite
 {
-        int x;
-        int y;
+    int x;
+    int y;
 }                   t_sprite;
+
+typedef struct      s_sp_cast
+{
+    t_sprite    *sprite;
+    int         sp_amount;
+    double      sprite_x;
+    double      sprite_y;
+    double      inv_det;
+    double      transform_x;
+    double      transform_y;
+    int         sprite_screen_x;
+    int         sprite_height;
+    int         sprite_width;
+    int         draw_start_y;
+    int         draw_end_y;
+    int         draw_start_x;
+    int         draw_end_x;
+    int         stripe;
+    int         tex_x;
+    int         tex_y;
+    int         y;
+    unsigned int         color;
+}                   t_sp_cast;
 
 /*
 ** STRUCT - GLOBAL
@@ -248,8 +272,8 @@ typedef struct      s_win
 t_img   *new_image(t_win *win, int size_x, int size_y);
 void    pixel_put_color(t_img *img, int x, int y, int color);
 void    vertical_line_color(t_line *line, t_win *win, int color);
-void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_cam_ray *ray);
-void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_cam_ray *ray);
+void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_ray_cast *ray);
+void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_ray_cast *ray);
 
 /*
 ** ENGINE - TEXTURE
@@ -259,20 +283,29 @@ int     load_texture(t_win *win);
 int     init_tex(t_win *win);
 
 /*
-** ENGINE - SPRITE
+** ENGINE - SPRITE CASTING
 */
-int     set_sprites(t_win *win, const char *path);
-int     load_sprites(t_win *win);
-int     init_sprite(t_win *win);
-t_list  *get_sprite_info(t_win *win);
+int         set_sprites(t_win *win, const char *path);
+int         load_sprites(t_win *win);
+int         init_sprite(t_win *win);
+// need to sort out
+int         get_sprite_amount(t_win *win);
+t_sp_cast   *sprite_cast_init(t_win *win);
+t_sp_cast   *get_sprite_pos(t_win *win);
+void        sort_sprite(t_win *win, t_sp_cast *sp_cast);
+void        sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
+void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
+void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
+void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
+int         sprite_casting(t_win *win, t_ray_cast *ray);
 
 /*
-** ENGINE - RAYCASTING
+** ENGINE - RAY CASTING
 */
-void    init_raycating_value_calc(t_camera *cam, t_cam_ray *ray, t_win *win);
-void    step_calc_init_side_dist(t_camera *cam, t_cam_ray *ray);
-void    wall_hit(t_cam_ray *ray, t_win *win);
-void    perpwalldist_and_heightline(t_camera *cam ,t_cam_ray *ray, t_win *win);
+void    init_raycating_value_calc(t_camera *cam, t_ray_cast *ray, t_win *win);
+void    step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);
+void    wall_hit(t_ray_cast *ray, t_win *win);
+void    perpwalldist_and_heightline(t_camera *cam ,t_ray_cast *ray, t_win *win);
 int     ray_casting(t_win *win);
 
 /*
@@ -297,9 +330,9 @@ void    turn_right(t_win *win);
 /*
 ** ENGINE - MAPPING
 */
-void   draw_side(t_cam_ray *ray, t_win *win, t_line *line, double wall_x);
-void   draw_ceiling_floor(t_win *win, t_line *line, t_cam_ray *ray);
-void   mapping(t_cam_ray *ray, t_win *win);
+void   draw_side(t_ray_cast *ray, t_win *win, t_line *line, double wall_x);
+void   draw_ceiling_floor(t_win *win, t_line *line, t_ray_cast *ray);
+void   mapping(t_ray_cast *ray, t_win *win);
 
 /*
 ** EVENTS - KEYS

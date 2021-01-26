@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/18 22:07:36 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/26 19:07:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    init_raycating_value_calc(
     t_camera *cam,
-    t_cam_ray *ray,
+    t_ray_cast *ray,
     t_win *win)
 {
     ray->camera_x = 2 * ray->pix / (double)win->width - 1;
@@ -29,7 +29,7 @@ void    init_raycating_value_calc(
 
 void    step_calc_init_side_dist(
     t_camera *cam,
-    t_cam_ray *ray)
+    t_ray_cast *ray)
 {
     if (ray->ray_dir_x < 0)
     {
@@ -54,7 +54,7 @@ void    step_calc_init_side_dist(
 }
 
 void    wall_hit(
-    t_cam_ray *ray,
+    t_ray_cast *ray,
     t_win *win)
 {
     while (ray->hit == 0)
@@ -84,7 +84,7 @@ void    wall_hit(
 
 void    perpwalldist_and_heightline(
     t_camera *cam,
-    t_cam_ray *ray,
+    t_ray_cast *ray,
     t_win *win)
 {
     if (ray->side == 0 || ray->side == 1)

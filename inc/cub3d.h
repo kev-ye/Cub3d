@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/26 23:24:09 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/27 12:46:38 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ typedef struct      s_win
     t_img       *img;
     t_img       **texture;
     t_img       *sprite;
+    t_sprite    *sp;
 }                   t_win;
 
 /*
@@ -296,8 +297,9 @@ void        sort_sprite(t_win *win, t_sp_cast *sp_cast);
 void        sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
 void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
 void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
-void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
+void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast);
 int         sprite_casting(t_win *win, t_ray_cast *ray);
+void        paint_pixel(t_win *win, t_sp_cast *sp_cast);
 
 /*
 ** ENGINE - RAY CASTING

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/26 23:23:40 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/27 13:00:00 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,35 @@ int get_sprite_amount(t_win *win)
     return (count);
 }
 
+// t_sp_cast *sprite_cast_init(t_win *win)
+// {
+//     t_sp_cast *sp_cast;
+//     t_sprite *sprite;
+//     int count;
+
+//     count = get_sprite_amount(win);
+//     if (!(sprite = malloc(sizeof(t_sprite) * count)))
+//         return (NULL);
+//     ft_bzero(sprite, sizeof(t_sprite) * count);
+//     if (!(sp_cast = malloc(sizeof(t_sp_cast))))
+//         return (NULL);
+//     ft_bzero(sp_cast, sizeof(t_sp_cast));
+//     sp_cast->sp_amount = count;
+//     sp_cast->sprite = sprite;
+//     return (sp_cast);
+// }
+
 t_sp_cast *sprite_cast_init(t_win *win)
 {
     t_sp_cast *sp_cast;
-    t_sprite *sprite;
     int count;
 
     count = get_sprite_amount(win);
-    if (!(sprite = malloc(sizeof(t_sprite) * count)))
-        return (NULL);
     if (!(sp_cast = malloc(sizeof(t_sp_cast))))
         return (NULL);
-    ft_bzero(sprite, sizeof(t_sprite) * count);
     ft_bzero(sp_cast, sizeof(t_sp_cast));
     sp_cast->sp_amount = count;
-    sp_cast->sprite = sprite;
+    sp_cast->sprite = win->sp;
     return (sp_cast);
 }
 
@@ -108,10 +122,10 @@ void    sort_sprite(t_win *win, t_sp_cast *sp_cast)
 
 void    sprite_projection(t_win *win, t_sp_cast *sp_cast, int i)
 {
-    sp_cast->sprite_x = sp_cast->sprite[i].x - win->camera->pos_x;
-    sp_cast->sprite_x = sp_cast->sprite[i].x - win->camera->pos_x;
+    sp_cast->sprite_x = sp_cast->sprite[i].x - (win->camera->pos_x - 0.5);
+    sp_cast->sprite_y = sp_cast->sprite[i].y - (win->camera->pos_y - 0.5);
     sp_cast->inv_det = 1.0 / (win->camera->plane_x * win->camera->dir_y
-                       - win->camera->plane_y * win->camera->dir_x);
+                       - win->camera->dir_x * win->camera->plane_y);
     sp_cast->transform_x = sp_cast->inv_det * (win->camera->dir_y
                            * sp_cast->sprite_x - win->camera->dir_x
                            * sp_cast->sprite_y);
@@ -146,13 +160,15 @@ void    sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
     sp_cast->stripe = sp_cast->draw_start_x;
     while (sp_cast->stripe < sp_cast->draw_end_x)
     {
-        sp_cast->tex_x = (int)((256 * (sp_cast->stripe - (-sp_cast->sprite_width / 2 + sp_cast->sprite_screen_x)) * 64 / sp_cast->sprite_width) / 256);
+        sp_cast->tex_x = (int)((256 * (sp_cast->stripe - (-sp_cast->sprite_width / 2 + sp_cast->sprite_screen_x)) * win->sprite->width / sp_cast->sprite_width) / 256);
         if (sp_cast->transform_y > 0 && sp_cast->stripe > 0 && sp_cast->stripe < win->width && sp_cast->transform_y < ray->zbuffer[sp_cast->stripe])
         {
             sp_cast->y = sp_cast->draw_start_y;
             while (sp_cast->y < sp_cast->draw_end_y)
             {
-                pixel_put_sprite(win, sp_cast, ray);
+                pixel_put_sprite(win, sp_cast);
+                if (sp_cast->color != 0)
+                    paint_pixel(win, sp_cast);
                 sp_cast->y++;
             }
         }
@@ -160,17 +176,21 @@ void    sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
     }
 }
 
-void    pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
+void    pixel_put_sprite(t_win *win, t_sp_cast *sp_cast)
 {
     sp_cast->tex_y = (((sp_cast->y * 256 - win->height * 128 + sp_cast->sprite_height * 128) * win->sprite->height) / sp_cast->sprite_height) / 256;
     ft_memcpy(&sp_cast->color, win->sprite->addr + sp_cast->tex_y * win->sprite->line_len + sp_cast->tex_x * win->sprite->bpp / 8, sizeof(unsigned int));
+}
+
+void    paint_pixel(t_win *win, t_sp_cast *sp_cast)
+{
+    ft_memcpy(win->img->addr + sp_cast->y * win->img->line_len + sp_cast->stripe * win->img->bpp / 8, win->sprite->addr + sp_cast->tex_y * win->sprite->line_len + sp_cast->tex_x * win->sprite->bpp / 8, sizeof(unsigned int));
 }
 
 int    sprite_casting(t_win *win, t_ray_cast *ray)
 {
     t_sp_cast *sp_cast;
     int i;
-
     if (!(sp_cast = get_sprite_pos(win)))
         return (0);
     sort_sprite(win, sp_cast);
@@ -181,5 +201,6 @@ int    sprite_casting(t_win *win, t_ray_cast *ray)
         sprite_draw(win, sp_cast, ray);
         i++;
     }
+    free(sp_cast);
     return (1);
 }

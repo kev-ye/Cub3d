@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/26 23:24:40 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/27 09:50:21 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int ray_casting(t_win *win)
     
     if (!(ray = malloc(sizeof(t_ray_cast))))
         return (0);
+    ft_bzero(ray, sizeof(t_ray_cast));
     if (!(ray->zbuffer = malloc(sizeof(double) * win->width)))
         return (0);
-    ft_bzero(ray, sizeof(t_ray_cast));
     ft_bzero(ray->zbuffer, sizeof(double) * win->width);
     while (ray->pix < win->width)
     {

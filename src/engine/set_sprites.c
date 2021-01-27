@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:23:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/26 23:18:14 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/27 12:59:15 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,18 @@ int     load_sprites(t_win *win)
 
 int init_sprite(t_win *win)
 {
+    t_sprite *sprite;
+    int count;
+    
     if (!(win->sprite = malloc(sizeof(t_img))))
         return (0);
     ft_bzero(win->sprite, sizeof(t_img));
     if (!(load_sprites(win)))
         return (0);
+    count = get_sprite_amount(win);
+    if (!(sprite = malloc(sizeof(t_sprite) * count)))
+        return (0);
+    ft_memset(sprite, -1, sizeof(t_sprite) * count);
+    win->sp = sprite;
     return (1);
 }

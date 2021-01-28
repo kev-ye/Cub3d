@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:20:32 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 21:52:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/28 22:28:28 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void    move_d(t_win *win)
                     * win->camera->speed)] == '0')
         win->camera->pos_x += win->camera->plane_x * win->camera->speed;
     if (win->desc_info->map[(int)(win->camera->pos_y + win->camera->plane_y
-                    * win->camera->speed)]
-                    [(int)win->camera->pos_x] == '0')
+                    * win->camera->speed)][(int)win->camera->pos_x] == '0')
         win->camera->pos_y += win->camera->plane_y * win->camera->speed;
 }

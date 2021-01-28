@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/27 12:46:38 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/28 22:47:22 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,25 +104,25 @@ typedef struct      s_camera
 */
 typedef struct      s_ray_cast
 {
-    int     pix;
-    double  camera_x;
-    double  ray_dir_x;
-    double  ray_dir_y;
-    int     map_x;
-    int     map_y;
-    double  side_dist_x;
-    double  side_dist_y;
-    double  delta_dist_x;
-    double  delta_dist_y;
-    double  perp_wall_dist;
-    int     step_x;
-    int     step_y;
-    int     hit;
-    int     side;
-    int     line_height;
-    int     draw_start;
-    int     draw_end;
-    int     *zbuffer;
+    int         pix;
+    double      camera_x;
+    double      ray_dir_x;
+    double      ray_dir_y;
+    int         map_x;
+    int         map_y;
+    double      side_dist_x;
+    double      side_dist_y;
+    double      delta_dist_x;
+    double      delta_dist_y;
+    double      perp_wall_dist;
+    int         step_x;
+    int         step_y;
+    int         hit;
+    int         side;
+    int         line_height;
+    int         draw_start;
+    int         draw_end;
+    double      *zbuffer;
 }                   t_ray_cast;
 
 /*
@@ -264,7 +264,6 @@ typedef struct      s_win
     t_img       *img;
     t_img       **texture;
     t_img       *sprite;
-    t_sprite    *sp;
 }                   t_win;
 
 /*

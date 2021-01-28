@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/27 13:03:34 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/28 22:48:24 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,8 @@ void    wall_hit(
             else if (ray->step_y == -1)
                 ray->side = 3;
         }
-        if (win->desc_info->map[ray->map_y][ray->map_x] > '0' && win->desc_info->map[ray->map_y][ray->map_x] != '2')
+        if (win->desc_info->map[ray->map_y][ray->map_x] == '1')
             ray->hit = 1;
-        // if (win->desc_info->map[ray->map_y][ray->map_x] == '2')
-        // {
-        //     win->sp->x = ray->map_x;
-        //     win->sp->y = ray->map_y;
-        // }
     }
 }
 

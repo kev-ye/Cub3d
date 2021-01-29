@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:02:39 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/22 10:12:34 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/29 10:11:31 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int get_floor_color(char *line, t_desc_info *desc_info)
         free_split(s);
         return (0);
     }
-    if (ft_strcmp(s[0], "F"))
+    if (ft_strcmp(s[0], "F") != 0)
     {
         free_split(s);
         return (0);;
@@ -57,7 +57,7 @@ int get_ceiling_color(char *line, t_desc_info *desc_info)
         free_split(s);
         return (0);;
     }
-    if (ft_strcmp(s[0], "C"))
+    if (ft_strcmp(s[0], "C") != 0)
     {
         free_split(s);
         return (0);;

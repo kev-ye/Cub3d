@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/28 22:47:22 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/29 12:31:30 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct      s_camera
 }                   t_camera;
 
 /*
-** STURCT - RAYCASTING
+** STURCT - RAY CASTING
 **
 ** - Camera_x       : The camera plane current x coordinate of
 **                    the screen represents.
@@ -219,12 +219,18 @@ typedef struct       s_desc_info
     char *path_s;
 }                   t_desc_info;
 
+/*
+** STRUTC - SPRITES COORDINATE
+*/
 typedef struct      s_sprite
 {
     int x;
     int y;
 }                   t_sprite;
 
+/*
+** STRUTC - SPRITES CASTING
+*/
 typedef struct      s_sp_cast
 {
     t_sprite    *sprite;
@@ -267,7 +273,7 @@ typedef struct      s_win
 }                   t_win;
 
 /*
-** ENGINE - IMAGE
+** ENGINE - DRAW / IMAGE
 */
 t_img   *new_image(t_win *win, int size_x, int size_y);
 void    pixel_put_color(t_img *img, int x, int y, int color);
@@ -284,11 +290,37 @@ int     init_tex(t_win *win);
 
 /*
 ** ENGINE - SPRITE CASTING
+**
+** Step of sptite casting :
+**
+** Sort sprites from far to close (sort_sprite).
+** After sorting the sprites, do the projection and draw them (sprite_casting).
+** Translate sprite position to relative to camera (sprite_projection).
+** Transform sprite with the inverse camera matrix (sprite_projection):
+**
+** [ planeX   dirX ] -1                                    [ dirY      -dirX ]
+** [               ]     =  1/(planeX*dirY-dirX*planeY) *  [                 ]
+** [ planeY   dirY ]                                       [ -planeY  planeX ]
+**
+** Required for correct matrix multiplication (sprite_projection).
+** Calculate height of the sprite on screen (sprite_draw).
+** Calculate lowest and highest pixel to fill in current stripe (sprite_draw).
+** Calculate width of the sprite (sprite_draw).
+** Loop through every vertical stripe of the sprite on screen (sprite_drawing).
+** With the conditions in the if are (sprite_drawing):
+** 1) it's in front of camera plane so you don't see things behind you.
+** 2) it's on the screen (left).
+** 3) it's on the screen (right).
+** 4) ZBuffer, with perpendicular distance.
+** Loop for every pixel of the current stripe (sprite_drawing).
+** 256 and 128 factors to avoid floats for calculate tex_y
+** (sprite_drawing + pixel_put_sprite).
+** Get current color from the texture (sprite_drawing + pixel_put_sprite).
+** Paint pixel if it isn't the invisible color(sprite_drawing + paint_pixel).
 */
 int         set_sprites(t_win *win, const char *path);
 int         load_sprites(t_win *win);
 int         init_sprite(t_win *win);
-// need to sort out
 int         get_sprite_amount(t_win *win);
 t_sp_cast   *sprite_cast_init(t_win *win);
 t_sp_cast   *get_sprite_pos(t_win *win);
@@ -297,11 +329,30 @@ void        sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
 void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
 void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
 void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast);
-int         sprite_casting(t_win *win, t_ray_cast *ray);
 void        paint_pixel(t_win *win, t_sp_cast *sp_cast);
+int         sprite_casting(t_win *win, t_ray_cast *ray);
 
 /*
 ** ENGINE - RAY CASTING
+**
+** Step of ray casting (check with the "STRUCT - RAY CASTING"):
+**
+** Calculate ray postion and direction (init_raycating_value_calc).
+** Get which box of the map we're in (init_raycating_value_calc).
+** Get lenght of ray from one x or y-side to next x or y-side
+** (init_raycating_value_calc).
+** Calculate step and initial side distance (step_calc_init_side_dist).
+** Perform DDA (wall_hit).
+** Jump to next map square, or in x-direction, or in y-direction (wall_hit).
+** Check if ray hs hit a wall (wall_hit).
+** Calculate distance projected on camera direction
+** (perpwalldist_and_heightline).
+** Calculate height of line to draw on screen (perpwalldist_and_heightline).
+** Calculate lowest and highest pixel to fill in current stripe
+** (perpwalldist_and_heightline).
+** Textured / colored + draw -> check "ENGINE - MAPPING".
+** Move -> check "ENGINE - PLAYER MOUVEMENT".
+** rotation -> check "ENGINE - CAMERA TURN".
 */
 void    init_raycating_value_calc(t_camera *cam, t_ray_cast *ray, t_win *win);
 void    step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:23:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/28 22:47:00 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/29 09:50:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,46 @@ int     load_sprites(t_win *win)
     return (1);
 }
 
-int init_sprite(t_win *win)
+int get_sprite_amount(t_win *win)
 {
+    int count;
+    int x;
+    int y;
+
+    count = 0;
+    y = -1;
+    while (++y < win->desc_info->map_y)
+    {
+        x = -1;
+        while (++x < win->desc_info->map_x)
+        {
+            if (win->desc_info->map[y][x] == '2')
+                ++count;
+        }
+    }
+    return (count);
+}
+
+t_sp_cast *sprite_cast_init(t_win *win)
+{
+    t_sp_cast *sp_cast;
     t_sprite *sprite;
     int count;
-    
+
+    count = get_sprite_amount(win);
+    if (!(sprite = malloc(sizeof(t_sprite) * count)))
+        return (NULL);
+    ft_bzero(sprite, sizeof(t_sprite) * count);
+    if (!(sp_cast = malloc(sizeof(t_sp_cast))))
+        return (NULL);
+    ft_bzero(sp_cast, sizeof(t_sp_cast));
+    sp_cast->sp_amount = count;
+    sp_cast->sprite = sprite;
+    return (sp_cast);
+}
+
+int init_sprite(t_win *win)
+{
     if (!(win->sprite = malloc(sizeof(t_img))))
         return (0);
     ft_bzero(win->sprite, sizeof(t_img));

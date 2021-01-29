@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:56:10 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 17:25:03 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/29 10:08:25 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void    free_win(t_win *win)
             free(win->texture[3]);
         free(win->texture);
     }
+    if (win->sprite != NULL)
+        free(win->sprite);  
     if (win != NULL)
         free(win);
 }

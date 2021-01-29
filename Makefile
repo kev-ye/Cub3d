@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/01/22 12:12:18 by kaye             ###   ########.fr        #
+#    Updated: 2021/01/29 12:33:21 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,14 @@ SRC	  	:= main.c
 SUB_SRC := img.c \
 		   mapping.c \
 		   move.c \
+		   rotation.c \
 		   ray_casting_utils.c \
 		   ray_casting.c \
 		   set_camera.c \
 		   set_sprites.c \
 		   set_textures.c \
-		   turn.c
+		   sprite_casting_utils.c \
+		   sprite_casting.c
 SRC 	+= $(addprefix engine/, $(SUB_SRC))
 SUB_SRC := event_key.c \
 		   events.c

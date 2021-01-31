@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 12:34:01 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 14:24:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    pixel_put_monster(t_win *win, t_sp_cast *ms_cast)
 {
     ms_cast->tex_y = (((ms_cast->y * 256 - win->height * win->camera->cam_height * 128
                         + ms_cast->sprite_height * 128)
-                        * win->sprite->height) / ms_cast->sprite_height) / 256;
+                        * win->monster->height) / ms_cast->sprite_height) / 256;
     ft_memcpy(&ms_cast->color, win->monster->addr + ms_cast->tex_y
                 * win->monster->line_len + ms_cast->tex_x * win->monster->bpp / 8,
                 sizeof(unsigned int));
@@ -35,7 +35,7 @@ int    monster_casting(t_win *win, t_ray_cast *ray)
     t_sp_cast *ms_cast;
     int i;
     
-    if (!(ms_cast = get_sprite_pos(win)))
+    if (!(ms_cast = get_monster_pos(win)))
         return (0);
     sort_monster(win, ms_cast);
     i = 0;

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:51:29 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 12:31:50 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 14:23:23 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_sp_cast *get_monster_pos(t_win *win)
     int x;
     int y;
 
-    if (!(ms_cast = sprite_cast_init(win)))
+    if (!(ms_cast = monster_cast_init(win)))
         return (NULL);
     count = 0;
     y = -1;
@@ -111,7 +111,7 @@ void    monster_drawing(t_win *win, t_sp_cast *ms_cast, t_ray_cast *ray)
         ms_cast->tex_x = (int)((256 * (ms_cast->stripe
                         - (-ms_cast->sprite_width / 2
                         + ms_cast->sprite_screen_x))
-                        * win->sprite->width / ms_cast->sprite_width) / 256);
+                        * win->monster->width / ms_cast->sprite_width) / 256);
         if (ms_cast->transform_y > 0 && ms_cast->stripe > 0
             && ms_cast->stripe < win->width
             && ms_cast->transform_y < ray->zbuffer[ms_cast->stripe])

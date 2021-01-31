@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 12:18:53 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 12:32:32 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 14:25:34 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int     load_monster(t_win *win)
     int sprite;
     int monster;
 
-    if (!(monster = set_sprites(win, win->desc_info->path_m)))
+    if (!(monster = set_monster(win, win->desc_info->path_m)))
         return (0);
     return (1);
 }

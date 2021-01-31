@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:08:03 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 22:46:13 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,8 +276,8 @@ typedef struct      s_win
 ** ENGINE - DRAW / IMAGE
 */
 t_img   *new_image(t_win *win, int size_x, int size_y);
-void    pixel_put_color(t_img *img, int x, int y, int color);
-void    vertical_line_color(t_line *line, t_win *win, int color);
+void    pixel_put_color(t_img *img, int x, int y, unsigned int color);
+void    vertical_line_color(t_line *line, t_win *win, unsigned int color);
 void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_ray_cast *ray);
 void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_ray_cast *ray);
 

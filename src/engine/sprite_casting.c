@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/29 09:54:57 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:23:07 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    pixel_put_sprite(t_win *win, t_sp_cast *sp_cast)
 {
-    sp_cast->tex_y = (((sp_cast->y * 256 - win->height * 128
+    sp_cast->tex_y = (((sp_cast->y * 256 - win->height * win->camera->cam_height * 128
                         + sp_cast->sprite_height * 128)
                         * win->sprite->height) / sp_cast->sprite_height) / 256;
     ft_memcpy(&sp_cast->color, win->sprite->addr + sp_cast->tex_y

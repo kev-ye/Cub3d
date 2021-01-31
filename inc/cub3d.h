@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/29 12:31:30 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:33:43 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 #  define KEY_CODE_D 2
 #  define KEY_CODE_LEFT 123
 #  define KEY_CODE_RIGHT 124
+#  define KEY_CODE_UP 126
+#  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
 #else
 #  define KEY_CODE_ESC 65307
@@ -154,6 +156,8 @@ typedef struct      s_key
     int     key_d;
     int     key_left;
     int     key_right;
+    int     key_up;
+    int     key_down;
 }                   t_key;
 
 /*
@@ -188,6 +192,7 @@ typedef struct      s_desc
     int s;
     int f;
     int c;
+    int m; // monster
 }                   t_desc;
 
 /*
@@ -217,6 +222,7 @@ typedef struct       s_desc_info
     char *path_we;
     char *path_ea;
     char *path_s;
+    char *path_m; // add monster
 }                   t_desc_info;
 
 /*
@@ -270,6 +276,7 @@ typedef struct      s_win
     t_img       *img;
     t_img       **texture;
     t_img       *sprite;
+    t_img       *monster; // add monster
 }                   t_win;
 
 /*
@@ -333,6 +340,23 @@ void        paint_pixel(t_win *win, t_sp_cast *sp_cast);
 int         sprite_casting(t_win *win, t_ray_cast *ray);
 
 /*
+** ENGINE - MONSTER CASTING
+*/
+int         init_monster(t_win *win);
+int         load_monster(t_win *win);
+int         set_monster(t_win *win, const char *path);
+int         get_monster_amount(t_win *win);
+t_sp_cast   *monster_cast_init(t_win *win);
+void        pixel_put_monster(t_win *win, t_sp_cast *ms_cast);
+void        paint_pixel_m(t_win *win, t_sp_cast *ms_cast);
+int         monster_casting(t_win *win, t_ray_cast *ray);
+t_sp_cast   *get_monster_pos(t_win *win);
+void        sort_monster(t_win *win, t_sp_cast *ms_cast);
+void        monster_projection(t_win *win, t_sp_cast *ms_cast, int i);
+void        monster_draw(t_win *win, t_sp_cast *ms_cast, t_ray_cast *ray);
+void        monster_drawing(t_win *win, t_sp_cast *ms_cast, t_ray_cast *ray);
+
+/*
 ** ENGINE - RAY CASTING
 **
 ** Step of ray casting (check with the "STRUCT - RAY CASTING"):
@@ -374,10 +398,12 @@ void    move_a(t_win *win);
 void    move_d(t_win *win);
 
 /*
-** ENGINE - CAMERA TURN
+** ENGINE - CAMERA ROTATION
 */
 void    turn_left(t_win *win);
 void    turn_right(t_win *win);
+void    turn_up(t_win *win); // bonus
+void    turn_down(t_win *win); // bonus
 
 /*
 ** ENGINE - MAPPING

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:51:29 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/29 09:57:40 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:25:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void    sprite_projection(t_win *win, t_sp_cast *sp_cast, int i)
 void    sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
 {
     sp_cast->sprite_height = abs((int)(win->height / (sp_cast->transform_y)));
-    sp_cast->draw_start_y = -sp_cast->sprite_height / 2 + win->height / 2;
+    sp_cast->draw_start_y = -sp_cast->sprite_height / 2 + win->height / 2 * win->camera->cam_height;
     if (sp_cast->draw_start_y < 0)
         sp_cast->draw_start_y = 0;
-    sp_cast->draw_end_y = sp_cast->sprite_height / 2 + win->height / 2;
+    sp_cast->draw_end_y = sp_cast->sprite_height / 2 + win->height / 2 * win->camera->cam_height;
     if (sp_cast->draw_end_y >= win->height)
         sp_cast->draw_end_y = win->height - 1;
     sp_cast->sprite_width = abs((int)(win->height / (sp_cast->transform_y)));

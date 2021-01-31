@@ -4,6 +4,7 @@ SO ./textures/south1.xpm
 WE ./textures/west1.xpm
 EA ./textures/east1.xpm
 S ./textures/sprites.xpm
+M ./textures/monster.xpm
 F 60,60,60
 C 160,160,160
 

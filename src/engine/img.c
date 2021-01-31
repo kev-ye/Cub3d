@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/27 09:59:00 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 11:10:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void    pixel_put_tex(
     t_ray_cast *ray)
 {
 
-    line->tex_y = (((line->line_y * 256 - win->height * 128 + ray->line_height * 128) * texture->height) / ray->line_height) / 256;
+    line->tex_y = (((line->line_y * 256 - win->height * win->camera->cam_height * 128 + ray->line_height * 128) * texture->height) / ray->line_height) / 256;
     ft_memcpy(win->img->addr + line->line_y * win->img->line_len
                             + line->line_x * win->img->bpp / 8,
                             texture->addr + line->tex_y * texture->line_len

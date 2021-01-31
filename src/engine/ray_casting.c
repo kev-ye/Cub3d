@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/29 11:41:13 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:35:39 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int ray_casting(t_win *win)
     }
     if (!(sprite_casting(win, ray)))
         return (0);
+    // if (!(monster_casting(win, ray)))
+    //     return (0);
     if (!win->save)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:57:11 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 12:46:36 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:00:55 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_desc_info *init_desc_info()
     new_info->path_we = NULL;
     new_info->path_ea = NULL;
     new_info->path_s = NULL;
+    new_info->path_m = NULL; // add monster
     new_info->color_f = -1;
     new_info->color_c = -1;
     new_info->player_x = -99;

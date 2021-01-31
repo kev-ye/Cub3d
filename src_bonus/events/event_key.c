@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 19:04:13 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:03:50 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 11:34:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int event_key_press(int keycode, t_win *win)
         win->key_code->key_left = 1;
     else if (keycode == KEY_CODE_RIGHT && win->key_code->key_right == 0)
         win->key_code->key_right = 1;
+    else if (keycode == KEY_CODE_UP && win->key_code->key_up == 0)
+        win->key_code->key_up = 1;
+    else if (keycode == KEY_CODE_DOWN && win->key_code->key_down == 0)
+        win->key_code->key_down = 1;
     return (1);
 }
 
@@ -47,6 +51,10 @@ int event_key_release(int keycode, t_win *win)
         win->key_code->key_left = 0;
     else if (keycode == KEY_CODE_RIGHT && win->key_code->key_right == 1)
         win->key_code->key_right = 0;
+    else if (keycode == KEY_CODE_UP && win->key_code->key_up == 1)
+        win->key_code->key_up = 0;
+    else if (keycode == KEY_CODE_DOWN && win->key_code->key_down == 1)
+        win->key_code->key_down = 0;
     return (1);
 }
 
@@ -64,6 +72,10 @@ int event_key(t_win *win)
         turn_left(win);
     if (win->key_code->key_right == 1)
         turn_right(win);
+    if (win->key_code->key_up == 1)
+        turn_up(win);
+    if (win->key_code->key_down == 1)
+        turn_down(win);
     return (1);
 }
 
@@ -78,5 +90,7 @@ int init_key(t_win *win)
     win->key_code->key_d = 0;
     win->key_code->key_left = 0;
     win->key_code->key_right = 0;
+    win->key_code->key_up = 0;
+    win->key_code->key_down = 0;
     return (1);    
 }

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:04:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:06:35 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 12:38:36 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ static int get_path_2(char **s, t_desc_info **desc_info)
     else if (!ft_strcmp(s[0], "S"))
     {
         (*desc_info)->path_s = ft_strdup(s[1]);
+        return (1);
+    }
+    else if (!ft_strcmp(s[0], "M")) // add monster
+    {
+        (*desc_info)->path_m = ft_strdup(s[1]);
         return (1);
     }
     return (0);

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 11:53:08 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 20:57:52 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 11:35:09 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,16 @@ void turn_right(t_win *win)
                         * sin(win->camera->rot_speed)
                         + win->camera->plane_y
                         * cos(win->camera->rot_speed);
+}
+
+void turn_up(t_win *win)
+{
+    if (win->camera->cam_height < 2)
+        win->camera->cam_height += win->camera->rot_speed;
+}
+
+void turn_down(t_win *win)
+{
+    if (win->camera->cam_height > 0)
+        win->camera->cam_height -= win->camera->rot_speed;
 }

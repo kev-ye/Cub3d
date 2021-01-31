@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:08:03 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 20:00:44 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 #  define KEY_CODE_D 2
 #  define KEY_CODE_LEFT 123
 #  define KEY_CODE_RIGHT 124
+#  define KEY_CODE_UP 126
+#  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
 #else
 #  define KEY_CODE_ESC 65307
@@ -154,6 +156,8 @@ typedef struct      s_key
     int     key_d;
     int     key_left;
     int     key_right;
+    int     key_up;
+    int     key_down;
 }                   t_key;
 
 /*
@@ -188,6 +192,7 @@ typedef struct      s_desc
     int s;
     int f;
     int c;
+    int m; // monster
 }                   t_desc;
 
 /*
@@ -217,6 +222,7 @@ typedef struct       s_desc_info
     char *path_we;
     char *path_ea;
     char *path_s;
+    char *path_m; // add monster
 }                   t_desc_info;
 
 /*
@@ -269,7 +275,9 @@ typedef struct      s_win
     t_key       *key_code;
     t_img       *img;
     t_img       **texture;
-    t_img       *sprite;
+    // t_img       *sprite;
+    t_img       **sprite; // add monster
+    int         sp_amount;
 }                   t_win;
 
 /*
@@ -318,7 +326,8 @@ int     init_tex(t_win *win);
 ** Get current color from the texture (sprite_drawing + pixel_put_sprite).
 ** Paint pixel if it isn't the invisible color(sprite_drawing + paint_pixel).
 */
-int         set_sprites(t_win *win, const char *path);
+//int         set_sprites(t_win *win, const char *path);
+int         set_sprites(t_win *win, const char *path, int index); // add monster
 int         load_sprites(t_win *win);
 int         init_sprite(t_win *win);
 int         get_sprite_amount(t_win *win);
@@ -326,10 +335,10 @@ t_sp_cast   *sprite_cast_init(t_win *win);
 t_sp_cast   *get_sprite_pos(t_win *win);
 void        sort_sprite(t_win *win, t_sp_cast *sp_cast);
 void        sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
-void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
-void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
-void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast);
-void        paint_pixel(t_win *win, t_sp_cast *sp_cast);
+void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i);
+void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i);
+void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i);
+void        paint_pixel(t_win *win, t_sp_cast *sp_cast, int i);
 int         sprite_casting(t_win *win, t_ray_cast *ray);
 
 /*
@@ -359,6 +368,7 @@ void    step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);
 void    wall_hit(t_ray_cast *ray, t_win *win);
 void    perpwalldist_and_heightline(t_camera *cam ,t_ray_cast *ray, t_win *win);
 int     ray_casting(t_win *win);
+void    touch_sprite(t_win *win); // add monster
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER
@@ -378,6 +388,8 @@ void    move_d(t_win *win);
 */
 void    turn_left(t_win *win);
 void    turn_right(t_win *win);
+void    turn_up(t_win *win); // bonus
+void    turn_down(t_win *win); // bonus
 
 /*
 ** ENGINE - MAPPING

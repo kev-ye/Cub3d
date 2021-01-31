@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:08:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 19:34:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    sprite_projection(t_win *win, t_sp_cast *sp_cast, int i)
                             (1 + sp_cast->transform_x / sp_cast->transform_y));
 }
 
-void    sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
+void    sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i)
 {
     sp_cast->sprite_height = abs((int)(win->height / (sp_cast->transform_y)));
     sp_cast->draw_start_y = -sp_cast->sprite_height / 2 + win->height / 2 * win->camera->cam_height;
@@ -74,17 +74,27 @@ void    sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
     if (sp_cast->draw_end_x >= win->width)
         sp_cast->draw_end_x = win->width - 1;
     sp_cast->stripe = sp_cast->draw_start_x;
-    sprite_drawing(win, sp_cast, ray);
+    sprite_drawing(win, sp_cast, ray, i);
 }
 
-void    sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
+void    sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i)
 {
     while (sp_cast->stripe < sp_cast->draw_end_x)
     {
-        sp_cast->tex_x = (int)((256 * (sp_cast->stripe
-                        - (-sp_cast->sprite_width / 2
-                        + sp_cast->sprite_screen_x))
-                        * win->sprite->width / sp_cast->sprite_width) / 256);
+        if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '2')
+        {
+            sp_cast->tex_x = (int)((256 * (sp_cast->stripe
+                            - (-sp_cast->sprite_width / 2
+                            + sp_cast->sprite_screen_x))
+                            * win->sprite[0]->width / sp_cast->sprite_width) / 256);
+        }
+        if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '4')
+        {
+            sp_cast->tex_x = (int)((256 * (sp_cast->stripe
+                            - (-sp_cast->sprite_width / 2
+                            + sp_cast->sprite_screen_x))
+                            * win->sprite[1]->width / sp_cast->sprite_width) / 256);
+        }
         if (sp_cast->transform_y > 0 && sp_cast->stripe > 0
             && sp_cast->stripe < win->width
             && sp_cast->transform_y < ray->zbuffer[sp_cast->stripe])
@@ -92,9 +102,9 @@ void    sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
             sp_cast->y = sp_cast->draw_start_y;
             while (sp_cast->y < sp_cast->draw_end_y)
             {
-                pixel_put_sprite(win, sp_cast);
+                pixel_put_sprite(win, sp_cast, i);
                 if ((sp_cast->color & 0x00FFFFFF) != 0)
-                    paint_pixel(win, sp_cast);
+                    paint_pixel(win, sp_cast, i);
                 sp_cast->y++;
             }
         }
@@ -114,7 +124,7 @@ int    sprite_casting(t_win *win, t_ray_cast *ray)
     while (i < sp_cast->sp_amount)
     {
         sprite_projection(win, sp_cast, i);
-        sprite_draw(win, sp_cast, ray);
+        sprite_draw(win, sp_cast, ray, i);
         i++;
     }
     free(sp_cast);

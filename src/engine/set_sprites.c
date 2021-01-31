@@ -6,34 +6,11 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:23:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 14:13:12 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 19:55:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int     set_sprites(
-    t_win *win,
-    const char *path)
-{
-    if (!(win->sprite->img_ptr = mlx_xpm_file_to_image(win->mlx_ptr,
-                                    (char *)path, &win->sprite->width,
-                                    &win->sprite->height)))
-        return (0);
-    win->sprite->addr = mlx_get_data_addr(win->sprite->img_ptr,
-                    &win->sprite->bpp, &win->sprite->line_len,
-                    &win->sprite->endian);
-    return (1);
-}
-
-int     load_sprites(t_win *win)
-{
-    int sprite;
-
-    if (!(sprite = set_sprites(win, win->desc_info->path_s)))
-        return (0);
-    return (1);
-}
 
 int get_sprite_amount(t_win *win)
 {
@@ -48,7 +25,7 @@ int get_sprite_amount(t_win *win)
         x = -1;
         while (++x < win->desc_info->map_x)
         {
-            if (win->desc_info->map[y][x] == '2')
+            if (win->desc_info->map[y][x] == '2' || win->desc_info->map[y][x] == '4')
                 ++count;
         }
     }
@@ -70,14 +47,46 @@ t_sp_cast *sprite_cast_init(t_win *win)
     ft_bzero(sp_cast, sizeof(t_sp_cast));
     sp_cast->sp_amount = count;
     sp_cast->sprite = sprite;
+    win->sp_amount = count;
     return (sp_cast);
+}
+
+int     set_sprites(
+    t_win *win,
+    const char *path,
+    int index)
+{
+    if (!(win->sprite[index]->img_ptr = mlx_xpm_file_to_image(win->mlx_ptr,
+                                    (char *)path, &win->sprite[index]->width,
+                                    &win->sprite[index]->height)))
+        return (0);
+    win->sprite[index]->addr = mlx_get_data_addr(win->sprite[index]->img_ptr,
+                    &win->sprite[index]->bpp, &win->sprite[index]->line_len,
+                    &win->sprite[index]->endian);
+    return (1);
+}
+
+int     load_sprites(t_win *win)
+{
+    int sprite;
+
+    if (!(sprite = set_sprites(win, win->desc_info->path_s, 0)))
+        return (0);
+    if (!(sprite = set_sprites(win, win->desc_info->path_m, 1)))
+        return (0);
+    return (1);
 }
 
 int init_sprite(t_win *win)
 {
-    if (!(win->sprite = malloc(sizeof(t_img))))
+    if (!(win->sprite = malloc(sizeof(t_img *) * 2)))
         return (0);
-    ft_bzero(win->sprite, sizeof(t_img));
+    if (!(win->sprite[0] = malloc(sizeof(t_img))))
+        return (0);
+    if (!(win->sprite[1] = malloc(sizeof(t_img))))
+        return (0);
+    ft_bzero(win->sprite[0], sizeof(t_img));
+    ft_bzero(win->sprite[1], sizeof(t_img));
     if (!(load_sprites(win)))
         return (0);
     return (1);

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 12:33:43 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 19:53:28 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,8 +275,9 @@ typedef struct      s_win
     t_key       *key_code;
     t_img       *img;
     t_img       **texture;
-    t_img       *sprite;
-    t_img       *monster; // add monster
+    // t_img       *sprite;
+    t_img       **sprite; // add monster
+    int         sp_amount;
 }                   t_win;
 
 /*
@@ -325,7 +326,8 @@ int     init_tex(t_win *win);
 ** Get current color from the texture (sprite_drawing + pixel_put_sprite).
 ** Paint pixel if it isn't the invisible color(sprite_drawing + paint_pixel).
 */
-int         set_sprites(t_win *win, const char *path);
+//int         set_sprites(t_win *win, const char *path);
+int         set_sprites(t_win *win, const char *path, int index); // add monster
 int         load_sprites(t_win *win);
 int         init_sprite(t_win *win);
 int         get_sprite_amount(t_win *win);
@@ -333,28 +335,11 @@ t_sp_cast   *sprite_cast_init(t_win *win);
 t_sp_cast   *get_sprite_pos(t_win *win);
 void        sort_sprite(t_win *win, t_sp_cast *sp_cast);
 void        sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
-void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
-void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray);
-void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast);
-void        paint_pixel(t_win *win, t_sp_cast *sp_cast);
+void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i);
+void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i);
+void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i);
+void        paint_pixel(t_win *win, t_sp_cast *sp_cast, int i);
 int         sprite_casting(t_win *win, t_ray_cast *ray);
-
-/*
-** ENGINE - MONSTER CASTING
-*/
-int         init_monster(t_win *win);
-int         load_monster(t_win *win);
-int         set_monster(t_win *win, const char *path);
-int         get_monster_amount(t_win *win);
-t_sp_cast   *monster_cast_init(t_win *win);
-void        pixel_put_monster(t_win *win, t_sp_cast *ms_cast);
-void        paint_pixel_m(t_win *win, t_sp_cast *ms_cast);
-int         monster_casting(t_win *win, t_ray_cast *ray);
-t_sp_cast   *get_monster_pos(t_win *win);
-void        sort_monster(t_win *win, t_sp_cast *ms_cast);
-void        monster_projection(t_win *win, t_sp_cast *ms_cast, int i);
-void        monster_draw(t_win *win, t_sp_cast *ms_cast, t_ray_cast *ray);
-void        monster_drawing(t_win *win, t_sp_cast *ms_cast, t_ray_cast *ray);
 
 /*
 ** ENGINE - RAY CASTING
@@ -383,6 +368,7 @@ void    step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);
 void    wall_hit(t_ray_cast *ray, t_win *win);
 void    perpwalldist_and_heightline(t_camera *cam ,t_ray_cast *ray, t_win *win);
 int     ray_casting(t_win *win);
+void    touch_sprite(t_win *win, t_ray_cast *ray); // add monster
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER

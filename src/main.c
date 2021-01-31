@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 12:34:07 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 18:57:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int ac, char **av)
 
     check_ac(ac);
     if (!(win = init_mlx_win(av[1])) || !(init_key(win)) ||
-          !(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)) || !(init_monster(win))) // add monster
+          !(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)))
         msg_error(win, "Error : Malloc/mlx error");
     if (ac == 3)
     {

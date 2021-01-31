@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:51:14 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 12:57:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 18:26:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int check_map_y2(char **map, int y, int x, int get_wall)
             get_wall++;
             break;
         }
-        if (map[y][x] != '0' && map[y][x] != '2')
+        if (map[y][x] != '0' && map[y][x] != '2' && map[y][x] != '4') // add monster
             return (0);
         --y;
     }
@@ -46,7 +46,7 @@ int check_map_y(char **map, int y, int x, int len_y_max)
             get_wall++;
             break;
         }
-        if (map[y][x] != '0' && map[y][x] != '2')
+        if (map[y][x] != '0' && map[y][x] != '2' && map[y][x] != '4') // add monster
             return (0);
         ++y;
     }

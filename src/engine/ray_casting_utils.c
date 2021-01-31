@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 11:34:11 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 19:51:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,10 @@ void    perpwalldist_and_heightline(
                         * win->camera->cam_height));
     if (ray->draw_end >= win->height)
         ray->draw_end = win->height - 1;
+}
+
+void    touch_sprite(t_win *win, t_ray_cast *ray)
+{
+    if (win->desc_info->map[(int)win->camera->pos_y][(int)win->camera->pos_x] == '4')
+        win->desc_info->map[(int)win->camera->pos_y][(int)win->camera->pos_x] = '0';
 }

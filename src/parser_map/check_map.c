@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:51:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/21 17:30:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/01/31 18:24:03 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int check_map(char **map, int len_y_max)
         check_x = 0;
         while (check_x >= 0 && map[check_y][check_x])
         {
-            if (map[check_y][check_x] == '0' || map[check_y][check_x] == '2')
+            if (map[check_y][check_x] == '0' || map[check_y][check_x] == '2' || map[check_y][check_x] == '4') // add monster
             {
                 resu_x = check_map_x(map, check_y, check_x);
                 resu_y = check_map_y(map, check_y, check_x, len_y_max);
             }
-            if ((map[check_y][check_x] == '0' || map[check_y][check_x] == '2') && (!resu_x || !resu_y))
+            if ((map[check_y][check_x] == '0' || map[check_y][check_x] == '2' || map[check_y][check_x] == '4') && (!resu_x || !resu_y)) // add monster
                 return (0);
             ++check_x;
         }

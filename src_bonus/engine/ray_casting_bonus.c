@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:16:39 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/01 12:36:42 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int ray_casting(t_win *win)
     }
     if (!(sprite_casting(win, ray)))
         return (0);
-    touch_sprite(win); // add monster
+    touch_sprite(win);
     if (!win->save)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);
+    life_bar(win);
     free(ray->zbuffer);
     free(ray);
     return (1);

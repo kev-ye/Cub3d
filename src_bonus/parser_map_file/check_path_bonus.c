@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:17:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:17:29 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/01 12:09:51 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int check_path(t_desc_info *desc_info)
         return (0);
     if (!(check_path_name(desc_info->path_s, &fd)))
         return (0);
-    if (!(check_path_name(desc_info->path_m, &fd))) // add monster
+    if (!(check_path_name(desc_info->path_b, &fd)))
+        return (0);
+    if (!(check_path_name(desc_info->path_l, &fd)))
         return (0);
     return (1);
 }

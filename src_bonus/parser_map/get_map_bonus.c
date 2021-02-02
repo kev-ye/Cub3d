@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:17:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 09:50:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int map_line(char *line)
         return (0);
     while (line[i])
     {
-        if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2' || line[i] == '4'
-            || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')  // add monster
+        if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2' || line[i] == '3' || line[i] == '4'
+            || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
             ++i;
         else
             return (0);

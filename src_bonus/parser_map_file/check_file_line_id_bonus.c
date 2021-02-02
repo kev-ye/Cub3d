@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:11:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/01 12:13:03 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 09:44:23 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static int check_file_line_info_done(t_desc desc)
 {
     if (desc.r == 0 || desc.no == 0 || desc.so == 0 || desc.we == 0 ||
-        desc.ea == 0 || desc.s == 0 || desc.f == 0 || desc.c == 0 || desc.b == 0 || desc.l == 0)
+        desc.ea == 0 || desc.s == 0 || desc.f == 0 || desc.c == 0 || desc.b == 0 || desc.l == 0 || desc.m == 0)
         return (1);
     else if (desc.r == 1 && desc.no == 1 && desc.so == 1 && desc.we == 1 &&
-        desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1 && desc.b == 1 && desc.l == 1)
+        desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1 && desc.b == 1 && desc.l == 1 && desc.m == 1)
         return (1);
     return (0);
 }
@@ -85,6 +85,12 @@ static int check_file_line_info(char *line, int i, t_desc *desc, t_desc_info *de
             return (0);
         desc->l++;
     }
+    else if (line[i] == 'M' && line[i + 1] == ' ')
+    {
+        if (!(get_path(line, desc_info)))
+            return (0);
+        desc->m++;
+    }
     else
         return (0);
     return (1);
@@ -101,7 +107,7 @@ int check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
     {
         if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
                 line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
-                line[i] == 'C' || line[i] == 'B' || line[i] == 'L')
+                line[i] == 'C' || line[i] == 'B' || line[i] == 'L' || line[i] == 'M')
         {
             if (check_file_line_info(line, i, desc, desc_info)
                 && check_file_line_info_done(*desc))

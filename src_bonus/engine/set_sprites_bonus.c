@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:23:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/01 12:11:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 10:08:38 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int get_sprite_amount(t_win *win)
         x = -1;
         while (++x < win->desc_info->map_x)
         {
-            if (win->desc_info->map[y][x] == '2' || win->desc_info->map[y][x] == '4')
+            if (win->desc_info->map[y][x] == '2' || win->desc_info->map[y][x] == '3' || win->desc_info->map[y][x] == '4')
                 ++count;
         }
     }
@@ -47,7 +47,6 @@ t_sp_cast *sprite_cast_init(t_win *win)
     ft_bzero(sp_cast, sizeof(t_sp_cast));
     sp_cast->sp_amount = count;
     sp_cast->sprite = sprite;
-    win->sp_amount = count;
     return (sp_cast);
 }
 
@@ -68,25 +67,28 @@ int     set_sprites(
 
 int     load_sprites(t_win *win)
 {
-    int sprite;
-
-    if (!(sprite = set_sprites(win, win->desc_info->path_s, 0)))
+    if (!(set_sprites(win, win->desc_info->path_s, 0)))
         return (0);
-    if (!(sprite = set_sprites(win, win->desc_info->path_b, 1)))
+    if (!(set_sprites(win, win->desc_info->path_b, 1)))
+        return (0);
+    if (!(set_sprites(win, win->desc_info->path_m, 2)))
         return (0);
     return (1);
 }
 
 int init_sprite(t_win *win)
 {
-    if (!(win->sprite = malloc(sizeof(t_img *) * 2)))
+    if (!(win->sprite = malloc(sizeof(t_img *) * 3)))
         return (0);
     if (!(win->sprite[0] = malloc(sizeof(t_img))))
         return (0);
     if (!(win->sprite[1] = malloc(sizeof(t_img))))
         return (0);
+    if (!(win->sprite[2] = malloc(sizeof(t_img))))
+        return (0);
     ft_bzero(win->sprite[0], sizeof(t_img));
     ft_bzero(win->sprite[1], sizeof(t_img));
+    ft_bzero(win->sprite[2], sizeof(t_img));
     if (!(load_sprites(win)))
         return (0);
     return (1);

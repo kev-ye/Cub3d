@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 09:52:20 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:16:47 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 10:14:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int init_camera(t_win *win)
     win->camera->rot_speed = 0.06;
     win->camera->speed = 0.06;
     win->camera->cam_height = 1.0;
+    win->player_life = 1.0;
     return (1);
 }

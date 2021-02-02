@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:04:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/01 12:10:24 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 09:43:48 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static int get_path_2(char **s, t_desc_info **desc_info)
     else if (!ft_strcmp(s[0], "L"))
     {
         (*desc_info)->path_l = ft_strdup(s[1]);
+        return (1);
+    }
+    else if (!ft_strcmp(s[0], "M"))
+    {
+        (*desc_info)->path_m = ft_strdup(s[1]);
         return (1);
     }
     return (0);

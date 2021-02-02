@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:57:11 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/01 12:10:45 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 09:21:29 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_desc_info *init_desc_info()
     new_info->path_we = NULL;
     new_info->path_ea = NULL;
     new_info->path_s = NULL;
+    new_info->path_m = NULL;
     new_info->path_b = NULL;
     new_info->path_l = NULL;
     new_info->color_f = -1;

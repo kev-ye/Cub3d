@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/01 14:19:32 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 10:35:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct      s_desc
     int s;
     int f;
     int c;
+    int m;
     int b;
     int l;
 }                   t_desc;
@@ -223,6 +224,7 @@ typedef struct       s_desc_info
     char *path_we;
     char *path_ea;
     char *path_s;
+    char *path_m;
     char *path_b;
     char *path_l;
 }                   t_desc_info;
@@ -277,10 +279,9 @@ typedef struct      s_win
     t_key       *key_code;
     t_img       *img;
     t_img       **texture;
-    // t_img       *sprite;
-    t_img       **sprite; // add monster
-    int         sp_amount;
+    t_img       **sprite;
     t_img       *life;
+    double      player_life;
 }                   t_win;
 
 /*
@@ -329,8 +330,7 @@ int     init_tex(t_win *win);
 ** Get current color from the texture (sprite_drawing + pixel_put_sprite).
 ** Paint pixel if it isn't the invisible color(sprite_drawing + paint_pixel).
 */
-//int         set_sprites(t_win *win, const char *path);
-int         set_sprites(t_win *win, const char *path, int index); // add monster
+int         set_sprites(t_win *win, const char *path, int index);
 int         load_sprites(t_win *win);
 int         init_sprite(t_win *win);
 int         get_sprite_amount(t_win *win);
@@ -371,12 +371,11 @@ void    step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);
 void    wall_hit(t_ray_cast *ray, t_win *win);
 void    perpwalldist_and_heightline(t_camera *cam ,t_ray_cast *ray, t_win *win);
 int     ray_casting(t_win *win);
-void    touch_sprite(t_win *win);
 
 /*
 ** ENGINE - LIFE BAR
 */
-int    set_life(t_win *win, const char *path);
+int    set_life_img(t_win *win, const char *path);
 int    life_bar(t_win *win);
 
 /*

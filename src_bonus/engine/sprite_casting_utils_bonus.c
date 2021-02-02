@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:51:29 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/01 14:31:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 09:51:53 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_sp_cast *get_sprite_pos(t_win *win)
         x = -1;
         while (++x < win->desc_info->map_x)
         {
-            if (win->desc_info->map[y][x] == '2' || win->desc_info->map[y][x] == '4')
+            if (win->desc_info->map[y][x] == '2' || win->desc_info->map[y][x] == '3'|| win->desc_info->map[y][x] == '4')
             {
                 sp_cast->sprite[count].x = x;
                 sp_cast->sprite[count].y = y;
@@ -50,6 +50,15 @@ void    pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i)
                     * win->sprite[0]->line_len + sp_cast->tex_x * win->sprite[0]->bpp / 8,
                     sizeof(unsigned int));
     }
+    if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '3')
+    {
+        sp_cast->tex_y = (((sp_cast->y * 256 - win->height * win->camera->cam_height * 128
+                            + sp_cast->sprite_height * 128)
+                            * win->sprite[2]->height) / sp_cast->sprite_height) / 256;
+        ft_memcpy(&sp_cast->color, win->sprite[2]->addr + sp_cast->tex_y
+                    * win->sprite[2]->line_len + sp_cast->tex_x * win->sprite[2]->bpp / 8,
+                    sizeof(unsigned int));
+    }
     if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '4')
     {
         sp_cast->tex_y = (((sp_cast->y * 256 - win->height * win->camera->cam_height * 128
@@ -68,6 +77,11 @@ void    paint_pixel(t_win *win, t_sp_cast *sp_cast, int i)
                     + sp_cast->stripe * win->img->bpp / 8, win->sprite[0]->addr
                     + sp_cast->tex_y * win->sprite[0]->line_len + sp_cast->tex_x
                     * win->sprite[0]->bpp / 8, sizeof(unsigned int));
+    if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '3')
+        ft_memcpy(win->img->addr + sp_cast->y * win->img->line_len
+                    + sp_cast->stripe * win->img->bpp / 8, win->sprite[2]->addr
+                    + sp_cast->tex_y * win->sprite[2]->line_len + sp_cast->tex_x
+                    * win->sprite[2]->bpp / 8, sizeof(unsigned int));
     if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '4')
         ft_memcpy(win->img->addr + sp_cast->y * win->img->line_len
                     + sp_cast->stripe * win->img->bpp / 8, win->sprite[1]->addr

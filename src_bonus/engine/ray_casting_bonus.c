@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 10:53:21 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:51:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,15 @@ int ray_casting(t_win *win)
         return (0);
     touch_sprite(win);
     life_bar(win);
+    gun(win);
+    sight(win);
     if (!win->save)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);
+    put_hud(win);
     free(ray->zbuffer);
     free(ray);
+    if (win->player_life < 0.0)
+        shut_down(win);
     return (1);
 }

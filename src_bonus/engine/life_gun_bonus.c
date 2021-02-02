@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   life_bar.c                                         :+:      :+:    :+:   */
+/*   life_gun_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 10:17:59 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 10:58:45 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:35:23 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@ int    set_life_img(t_win *win, const char *path)
     return (1);
 }
 
-void    ft_pixel_put(
+int    set_gun_img(t_win *win, const char *path)
+{
+    if (!(win->gun = malloc(sizeof(t_img))))
+        return (0);
+    ft_bzero(win->gun, sizeof(t_img));
+    if (!(win->gun->img_ptr = mlx_xpm_file_to_image(win->mlx_ptr, (char *)path, &win->gun->width, &win->gun->height)))
+        return (0);
+    win->gun->addr = mlx_get_data_addr(win->gun->img_ptr, &win->gun->bpp, &win->gun->line_len, &win->gun->endian);
+    return (1);
+}
+
+void    pixel_put_win(
     t_win *win,
     int x,
     int y,
@@ -51,7 +62,30 @@ int    life_bar(t_win *win)
             color = *(unsigned int *)(win->life->addr +
                     (y * win->life->line_len) + (x * (win->life->bpp / 8)));
             if (x < win->player_life * win->life->width && color != 0x000000FF)
-                ft_pixel_put(win, x, win->height - win->life->height + y, color);
+                pixel_put_win(win, x, win->height - win->life->height + y, color);
+            ++y;
+        }
+        ++x;
+    }
+    return (1);
+}
+
+int    gun(t_win *win)
+{
+    unsigned int    color;
+    int x;
+    int y;
+
+    x = 0;
+    while (x < win->gun->width)
+    {
+        y = 0;
+        while (y < win->gun->height)
+        {
+            color = *(unsigned int *)(win->gun->addr +
+                    (y * win->gun->line_len) + (x * (win->gun->bpp / 8)));
+            if (color != 0x00981F88)
+                pixel_put_win(win, (win->width  - win->gun->width) / 2 + x, win->height - win->gun->height + y, color);
             ++y;
         }
         ++x;

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 19:04:13 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:17:02 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 16:01:46 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int event_key_press(int keycode, t_win *win)
         win->key_code->key_up = 1;
     else if (keycode == KEY_CODE_DOWN && win->key_code->key_down == 0)
         win->key_code->key_down = 1;
+    else if (keycode == KEY_CODE_SPACE && win->key_code->key_space == 0) // add
+        win->key_code->key_space = 1;
     return (1);
 }
 
@@ -55,6 +57,8 @@ int event_key_release(int keycode, t_win *win)
         win->key_code->key_up = 0;
     else if (keycode == KEY_CODE_DOWN && win->key_code->key_down == 1)
         win->key_code->key_down = 0;
+    else if (keycode == KEY_CODE_SPACE && win->key_code->key_space == 1) // add
+        win->key_code->key_space = 0;
     return (1);
 }
 
@@ -76,6 +80,8 @@ int event_key(t_win *win)
         turn_up(win);
     if (win->key_code->key_down == 1)
         turn_down(win);
+    if (win->key_code->key_space == 1)
+        kill_monster(win);
     return (1);
 }
 
@@ -92,5 +98,6 @@ int init_key(t_win *win)
     win->key_code->key_right = 0;
     win->key_code->key_up = 0;
     win->key_code->key_down = 0;
+    win->key_code->key_space = 0;
     return (1);    
 }

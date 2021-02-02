@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:16:25 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 09:20:34 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 15:39:00 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int check_map_ready(t_desc desc)
 {
     if (desc.r == 1 && desc.no == 1 && desc.so == 1 && desc.we == 1 &&
-        desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1 && desc.b == 1 && desc.l == 1 && desc.m == 1)
+        desc.ea == 1 && desc.s == 1 && desc.f == 1 && desc.c == 1 && desc.b == 1 && desc.l == 1 && desc.m == 1 && desc.g == 1 && desc.v == 1)
     {
         return (1);
     }

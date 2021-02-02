@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 10:35:47 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/02 16:00:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #  define KEY_CODE_UP 126
 #  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
+#  define KEY_CODE_SPACE 49
 #else
 #  define KEY_CODE_ESC 65307
 #  define KEY_CODE_W 119
@@ -61,11 +62,22 @@
 /*
 ** COLOR CODE
 */
-#define RED 0xFF0000
-#define GREEN 0x00FF00
-#define BLUE 0x0000FF
-#define YELLOW 0xFFFF00
-#define WHITE 0xFFFFFF
+#define RED 0xF00F0000
+#define GREEN 0x0000FF00
+#define BLUE 0x000000FF
+#define YELLOW 0x00FFFF00
+#define WHITE 0x00FFFFFF
+
+/*
+** MSG HUD
+*/
+#define MSG1 
+#define MSG2 "W S A D : MOVE"
+#define MSG3 "^ v < > : CAMERA"
+#define MSG4
+#define MSG5
+#define MSG6
+#define MSG7
 
 /*
 ** STRUCT - CAMERA / PLAYER
@@ -158,6 +170,7 @@ typedef struct      s_key
     int     key_right;
     int     key_up;
     int     key_down;
+    int     key_space;
 }                   t_key;
 
 /*
@@ -195,6 +208,8 @@ typedef struct      s_desc
     int m;
     int b;
     int l;
+    int g;
+    int v;
 }                   t_desc;
 
 /*
@@ -227,6 +242,8 @@ typedef struct       s_desc_info
     char *path_m;
     char *path_b;
     char *path_l;
+    char *path_g;
+    char *path_v;
 }                   t_desc_info;
 
 /*
@@ -281,7 +298,12 @@ typedef struct      s_win
     t_img       **texture;
     t_img       **sprite;
     t_img       *life;
+    t_img       *gun;
+    t_img       *sight;
     double      player_life;
+    int         monster;
+    int         monster_x;
+    int         monster_y;
 }                   t_win;
 
 /*
@@ -292,7 +314,7 @@ void    pixel_put_color(t_img *img, int x, int y, unsigned int color);
 void    vertical_line_color(t_line *line, t_win *win, unsigned int color);
 void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_ray_cast *ray);
 void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_ray_cast *ray);
-
+void    pixel_put_win(t_win *win, int x, int y, unsigned int color);
 /*
 ** ENGINE - TEXTURE
 */
@@ -377,6 +399,23 @@ int     ray_casting(t_win *win);
 */
 int    set_life_img(t_win *win, const char *path);
 int    life_bar(t_win *win);
+
+/*
+** ENGINE - GUN
+*/
+int    set_gun_img(t_win *win, const char *path);
+int    gun(t_win *win);
+
+/*
+** ENGINE - sight
+*/
+int    set_sight_img(t_win *win, const char *path);
+int    sight(t_win *win);
+
+/*
+** ENGINE - KILL MONSTER
+*/
+void    kill_monster(t_win *win);
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER
@@ -467,5 +506,6 @@ void    free_desc_info(t_desc_info *desc_info);
 void    free_win(t_win *win);
 void    shut_down(t_win *win);
 void    make_bmp(t_win *win);
+void    put_hud(t_win *win);
 
 #endif

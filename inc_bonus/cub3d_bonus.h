@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 16:00:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/03 15:54:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 #  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
 #  define KEY_CODE_SPACE 49
+#  define KEY_CODE_H 4
 #else
 #  define KEY_CODE_ESC 65307
 #  define KEY_CODE_W 119
@@ -71,13 +72,12 @@
 /*
 ** MSG HUD
 */
-#define MSG1 
-#define MSG2 "W S A D : MOVE"
-#define MSG3 "^ v < > : CAMERA"
-#define MSG4
-#define MSG5
-#define MSG6
-#define MSG7
+#define MSG1 "PRESS ESC     : QUIT GAME"
+#define MSG2 "PRESS W S A D : MOVE"
+#define MSG3 "PRESS ^ v < > : CAMERA"
+#define MSG4 "WINDOW WIDTH  : "
+#define MSG5 "WINDOW HEIGHT : "
+#define MSG6 "PRESS H       : CLOSE HUD"
 
 /*
 ** STRUCT - CAMERA / PLAYER
@@ -171,6 +171,7 @@ typedef struct      s_key
     int     key_up;
     int     key_down;
     int     key_space;
+    int     key_h;
 }                   t_key;
 
 /*
@@ -209,7 +210,6 @@ typedef struct      s_desc
     int b;
     int l;
     int g;
-    int v;
 }                   t_desc;
 
 /*
@@ -243,7 +243,6 @@ typedef struct       s_desc_info
     char *path_b;
     char *path_l;
     char *path_g;
-    char *path_v;
 }                   t_desc_info;
 
 /*
@@ -299,11 +298,8 @@ typedef struct      s_win
     t_img       **sprite;
     t_img       *life;
     t_img       *gun;
-    t_img       *sight;
+    int         hud;
     double      player_life;
-    int         monster;
-    int         monster_x;
-    int         monster_y;
 }                   t_win;
 
 /*
@@ -407,15 +403,11 @@ int    set_gun_img(t_win *win, const char *path);
 int    gun(t_win *win);
 
 /*
-** ENGINE - sight
+** ENGINE - SOUND
 */
-int    set_sight_img(t_win *win, const char *path);
-int    sight(t_win *win);
-
-/*
-** ENGINE - KILL MONSTER
-*/
-void    kill_monster(t_win *win);
+void    game_sound();
+void    effect_sound_h();
+void    effect_sound_m();
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER

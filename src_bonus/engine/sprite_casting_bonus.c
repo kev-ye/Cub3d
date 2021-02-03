@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 10:09:12 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/03 15:56:41 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ void    sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i)
                     if ((sp_cast->color & 0x00FFFFFF) != 0)
                         paint_pixel(win, sp_cast, i);
                 if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '3')
+                {
                     if ((sp_cast->color & 0x00FCFCFC) != 0x00FCFCFC)
                         paint_pixel(win, sp_cast, i);
+                }
                 if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '4')
                     if ((sp_cast->color & 0x000000FF) != 0x000000FF)
                         paint_pixel(win, sp_cast, i);

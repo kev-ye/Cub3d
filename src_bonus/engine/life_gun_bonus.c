@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 10:17:59 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 15:35:23 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/03 12:32:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int    gun(t_win *win)
         {
             color = *(unsigned int *)(win->gun->addr +
                     (y * win->gun->line_len) + (x * (win->gun->bpp / 8)));
-            if (color != 0x00981F88)
+            if (color != 0x0)
                 pixel_put_win(win, (win->width  - win->gun->width) / 2 + x, win->height - win->gun->height + y, color);
             ++y;
         }

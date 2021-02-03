@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 16:06:08 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/03 12:01:12 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,6 @@ void    wall_hit(
         }
         if (win->desc_info->map[ray->map_y][ray->map_x] == '1')
             ray->hit = 1;
-        if (win->desc_info->map[ray->map_y][ray->map_x] == '3')
-        {
-            // win->monster = 1;
-            // win->monster_x = ray->map_x;
-            // win->monster_y = ray->map_y;
-            win->desc_info->map[ray->map_y][ray->map_x] = '0';
-        }
-        else
-            win->monster = 0;
     }
 }
 

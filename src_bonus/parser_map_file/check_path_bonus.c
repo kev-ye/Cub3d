@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:17:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 15:39:08 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/03 12:42:31 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int check_path(t_desc_info *desc_info)
     if (!(check_path_name(desc_info->path_m, &fd)))
         return (0);
     if (!(check_path_name(desc_info->path_g, &fd)))
-        return (0);
-    if (!(check_path_name(desc_info->path_v, &fd)))
         return (0);
     return (1);
 }

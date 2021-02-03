@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/02 15:51:33 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/03 15:54:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ static void    touch_sprite(t_win *win)
 {
     if (win->desc_info->map[(int)win->camera->pos_y][(int)win->camera->pos_x] == '4')
     {
+        effect_sound_h();
         win->desc_info->map[(int)win->camera->pos_y][(int)win->camera->pos_x] = '0';
         if (win->player_life < 1.0)
             win->player_life += 0.33;
+        
     }
     if (win->desc_info->map[(int)win->camera->pos_y][(int)win->camera->pos_x] == '3')
     {
+        effect_sound_m();
         win->desc_info->map[(int)win->camera->pos_y][(int)win->camera->pos_x] = '0';
         if (win->player_life > 0.0)
             win->player_life -= 0.33;
@@ -48,7 +51,7 @@ int ray_casting(t_win *win)
     t_ray_cast *ray;
     
     if (!(ray = malloc(sizeof(t_ray_cast))))
-        return (0);
+        return (0); 
     ft_bzero(ray, sizeof(t_ray_cast));
     if (!(ray->zbuffer = malloc(sizeof(double) * win->width)))
         return (0);
@@ -63,7 +66,6 @@ int ray_casting(t_win *win)
     touch_sprite(win);
     life_bar(win);
     gun(win);
-    sight(win);
     if (!win->save)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);

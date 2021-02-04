@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:44:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 15:36:46 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 15:50:34 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    game_sound()
 {
-    system(SOUND" ./src_bonus/game_music/game_sound.mp3&");
+    system(SOUND" ./src_bonus/game_music/game_sound.wav&");
 }
 
 void    effect_sound_h()

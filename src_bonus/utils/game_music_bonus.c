@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:44:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 10:07:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 11:54:01 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void    game_sound()
 {
-    system("afplay ./src_bonus/game_music/game_sound.mp3&");
+    system(SOUND" ./src_bonus/game_music/game_sound.mp3&");
 }
 
 void    effect_sound_h()
 {
-    system("afplay ./src_bonus/game_music/health_sound.wav&");
+    system(SOUND" ./src_bonus/game_music/health_sound.wav&");
 }
 
 void    effect_sound_m()
 {
-    system("afplay ./src_bonus/game_music/monster_sound.wav&");
+    system(SOUND" ./src_bonus/game_music/monster_sound.wav&");
 }
 
 void    play_game_sound(t_win *win)

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 15:54:58 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 11:25:12 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ static void     ray_casting_regroup(
     ray->zbuffer[ray->pix] = ray->perp_wall_dist;
 }
 
+static void     effect(t_win *win)
+{
+    touch_sprite(win);
+    life_bar(win);
+    gun(win);
+}
+
 int ray_casting(t_win *win)
 {
     t_ray_cast *ray;
@@ -61,11 +68,9 @@ int ray_casting(t_win *win)
         ray_casting_regroup(win, ray);
         ++ray->pix;
     }
+    effect(win);
     if (!(sprite_casting(win, ray)))
         return (0);
-    touch_sprite(win);
-    life_bar(win);
-    gun(win);
     if (!win->save)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);

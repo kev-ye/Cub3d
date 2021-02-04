@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 22:46:13 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 11:41:32 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ typedef struct      s_win
     int         width;
     int         height;
     int         save;
+    t_ray_cast  *ray;
     t_desc_info *desc_info;
     t_camera    *camera;
     t_key       *key_code;

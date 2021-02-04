@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:16:25 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 21:05:29 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 10:42:21 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ int check_no_map(char *line, t_desc *desc)
             || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
         {
             desc->map = 1;
-            return (1);
+            i++;
         }
-        ++i;
+        else
+            return (0);
     }
-    return (0);
+    return (1);
 }
 
 int check_map_norm(char *line)

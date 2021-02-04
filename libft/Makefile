@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/01/22 09:44:42 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/04 10:54:20 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SUB_SRC := ft_strlen.c \
 		   ft_strcpy.c \
 		   ft_strcmp.c \
 		   ft_strnlen.c \
-		   ft_charinstr.c
+		   ft_charinstr.c \
+		   ft_strcat.c
 SRC 	+= $(addprefix string/, $(SUB_SRC))
 SUB_SRC := ft_putchar_fd.c \
 		   ft_putstr_fd.c \

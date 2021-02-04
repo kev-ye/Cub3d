@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:16:25 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 12:42:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 10:44:18 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int check_no_map(char *line, t_desc *desc)
     while (line[i])
     {
         if (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == '2'
-            || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W' || line[i] == '4' || line[i] == '3')
+            || line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+            ||line[i] == 'W' || line[i] == '4' || line[i] == '3')
         {
             desc->map = 1;
-            return (1);
+            i++;
         }
-        ++i;
+        else
+            return (0);
     }
-    return (0);
+    return (1);
 }
 
 int check_map_norm(char *line)

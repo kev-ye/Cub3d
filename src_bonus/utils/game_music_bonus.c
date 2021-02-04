@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:44:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 16:03:07 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 10:07:25 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,21 @@ void    effect_sound_m()
     system("afplay ./src_bonus/game_music/monster_sound.wav&");
 }
 
-void    game_music()
+void    play_game_sound(t_win *win)
 {
-    
+    game_sound();
+    win->sound_begin_time = clock();
+}
+
+void    game_sound_loop(t_win *win)
+{
+    clock_t time;
+
+    time = clock();
+    if (((double)(time - win->sound_begin_time) / CLOCKS_PER_SEC) > 12)
+    {
+        system("killall afplay");
+        game_sound();
+        win->sound_begin_time = time;
+    }
 }

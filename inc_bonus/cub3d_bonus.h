@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 15:54:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 11:12:00 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <mlx.h>
 #include <fcntl.h>
 #include "libft.h"
+#include <time.h>
 
 /*
 ** KEY CODE MACOS / LINUX
@@ -75,9 +76,7 @@
 #define MSG1 "PRESS ESC     : QUIT GAME"
 #define MSG2 "PRESS W S A D : MOVE"
 #define MSG3 "PRESS ^ v < > : CAMERA"
-#define MSG4 "WINDOW WIDTH  : "
-#define MSG5 "WINDOW HEIGHT : "
-#define MSG6 "PRESS H       : CLOSE HUD"
+#define MSG4 "PRESS H       : CLOSE HUD"
 
 /*
 ** STRUCT - CAMERA / PLAYER
@@ -300,6 +299,7 @@ typedef struct      s_win
     t_img       *gun;
     int         hud;
     double      player_life;
+    clock_t     sound_begin_time;
 }                   t_win;
 
 /*
@@ -408,6 +408,8 @@ int    gun(t_win *win);
 void    game_sound();
 void    effect_sound_h();
 void    effect_sound_m();
+void    play_game_sound(t_win *win);
+void    game_sound_loop(t_win *win);
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER
@@ -427,8 +429,8 @@ void    move_d(t_win *win);
 */
 void    turn_left(t_win *win);
 void    turn_right(t_win *win);
-void    turn_up(t_win *win); // bonus
-void    turn_down(t_win *win); // bonus
+void    turn_up(t_win *win);
+void    turn_down(t_win *win);
 
 /*
 ** ENGINE - MAPPING

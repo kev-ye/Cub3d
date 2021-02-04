@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events_bonus.c                                     :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 23:01:56 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 11:25:06 by kaye             ###   ########.fr       */
+/*   Created: 2021/02/04 10:52:32 by kaye              #+#    #+#             */
+/*   Updated: 2021/02/04 10:59:57 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
 
-int    event_loop(t_win *win)
-{
-    if (!(ray_casting(win)))
-        shut_down(win);
-    event_key(win);
-    game_sound_loop(win);
-    return (1);
-}
+/*
+** Append a copy of the null-terminated string s2 to
+** the end of the null-terminated string s1.
+*/
 
-int event_destroy_win(t_win *win)
+char	*ft_strcat(char *dest, const char *src)
 {
-    shut_down(win);
-    return (1);
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (src[j])
+		dest[i++] = src[j++];
+	dest[i] = '\0';
+	return (dest);
 }

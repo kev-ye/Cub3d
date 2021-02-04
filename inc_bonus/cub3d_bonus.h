@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 15:22:51 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 15:36:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 #  define RED_CROSS 17
 #  define KEY_CODE_H 4
 #  define SOUND "afplay"
+#  define KILL_SOUND "killall afplay"
 #else
 #  define KEY_CODE_ESC 65307
 #  define KEY_CODE_W 119
@@ -50,6 +51,7 @@
 #  define RED_CROSS 33
 #  define KEY_CODE_H 104
 #  define SOUND "aplay"
+#  define KILL_SOUND "killall aplay"
 #endif
 
 /*

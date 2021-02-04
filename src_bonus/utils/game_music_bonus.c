@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:44:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 11:54:01 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 15:36:46 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    game_sound_loop(t_win *win)
     time = clock();
     if (((double)(time - win->sound_begin_time) / CLOCKS_PER_SEC) > 12)
     {
-        system("killall afplay");
+        system(KILL_SOUND);
         game_sound();
         win->sound_begin_time = time;
     }

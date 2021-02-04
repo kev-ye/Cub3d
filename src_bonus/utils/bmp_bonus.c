@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:40:36 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 14:54:23 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 15:22:37 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,40 @@ static void load_bar(long long current, long long max)
 static void     bmp_file_header(t_win *win, int fd)
 {
     int size;
+    int get_value;
     
-    write(fd, "BM", 2);
+    get_value = write(fd, "BM", 2);
     size = win->img->bpp * win->img->width * win->img->height + 54 * 8;
     printf("Loading "S_CYAN"%s"S_NONE" ...\n", "save.bmp");
-    write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
     size = 0;
-    write(fd, &size, 2);
-    write(fd, &size, 2);
+    get_value = write(fd, &size, 2);
+    get_value = write(fd, &size, 2);
     size = 54;
-    write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    (void)get_value;
 }
 
 static void     bmp_infomation(t_win *win, int fd)
 {
     int size;
-
+    int get_value;
+    
     size = 40;
-    write(fd, &size, 4);
-    write(fd, &win->img->width, 4);
-    write(fd, &win->img->height, 4);
+    get_value = write(fd, &size, 4);
+    get_value = write(fd, &win->img->width, 4);
+    get_value = write(fd, &win->img->height, 4);
     size = 1;
-    write(fd, &size, 2);
-    write(fd, &win->img->bpp, 2);
+    get_value = write(fd, &size, 2);
+    get_value = write(fd, &win->img->bpp, 2);
     size = 0;
-    write(fd, &size, 4);
-    write(fd, &size, 4);
-    write(fd, &size, 4);
-    write(fd, &size, 4);
-    write(fd, &size, 4);
-    write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    get_value = write(fd, &size, 4);
+    (void)get_value;
 }
 
 static void bmp_data(t_win *win, int fd)
@@ -70,6 +74,7 @@ static void bmp_data(t_win *win, int fd)
     char *ptr;
     int x;
     int y;
+    int get_value;
 
     y = win->img->height;
     while (y--)
@@ -78,10 +83,11 @@ static void bmp_data(t_win *win, int fd)
         while (++x < win->img->width)
         {
             ptr = win->img->addr + (y * win->img->line_len + x * (win->img->bpp / 8));
-            write(fd, &(*(int *)ptr), 4);
+            get_value = write(fd, &(*(int *)ptr), 4);
         }
         load_bar(win->img->height - y, win->img->height);
     }
+    (void)get_value;
 }
 
 void    make_bmp(t_win *win)
@@ -90,7 +96,7 @@ void    make_bmp(t_win *win)
 
     win->save = 1;
     ray_casting(win);
-    if ((fd = open("./save.bmp", O_WRONLY | O_CREAT)) == -1)
+    if ((fd = open("./save.bmp", O_WRONLY | O_CREAT, 0755)) == -1)
         msg_error(win, "Malloc in mode --save\n");
     bmp_file_header(win, fd);
     load_bar(0, win->img->height);

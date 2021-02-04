@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 09:52:20 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/29 13:32:31 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/04 15:26:46 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int init_camera(t_win *win)
     win->camera->pos_x = (double)win->desc_info->player_x + 0.5;
     win->camera->pos_y = (double)win->desc_info->player_y + 0.5;
     win->camera = set_player_dir(win, win->camera);
-    win->camera->rot_speed = 0.06;
-    win->camera->speed = 0.06;
+    win->camera->rot_speed = 0.08;
+    win->camera->speed = 0.10;
     win->camera->cam_height = 1.0;
     return (1);
 }

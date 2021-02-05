@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:51:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/05 11:06:49 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/05 15:59:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,8 @@ int			check_map(char **map, int len_y_max)
 {
 	int check_x;
 	int check_y;
-	int resu_x;
-	int resu_y;
 
 	check_y = 0;
-	resu_x = 0;
-	resu_y = 0;
 	while (check_y < len_y_max)
 	{
 		check_x = 0;

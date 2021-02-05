@@ -6,14 +6,15 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 20:55:23 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/20 18:58:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/05 09:28:14 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** Allocates and returns a string representing int with different base received as an argument.
+** Allocates and returns a string representing int
+** with different base received as an argument.
 */
 
 static int		ft_conv_dh_itoa(int n)

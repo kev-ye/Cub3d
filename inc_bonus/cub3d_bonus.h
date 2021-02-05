@@ -6,20 +6,20 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 15:36:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/05 09:25:28 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
-#define CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <mlx.h>
-#include <fcntl.h>
-#include "libft.h"
-#include <time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include <mlx.h>
+# include <fcntl.h>
+# include "libft.h"
+# include <time.h>
 
 /*
 ** KEY CODE MACOS / LINUX
@@ -38,7 +38,7 @@
 #  define KEY_CODE_H 4
 #  define SOUND "afplay"
 #  define KILL_SOUND "killall afplay"
-#else
+# else
 #  define KEY_CODE_ESC 65307
 #  define KEY_CODE_W 119
 #  define KEY_CODE_S 115
@@ -52,37 +52,37 @@
 #  define KEY_CODE_H 104
 #  define SOUND "aplay"
 #  define KILL_SOUND "killall aplay"
-#endif
+# endif
 
 /*
 ** SHELL PRINT CODE
 */
-#define S_NONE "\033[0m"
-#define S_BLACK "\033[0;30m"
-#define S_RED "\033[0;31m"
-#define S_GREEN "\033[0;32m"
-#define S_YELLOW "\033[0;33m"
-#define S_BLUE "\033[0;34m"
-#define S_PURPLE "\033[0;35m"
-#define S_CYAN "\033[0;36m"
-#define S_CLRLINE "\033[K\r"
+# define S_NONE "\033[0m"
+# define S_BLACK "\033[0;30m"
+# define S_RED "\033[0;31m"
+# define S_GREEN "\033[0;32m"
+# define S_YELLOW "\033[0;33m"
+# define S_BLUE "\033[0;34m"
+# define S_PURPLE "\033[0;35m"
+# define S_CYAN "\033[0;36m"
+# define S_CLRLINE "\033[K\r"
 
 /*
 ** COLOR CODE
 */
-#define RED 0xF00F0000
-#define GREEN 0x0000FF00
-#define BLUE 0x000000FF
-#define YELLOW 0x00FFFF00
-#define WHITE 0x00FFFFFF
+# define RED 0xF00F0000
+# define GREEN 0x0000FF00
+# define BLUE 0x000000FF
+# define YELLOW 0x00FFFF00
+# define WHITE 0x00FFFFFF
 
 /*
 ** MSG HUD
 */
-#define MSG1 "PRESS ESC     : QUIT GAME"
-#define MSG2 "PRESS W S A D : MOVE"
-#define MSG3 "PRESS ^ v < > : CAMERA"
-#define MSG4 "PRESS H       : CLOSE HUD"
+# define MSG1 "PRESS ESC     : QUIT GAME"
+# define MSG2 "PRESS W S A D : MOVE"
+# define MSG3 "PRESS ^ v < > : CAMERA"
+# define MSG4 "PRESS H       : CLOSE HUD"
 
 /*
 ** STRUCT - CAMERA / PLAYER
@@ -91,18 +91,18 @@
 ** Dir_*    : The initial direction vector
 ** Plane_*  : The 2d raycaster version of camera plane
 */
-typedef struct      s_camera
+typedef struct	s_camera
 {
-    double  pos_x;
-    double  pos_y;
-    double  dir_x;
-    double  dir_y;
-    double  plane_x;
-    double  plane_y;
-    double  cam_height;
-    double  speed;
-    double  rot_speed;
-}                   t_camera;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	cam_height;
+	double	speed;
+	double	rot_speed;
+}				t_camera;
 
 /*
 ** STURCT - RAY CASTING
@@ -121,28 +121,28 @@ typedef struct      s_camera
 ** - Side           : North and south or west and east wall hit.
 ** - Line_height    : The height of line to draw on screen.
 */
-typedef struct      s_ray_cast
+typedef struct	s_ray_cast
 {
-    int         pix;
-    double      camera_x;
-    double      ray_dir_x;
-    double      ray_dir_y;
-    int         map_x;
-    int         map_y;
-    double      side_dist_x;
-    double      side_dist_y;
-    double      delta_dist_x;
-    double      delta_dist_y;
-    double      perp_wall_dist;
-    int         step_x;
-    int         step_y;
-    int         hit;
-    int         side;
-    int         line_height;
-    int         draw_start;
-    int         draw_end;
-    double      *zbuffer;
-}                   t_ray_cast;
+	int			pix;
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		*zbuffer;
+}				t_ray_cast;
 
 /*
 ** STRUCT - IMAGE
@@ -151,33 +151,33 @@ typedef struct      s_ray_cast
 ** Line_len : The size of a line.
 ** Endian   : Endian.
 */
-typedef struct      s_img 
+typedef struct	s_img
 {
-    void    *img_ptr;
-    char    *addr;
-    int     bpp;
-    int     line_len;
-    int     endian;
-    int     width;
-    int     height;
-}                   t_img;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}				t_img;
 
 /*
 ** STRUCT - EVENT KEY
 */
-typedef struct      s_key
+typedef struct	s_key
 {
-    int     key_w;
-    int     key_s;
-    int     key_a;
-    int     key_d;
-    int     key_left;
-    int     key_right;
-    int     key_up;
-    int     key_down;
-    int     key_space;
-    int     key_h;
-}                   t_key;
+	int		key_w;
+	int		key_s;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
+	int		key_up;
+	int		key_down;
+	int		key_space;
+	int		key_h;
+}				t_key;
 
 /*
 ** STRUCT - DRAW LINE
@@ -186,36 +186,36 @@ typedef struct      s_key
 ** Draw_*   : Start/end draw point.
 ** tex_*    : About textured.
 */
-typedef struct      s_line
+typedef struct	s_line
 {
-    int     line_x;
-    int     line_y;
-    int     draw_start;
-    int     draw_end;
-    int     tex_x;
-    int     tex_y;
-}                   t_line;
+	int		line_x;
+	int		line_y;
+	int		draw_start;
+	int		draw_end;
+	int		tex_x;
+	int		tex_y;
+}				t_line;
 
 /*
 ** STRUCT - DESCRITION UTILS
 */
-typedef struct      s_desc
+typedef struct	s_desc
 {
-    int map;
-    int player;
-    int r;
-    int no;
-    int so;
-    int we;
-    int ea;
-    int s;
-    int f;
-    int c;
-    int m;
-    int b;
-    int l;
-    int g;
-}                   t_desc;
+	int		map;
+	int		player;
+	int		r;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		s;
+	int		f;
+	int		c;
+	int		m;
+	int		b;
+	int		l;
+	int		g;
+}				t_desc;
 
 /*
 ** STRUCT - DESCRIPTION INFORMATION
@@ -227,102 +227,106 @@ typedef struct      s_desc
 ** player_dir   : The start direction.
 ** Map          : Map
 */
-typedef struct       s_desc_info
+typedef struct	s_desc_info
 {
-    char **map;
-    int map_y;
-    int map_x;
-    int r_x;
-    int r_y;
-    int color_f;
-    int color_c;
-    int player_x;
-    int player_y;
-    int player_dir;
-    char *path_no;
-    char *path_so;
-    char *path_we;
-    char *path_ea;
-    char *path_s;
-    char *path_m;
-    char *path_b;
-    char *path_l;
-    char *path_g;
-}                   t_desc_info;
+	char	**map;
+	int		map_y;
+	int		map_x;
+	int		r_x;
+	int		r_y;
+	int		color_f;
+	int		color_c;
+	int		player_x;
+	int		player_y;
+	int		player_dir;
+	char	*path_no;
+	char	*path_so;
+	char	*path_we;
+	char	*path_ea;
+	char	*path_s;
+	char	*path_m;
+	char	*path_b;
+	char	*path_l;
+	char	*path_g;
+}				t_desc_info;
 
 /*
 ** STRUTC - SPRITES COORDINATE
 */
-typedef struct      s_sprite
+typedef struct	s_sprite
 {
-    int x;
-    int y;
-}                   t_sprite;
+	int		x;
+	int		y;
+}				t_sprite;
 
 /*
 ** STRUTC - SPRITES CASTING
 */
-typedef struct      s_sp_cast
+typedef struct	s_sp_cast
 {
-    t_sprite    *sprite;
-    int         sp_amount;
-    double      sprite_x;
-    double      sprite_y;
-    double      inv_det;
-    double      transform_x;
-    double      transform_y;
-    int         sprite_screen_x;
-    int         sprite_height;
-    int         sprite_width;
-    int         draw_start_y;
-    int         draw_end_y;
-    int         draw_start_x;
-    int         draw_end_x;
-    int         stripe;
-    int         tex_x;
-    int         tex_y;
-    int         y;
-    unsigned int         color;
-}                   t_sp_cast;
+	t_sprite		*sprite;
+	int				sp_amount;
+	double			sprite_x;
+	double			sprite_y;
+	double			inv_det;
+	double			transform_x;
+	double			transform_y;
+	int				sprite_screen_x;
+	int				sprite_height;
+	int				sprite_width;
+	int				draw_start_y;
+	int				draw_end_y;
+	int				draw_start_x;
+	int				draw_end_x;
+	int				stripe;
+	int				tex_x;
+	int				tex_y;
+	int				y;
+	unsigned int	color;
+}				t_sp_cast;
 
 /*
 ** STRUCT - GLOBAL
 */
-typedef struct      s_win
+typedef struct	s_win
 {
-    void        *mlx_ptr;
-    void        *win_ptr;
-    int         width;
-    int         height;
-    int         save;
-    t_desc_info *desc_info;
-    t_camera    *camera;
-    t_key       *key_code;
-    t_img       *img;
-    t_img       **texture;
-    t_img       **sprite;
-    t_img       *life;
-    t_img       *gun;
-    int         hud;
-    double      player_life;
-    clock_t     sound_begin_time;
-}                   t_win;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			width;
+	int			height;
+	int			save;
+	t_desc_info	*desc_info;
+	t_camera	*camera;
+	t_key		*key_code;
+	t_img		*img;
+	t_img		**texture;
+	t_img		**sprite;
+	t_img		*life;
+	t_img		*gun;
+	int			hud;
+	double		player_life;
+	clock_t		sound_begin_time;
+}				t_win;
 
 /*
 ** ENGINE - DRAW / IMAGE
 */
-t_img   *new_image(t_win *win, int size_x, int size_y);
-void    pixel_put_color(t_img *img, int x, int y, unsigned int color);
-void    vertical_line_color(t_line *line, t_win *win, unsigned int color);
-void    vertical_line_tex(t_line *line, t_win *win, t_img *texture, t_ray_cast *ray);
-void    pixel_put_tex(t_line *line, t_img *texture, t_win *win, t_ray_cast *ray);
-void    pixel_put_win(t_win *win, int x, int y, unsigned int color);
+t_img			*new_image(t_win *win, int size_x, int size_y);
+void			pixel_put_color(t_img *img, int x, int y, unsigned int color);
+void			vertical_line_color(t_line *line, t_win *win,
+														unsigned int color);
+void			vertical_line_tex(t_line *line, t_win *win, t_img *texture,
+															t_ray_cast *ray);
+void			pixel_put_tex(t_line *line, t_img *texture, t_win *win,
+															t_ray_cast *ray);
+void			pixel_put_win(t_win *win, int x, int y, unsigned int color);
+
 /*
 ** ENGINE - TEXTURE
 */
-int     set_texture(t_win *win, const char *path, int index);
-int     load_texture(t_win *win);
-int     init_tex(t_win *win);
+int				set_texture(t_win *win, const char *path, int index);
+int				load_texture(t_win *win);
+int				init_tex(t_win *win);
 
 /*
 ** ENGINE - SPRITE CASTING
@@ -354,19 +358,21 @@ int     init_tex(t_win *win);
 ** Get current color from the texture (sprite_drawing + pixel_put_sprite).
 ** Paint pixel if it isn't the invisible color(sprite_drawing + paint_pixel).
 */
-int         set_sprites(t_win *win, const char *path, int index);
-int         load_sprites(t_win *win);
-int         init_sprite(t_win *win);
-int         get_sprite_amount(t_win *win);
-t_sp_cast   *sprite_cast_init(t_win *win);
-t_sp_cast   *get_sprite_pos(t_win *win);
-void        sort_sprite(t_win *win, t_sp_cast *sp_cast);
-void        sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
-void        sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i);
-void        sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray, int i);
-void        pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i);
-void        paint_pixel(t_win *win, t_sp_cast *sp_cast, int i);
-int         sprite_casting(t_win *win, t_ray_cast *ray);
+int				set_sprites(t_win *win, const char *path, int index);
+int				load_sprites(t_win *win);
+int				init_sprite(t_win *win);
+int				get_sprite_amount(t_win *win);
+t_sp_cast		*sprite_cast_init(t_win *win);
+t_sp_cast		*get_sprite_pos(t_win *win);
+void			sort_sprite(t_win *win, t_sp_cast *sp_cast);
+void			sprite_projection(t_win *win, t_sp_cast *sp_cast, int i);
+void			sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray,
+																		int i);
+void			sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray,
+																		int i);
+void			pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i);
+void			paint_pixel(t_win *win, t_sp_cast *sp_cast, int i);
+int				sprite_casting(t_win *win, t_ray_cast *ray);
 
 /*
 ** ENGINE - RAY CASTING
@@ -390,122 +396,125 @@ int         sprite_casting(t_win *win, t_ray_cast *ray);
 ** Move -> check "ENGINE - PLAYER MOUVEMENT".
 ** rotation -> check "ENGINE - CAMERA TURN".
 */
-void    init_raycating_value_calc(t_camera *cam, t_ray_cast *ray, t_win *win);
-void    step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);
-void    wall_hit(t_ray_cast *ray, t_win *win);
-void    perpwalldist_and_heightline(t_camera *cam ,t_ray_cast *ray, t_win *win);
-int     ray_casting(t_win *win);
+void			init_raycating_value_calc(t_camera *cam, t_ray_cast *ray,
+																t_win *win);
+void			step_calc_init_side_dist(t_camera *cam, t_ray_cast *ray);
+void			wall_hit(t_ray_cast *ray, t_win *win);
+void			perpwalldist_and_heightline(t_camera *cam, t_ray_cast *ray,
+																t_win *win);
+int				ray_casting(t_win *win);
 
 /*
 ** ENGINE - LIFE BAR
 */
-int    set_life_img(t_win *win, const char *path);
-int    life_bar(t_win *win);
+int				set_life_img(t_win *win, const char *path);
+int				life_bar(t_win *win);
 
 /*
 ** ENGINE - GUN
 */
-int    set_gun_img(t_win *win, const char *path);
-int    gun(t_win *win);
+int				set_gun_img(t_win *win, const char *path);
+int				gun(t_win *win);
 
 /*
 ** ENGINE - SOUND
 */
-void    game_sound();
-void    effect_sound_h();
-void    effect_sound_m();
-void    play_game_sound(t_win *win);
-void    game_sound_loop(t_win *win);
+void			game_sound();
+void			effect_sound_h();
+void			effect_sound_m();
+void			play_game_sound(t_win *win);
+void			game_sound_loop(t_win *win);
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER
 */
-int     init_camera(t_win *win);
+int				init_camera(t_win *win);
 
 /*
 ** ENGINE - PLAYER MOUVEMENT
 */
-void    move_w(t_win *win);
-void    move_s(t_win *win);
-void    move_a(t_win *win);
-void    move_d(t_win *win);
+void			move_w(t_win *win);
+void			move_s(t_win *win);
+void			move_a(t_win *win);
+void			move_d(t_win *win);
 
 /*
 ** ENGINE - CAMERA ROTATION
 */
-void    turn_left(t_win *win);
-void    turn_right(t_win *win);
-void    turn_up(t_win *win);
-void    turn_down(t_win *win);
+void			turn_left(t_win *win);
+void			turn_right(t_win *win);
+void			turn_up(t_win *win);
+void			turn_down(t_win *win);
 
 /*
 ** ENGINE - MAPPING
 */
-void   draw_side(t_ray_cast *ray, t_win *win, t_line *line, double wall_x);
-void   draw_ceiling_floor(t_win *win, t_line *line, t_ray_cast *ray);
-void   mapping(t_ray_cast *ray, t_win *win);
+void			draw_side(t_ray_cast *ray, t_win *win, t_line *line,
+																double wall_x);
+void			draw_ceiling_floor(t_win *win, t_line *line, t_ray_cast *ray);
+void			mapping(t_ray_cast *ray, t_win *win);
 
 /*
 ** EVENTS - KEYS
 */
-int     event_key_press(int keycode, t_win *win);
-int     event_key_release(int keycode, t_win *win);
-int     event_key(t_win *win);
-int     init_key(t_win *win);
+int				event_key_press(int keycode, t_win *win);
+int				event_key_release(int keycode, t_win *win);
+int				event_key(t_win *win);
+int				init_key(t_win *win);
 
 /*
 ** EVENTS - EVENTS
 */
-int     event_destroy_win(t_win *win);
-int     event_loop(t_win *win);
+int				event_destroy_win(t_win *win);
+int				event_loop(t_win *win);
 
 /*
 ** PARSER - INIT DESCRIPTION
 */
-t_desc          init_desc();
-t_desc_info     *init_desc_info();
+t_desc			init_desc();
+t_desc_info		*init_desc_info();
 
 /*
 ** PARSER - GET INFORMATION
 */
-int             get_resoltion(char *line, t_desc_info *desc_info);
-int             check_and_get_color(char *s);
-int             get_floor_color(char *line, t_desc_info *desc_info);
-int             get_ceiling_color(char *line, t_desc_info *desc_info);
-int             get_path(char *line, t_desc_info *desc_info);
+int				get_resoltion(char *line, t_desc_info *desc_info);
+int				check_and_get_color(char *s);
+int				get_floor_color(char *line, t_desc_info *desc_info);
+int				get_ceiling_color(char *line, t_desc_info *desc_info);
+int				get_path(char *line, t_desc_info *desc_info);
 
 /*
 ** PARSER - CHECK FILE
 */
-int             check_file_name(const char *path);
-int             check_file_line(char *line, t_desc *desc,
-                                                    t_desc_info *desc_info);
-int             check_map_ready(t_desc desc);
-int             check_no_map(char *line, t_desc *desc);
-int             check_map_norm(char *line);
-int             check_path(t_desc_info *desc_info);
-t_desc_info     *check_file(t_win *win, const char *path);
+int				check_file_name(const char *path);
+int				check_file_line(char *line, t_desc *desc,
+													t_desc_info *desc_info);
+int				check_map_ready(t_desc desc);
+int				check_no_map(char *line, t_desc *desc);
+int				check_map_norm(char *line);
+int				check_path(t_desc_info *desc_info);
+t_desc_info		*check_file(t_win *win, const char *path);
 
 /*
 ** PARSER - MAP
 */
-char            **get_map(const char *path, int *len_max_y, int *len_max_x);
-char            **get_player_place(char **map, int *p_x, int *p_y,
-                                        t_desc_info *desc_info, t_desc desc);
-int             check_map_x(char **map, int y, int x);
-int             check_map_y(char **map, int y, int x, int len_y_max);
-int             check_map(char **map, int len_y_max);
+char			**get_map(const char *path, int *len_max_y, int *len_max_x);
+char			**get_player_place(char **map, int *p_x, int *p_y,
+										t_desc_info *desc_info, t_desc desc);
+int				check_map_x(char **map, int y, int x);
+int				check_map_y(char **map, int y, int x, int len_y_max);
+int				check_map(char **map, int len_y_max);
 
 /*
 ** INIT / UTILS
 */
-void    msg_error(t_win* win, char *msg);
-int		create_rgb(int r, int g, int b);
-void    free_split(char **s);
-void    free_desc_info(t_desc_info *desc_info);
-void    free_win(t_win *win);
-void    shut_down(t_win *win);
-void    make_bmp(t_win *win);
-void    put_hud(t_win *win);
+void			msg_error(t_win *win, char *msg);
+int				create_rgb(int r, int g, int b);
+void			free_split(char **s);
+void			free_desc_info(t_desc_info *desc_info);
+void			free_win(t_win *win);
+void			shut_down(t_win *win);
+void			make_bmp(t_win *win);
+void			put_hud(t_win *win);
 
 #endif

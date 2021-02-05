@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 16:52:49 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 10:54:43 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/05 09:26:19 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char			*ft_itoa_base(int n, int base);
 char			*ft_strcpy(char *dst, const char *src);
 int				ft_strcmp(const char *s1, const char *s2);
 size_t			ft_strnlen(const char *s, size_t maxlen);
-size_t  		ft_charinstr(char *s, char c);
+size_t			ft_charinstr(char *s, char c);
 char			*ft_strcat(char *dest, const char *src);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 16:58:41 by kaye              #+#    #+#             */
-/*   Updated: 2020/11/04 17:43:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/05 09:30:09 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Computes the length of s.
 */
 
-size_t	ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
 	const char *str;
 

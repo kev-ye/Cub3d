@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/02/04 15:20:47 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/05 13:30:20 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ SUB_SRC := check_map.c \
 		   check_x.c \
 		   check_y.c \
 		   get_map.c \
+		   get_map2.c \
 		   get_player_place.c
 SRC		+= $(addprefix parser_map/, $(SUB_SRC))
 SUB_SRC := check_file_line_id.c \
@@ -158,7 +159,7 @@ $(NAME): $(OBJ)
 	@cp ./$(LFT_DIR)/$(LIBFT) .
 	@cp ./$(MLX_DIR)/$(MLX) .
 	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
-	$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+	@$(CC) $(CFLAG) $(IFLAG) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
 	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 $(NAME_B): $(OBJ_B)
@@ -167,7 +168,7 @@ $(NAME_B): $(OBJ_B)
 	@cp ./$(LFT_DIR)/$(LIBFT) .
 	@cp ./$(MLX_DIR)/$(MLX) .
 	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
-	$(CC) $(CFLAG) $(IFLAG_B) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
+	@$(CC) $(CFLAG) $(IFLAG_B) $(LFLAG) $(LIBFT) $(MLX) $^ -o $@
 	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 all: $(NAME)

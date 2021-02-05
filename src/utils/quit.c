@@ -6,16 +6,16 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:42:20 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/29 10:06:27 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/05 09:50:56 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void shut_down(t_win *win)
+void	shut_down(t_win *win)
 {
-    mlx_destroy_window(win->mlx_ptr, win->win_ptr);
-    if (win != NULL)
-        free_win(win);
-    exit(0);
+	mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+	if (win != NULL)
+		free_win(win);
+	exit(0);
 }

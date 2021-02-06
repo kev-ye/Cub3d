@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 10:17:59 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 12:32:47 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/06 16:41:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ int    set_gun_img(t_win *win, const char *path)
     return (1);
 }
 
-void    pixel_put_win(
-    t_win *win,
-    int x,
-    int y,
-    unsigned int color)
-{
-    char    *dst;
-
-    dst = win->img->addr + (y * win->img->line_len + x * (win->img->bpp / 8));
-    *(unsigned int *)dst = color;
-}
-
 
 int    life_bar(t_win *win)
 {
@@ -62,7 +50,7 @@ int    life_bar(t_win *win)
             color = *(unsigned int *)(win->life->addr +
                     (y * win->life->line_len) + (x * (win->life->bpp / 8)));
             if (x < win->player_life * win->life->width && color != 0x000000FF)
-                pixel_put_win(win, x, win->height - win->life->height + y, color);
+                pixel_put_color(win->img, x, win->height - win->life->height + y, color);
             ++y;
         }
         ++x;
@@ -85,7 +73,7 @@ int    gun(t_win *win)
             color = *(unsigned int *)(win->gun->addr +
                     (y * win->gun->line_len) + (x * (win->gun->bpp / 8)));
             if (color != 0x0)
-                pixel_put_win(win, (win->width  - win->gun->width) / 2 + x, win->height - win->gun->height + y, color);
+                pixel_put_color(win->img, (win->width  - win->gun->width) / 2 + x, win->height - win->gun->height + y, color);
             ++y;
         }
         ++x;

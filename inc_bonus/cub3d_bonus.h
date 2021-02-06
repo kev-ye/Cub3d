@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/05 09:25:28 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/06 16:39:42 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,6 @@ void			vertical_line_tex(t_line *line, t_win *win, t_img *texture,
 															t_ray_cast *ray);
 void			pixel_put_tex(t_line *line, t_img *texture, t_win *win,
 															t_ray_cast *ray);
-void			pixel_put_win(t_win *win, int x, int y, unsigned int color);
 
 /*
 ** ENGINE - TEXTURE

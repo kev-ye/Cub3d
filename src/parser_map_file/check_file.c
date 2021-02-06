@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/05 15:47:10 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/06 16:09:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_desc_info		*check_file(t_win *win, const char *path)
 	if (!(check_file_name(path)))
 		msg_error(win, "File -> File name error\n");
 	if ((fd = open(path, O_RDONLY)) == -1)
-		return (NULL);
+		msg_error(win, "File -> File no exist\n");
 	if (!(desc_info = init_desc_info()))
 		return (NULL);
 	line = NULL;

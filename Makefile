@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/02/05 13:30:20 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/07 21:21:55 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,10 @@ SUB_SRC_B 	:= img_bonus.c \
 		   	   set_textures_bonus.c \
 		   	   sprite_casting_utils_bonus.c \
 		   	   sprite_casting_bonus.c \
-		   	   life_gun_bonus.c
+		   	   life_gun_bonus.c \
+			   game_music_bonus.c \
+		   	   hud_bonus.c \
+			   mini_map_bonus.c
 SRC_B 		+= $(addprefix engine/, $(SUB_SRC_B))
 SUB_SRC_B 	:= event_key_bonus.c \
 		       events_bonus.c
@@ -132,9 +135,7 @@ SUB_SRC_B 	:= color_bonus.c \
 		   	   free_bonus.c \
 		   	   msg_error_bonus.c \
 		   	   quit_bonus.c \
-		   	   bmp_bonus.c \
-		   	   game_music_bonus.c \
-		   	   hud_bonus.c
+		   	   bmp_bonus.c
 SRC_B		+= $(addprefix utils/, $(SUB_SRC_B))
 OBJ_B	  	:= $(SRC_B:%.c=$(OBJ_DIR_B)/%.o)
 

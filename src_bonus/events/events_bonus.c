@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:01:56 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 11:25:06 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:17:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int    event_loop(t_win *win)
 {
     if (!(ray_casting(win)))
-        shut_down(win);
+        shut_down(win); // need protect
     event_key(win);
     game_sound_loop(win);
     return (1);

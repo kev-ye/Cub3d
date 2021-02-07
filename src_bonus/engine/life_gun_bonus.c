@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 10:17:59 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 12:10:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 20:47:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int    life_bar(t_win *win)
     int x;
     int y;
 
+    if (win->life->width > win->width || win->life->height > win->height)
+        return (1);
     x = 0;
     while (x < win->life->width)
     {
@@ -64,6 +66,8 @@ int    gun(t_win *win)
     int x;
     int y;
 
+    if (win->gun->width > win->width || win->gun->height > win->height)
+        return (1);
     x = 0;
     while (x < win->gun->width)
     {
@@ -73,10 +77,13 @@ int    gun(t_win *win)
             color = *(unsigned int *)(win->gun->addr +
                     (y * win->gun->line_len) + (x * (win->gun->bpp / 8)));
             if (color != 0x0)
-                pixel_put_color(win->img, (win->width  - win->gun->width) / 2 + x, win->height - win->gun->height + y, color);
+                pixel_put_color(win->gun, x, y, color);
+            if (color == 0x00000000)
+                pixel_put_color(win->gun, x, y, 0xFF000000);
             ++y;
         }
         ++x;
     }
+    mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->gun->img_ptr, (win->width - win->gun->width) / 2, win->height - win->gun->height);
     return (1);
 }

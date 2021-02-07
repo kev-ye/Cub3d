@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:26:26 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 14:43:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:07:16 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void    put_hud(t_win *win)
     char *x;
     char *y;
 
+    if (win->height < 140)
+        return ;
     x = ft_itoa(win->width);
     y = ft_itoa(win->height);
     if (win->hud == 1)
@@ -27,6 +29,7 @@ void    put_hud(t_win *win)
         mlx_string_put(win->mlx_ptr, win->win_ptr, 10, 80, WHITE, MSG2);
         mlx_string_put(win->mlx_ptr, win->win_ptr, 10, 100, WHITE, MSG3);
         mlx_string_put(win->mlx_ptr, win->win_ptr, 10, 120, WHITE, MSG4);
+        mlx_string_put(win->mlx_ptr, win->win_ptr, 10, 140, WHITE, MSG5);
     }
     free(x);
     free(y);

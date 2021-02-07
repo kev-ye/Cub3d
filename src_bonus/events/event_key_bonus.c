@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 19:04:13 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/03 12:02:50 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:12:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int event_key_press(int keycode, t_win *win)
         win->key_code->key_h = 1;
     else if (keycode == KEY_CODE_H && win->key_code->key_h == 1)
         win->key_code->key_h = 0;
+    else if (keycode == KEY_CODE_M && win->key_code->key_m == 0)
+        win->key_code->key_m = 1;
+    else if (keycode == KEY_CODE_M && win->key_code->key_m == 1)
+        win->key_code->key_m = 0;
     return (1);
 }
 
@@ -84,6 +88,10 @@ int event_key(t_win *win)
         win->hud = 1;
     else
         win->hud = 0;
+    if (win->key_code->key_m == 0)
+        win->show_mini_map = 1;
+    else
+        win->show_mini_map = 0;
     return (1);
 }
 

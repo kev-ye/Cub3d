@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 15:50:47 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:12:07 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 #  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
 #  define KEY_CODE_H 4
+#  define KEY_CODE_M 46
 #  define SOUND "afplay"
 #  define KILL_SOUND "killall afplay"
 # else
@@ -50,6 +51,7 @@
 #  define KEY_CODE_DOWN 65364
 #  define RED_CROSS 33
 #  define KEY_CODE_H 104
+#  define KEY_CODE_M 99999
 #  define SOUND "aplay"
 #  define KILL_SOUND "killall aplay"
 # endif
@@ -83,6 +85,7 @@
 # define MSG2 "PRESS W S A D : MOVE"
 # define MSG3 "PRESS ^ v < > : CAMERA"
 # define MSG4 "PRESS H       : CLOSE HUD"
+# define MSG5 "PRESS M       : CLOSE MINI MAP"
 
 /*
 ** STRUCT - CAMERA / PLAYER
@@ -177,6 +180,7 @@ typedef struct	s_key
 	int		key_down;
 	int		key_space;
 	int		key_h;
+	int		key_m;
 }				t_key;
 
 /*
@@ -304,6 +308,7 @@ typedef struct	s_win
 	t_img		*life;
 	t_img		*gun;
 	t_img		*mini_map;
+	int			show_mini_map;
 	int			pix_size;
 	int			hud;
 	double		player_life;
@@ -429,7 +434,7 @@ void			game_sound_loop(t_win *win);
 /*
 ** ENGINE - MINI MAP
 */
-int     creat_mini_map(t_win *win); // testing
+int     		mini_map(t_win *win);
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER

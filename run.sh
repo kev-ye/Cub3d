@@ -1,2 +1,2 @@
 #clang -I./inc -I./libft/inc -I./mlx/mlx -L./mlx/mlx -lmlx -L./libft -lft -lm -framework OpenGL -framework AppKit src/*.c src/*/*.c -o Cub3d && ./cub3D map.cub 
-clang -I./inc_bonus -I./libft/inc -I./mlx/mlx -L./mlx/mlx -lmlx -L./libft -lft -lm -framework OpenGL -framework AppKit src_bonus/*.c src_bonus/*/*.c -o Cub3d && ./cub3D map_bonus.cub 
+clang -I./inc_bonus -I./libft/inc -I./mlx/mlx -L./mlx/mlx -lmlx -L./libft -lft -lm -framework OpenGL -framework AppKit src_bonus/*.c src_bonus/*/*.c -o cub3D_bonus && ./cub3D_bonus map/map_bonus.cub

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 09:27:45 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 12:04:08 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int main(int ac, char **av)
     check_ac(ac);
     if (!(win = init_mlx_win(av[1])) || !(init_key(win)) ||
           !(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)))
-        msg_error(win, "Error : Malloc/mlx error");
+        msg_error(win, "Error : Malloc/mlx error\n");
     if (!(set_life_img(win, win->desc_info->path_l)) ||
         !(set_gun_img(win, win->desc_info->path_g)))
-        msg_error(win, "Error : Malloc/mlx error");
+        msg_error(win, "Error : Malloc/mlx error\n");
     if (ac == 3)
     {
         if (ft_strcmp(av[2], "--save") != 0)

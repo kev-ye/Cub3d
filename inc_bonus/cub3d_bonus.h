@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/06 16:39:42 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 12:31:05 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,8 @@ typedef struct	s_win
 	t_img		**sprite;
 	t_img		*life;
 	t_img		*gun;
+	t_img		*mini_map;
+	int			pix_size;
 	int			hud;
 	double		player_life;
 	clock_t		sound_begin_time;
@@ -423,6 +425,11 @@ void			effect_sound_h();
 void			effect_sound_m();
 void			play_game_sound(t_win *win);
 void			game_sound_loop(t_win *win);
+
+/*
+** ENGINE - MINI MAP
+*/
+int     creat_mini_map(t_win *win); // testing
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER

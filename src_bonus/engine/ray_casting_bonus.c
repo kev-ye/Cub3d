@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/06 16:40:46 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 12:11:19 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void     effect(t_win *win)
     touch_sprite(win);
     life_bar(win);
     gun(win);
+    creat_mini_map(win);
 }
 
 int ray_casting(t_win *win)

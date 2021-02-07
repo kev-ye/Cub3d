@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 12:31:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/07 15:50:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 /*
 ** COLOR CODE
 */
-# define RED 0xF00F0000
+# define RED 0x00FF0000
 # define GREEN 0x0000FF00
 # define BLUE 0x000000FF
 # define YELLOW 0x00FFFF00

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 10:38:11 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 10:46:13 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 #  define KEY_CODE_DOWN 65364
 #  define RED_CROSS 33
 #  define KEY_CODE_H 104
-#  define KEY_CODE_M 99999
+#  define KEY_CODE_M 109
 #  define SOUND "aplay"
 #  define KILL_SOUND "killall aplay"
 # endif

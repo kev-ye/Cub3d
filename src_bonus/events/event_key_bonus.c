@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 19:04:13 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 21:12:02 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 10:16:32 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ int init_key(t_win *win)
     win->key_code->key_right = 0;
     win->key_code->key_up = 0;
     win->key_code->key_down = 0;
-    win->key_code->key_space = 0;
     return (1);    
 }

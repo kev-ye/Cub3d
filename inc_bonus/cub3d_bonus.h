@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 21:12:07 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 10:38:11 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,6 @@ typedef struct	s_key
 	int		key_right;
 	int		key_up;
 	int		key_down;
-	int		key_space;
 	int		key_h;
 	int		key_m;
 }				t_key;
@@ -313,6 +312,7 @@ typedef struct	s_win
 	int			hud;
 	double		player_life;
 	clock_t		sound_begin_time;
+	int			need_casting;
 }				t_win;
 
 /*
@@ -414,13 +414,13 @@ int				ray_casting(t_win *win);
 ** ENGINE - LIFE BAR
 */
 int				set_life_img(t_win *win, const char *path);
-int				life_bar(t_win *win);
+void			life_bar(t_win *win);
 
 /*
 ** ENGINE - GUN
 */
 int				set_gun_img(t_win *win, const char *path);
-int				gun(t_win *win);
+void			gun(t_win *win);
 
 /*
 ** ENGINE - SOUND
@@ -434,7 +434,8 @@ void			game_sound_loop(t_win *win);
 /*
 ** ENGINE - MINI MAP
 */
-int     		mini_map(t_win *win);
+int    			init_mini_map(t_win *win);
+void     		mini_map(t_win *win);
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER

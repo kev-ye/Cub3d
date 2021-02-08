@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 10:17:59 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 20:47:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 10:32:34 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,14 @@ int    set_gun_img(t_win *win, const char *path)
     return (1);
 }
 
-
-int    life_bar(t_win *win)
+void    life_bar(t_win *win)
 {
     unsigned int    color;
     int x;
     int y;
 
     if (win->life->width > win->width || win->life->height > win->height)
-        return (1);
+        return ;
     x = 0;
     while (x < win->life->width)
     {
@@ -57,17 +56,16 @@ int    life_bar(t_win *win)
         }
         ++x;
     }
-    return (1);
 }
 
-int    gun(t_win *win)
+void    gun(t_win *win)
 {
     unsigned int    color;
     int x;
     int y;
 
     if (win->gun->width > win->width || win->gun->height > win->height)
-        return (1);
+        return ;
     x = 0;
     while (x < win->gun->width)
     {
@@ -77,13 +75,9 @@ int    gun(t_win *win)
             color = *(unsigned int *)(win->gun->addr +
                     (y * win->gun->line_len) + (x * (win->gun->bpp / 8)));
             if (color != 0x0)
-                pixel_put_color(win->gun, x, y, color);
-            if (color == 0x00000000)
-                pixel_put_color(win->gun, x, y, 0xFF000000);
+                pixel_put_color(win->img, x + (win->width - win->gun->width) / 2, y + (win->height - win->gun->height), color);
             ++y;
         }
         ++x;
     }
-    mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->gun->img_ptr, (win->width - win->gun->width) / 2, win->height - win->gun->height);
-    return (1);
 }

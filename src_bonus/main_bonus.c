@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 20:44:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 10:39:44 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int main(int ac, char **av)
           !(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)))
         msg_error(win, "Error : Malloc/mlx error\n");
     if (!(set_life_img(win, win->desc_info->path_l)) ||
-        !(set_gun_img(win, win->desc_info->path_g)))
+        !(set_gun_img(win, win->desc_info->path_g)) ||
+        !(init_mini_map(win)))
         msg_error(win, "Error : Malloc/mlx error\n");
     if (ac == 3)
     {
@@ -71,6 +72,8 @@ int main(int ac, char **av)
             msg_error(win, "The second argumnets isn't --save\n");
         make_bmp(win);
     }
+    // ray_casting(win);
+    win->need_casting = 1;
     play_game_sound(win);
     mlx_hook(win->win_ptr, 2, 1L << 0, event_key_press, win);
     mlx_hook(win->win_ptr, 3, 1L << 1, event_key_release, win);

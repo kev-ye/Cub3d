@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 21:17:39 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 10:39:17 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,15 @@ static void     effect(t_win *win)
 {
     touch_sprite(win);
     life_bar(win);
-}
-
-static void     effect2(t_win *win) // need protect
-{
     gun(win);
-    mini_map(win);
-    put_hud(win);
 }
 
 int ray_casting(t_win *win)
 {
     t_ray_cast *ray;
     
+    if (!win->need_casting)
+        return (1);
     if (!(ray = malloc(sizeof(t_ray_cast))))
         return (0); 
     ft_bzero(ray, sizeof(t_ray_cast));
@@ -80,7 +76,6 @@ int ray_casting(t_win *win)
     if (!win->save)
         mlx_put_image_to_window(win->mlx_ptr, win->win_ptr,
                                     win->img->img_ptr, 0, 0);
-    effect2(win);
     free(ray->zbuffer);
     free(ray);
     if (win->player_life < 0.0)

@@ -6,42 +6,42 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:44:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/04 16:01:48 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 12:30:48 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void    game_sound()
+void	game_sound(void)
 {
-    system(SOUND" ./src_bonus/game_music/game_sound.wav 2>/dev/null&");
+	system(SOUND" ./src_bonus/game_music/game_sound.wav 2>/dev/null&");
 }
 
-void    effect_sound_h()
+void	effect_sound_h(void)
 {
-    system(SOUND" ./src_bonus/game_music/health_sound.wav 2>/dev/null&");
+	system(SOUND" ./src_bonus/game_music/health_sound.wav 2>/dev/null&");
 }
 
-void    effect_sound_m()
+void	effect_sound_m(void)
 {
-    system(SOUND" ./src_bonus/game_music/monster_sound.wav 2>/dev/null&");
+	system(SOUND" ./src_bonus/game_music/monster_sound.wav 2>/dev/null&");
 }
 
-void    play_game_sound(t_win *win)
+void	play_game_sound(t_win *win)
 {
-    game_sound();
-    win->sound_begin_time = clock();
+	game_sound();
+	win->sound_begin_time = clock();
 }
 
-void    game_sound_loop(t_win *win)
+void	game_sound_loop(t_win *win)
 {
-    clock_t time;
+	clock_t time;
 
-    time = clock();
-    if (((double)(time - win->sound_begin_time) / CLOCKS_PER_SEC) > 12)
-    {
-        system(KILL_SOUND);
-        game_sound();
-        win->sound_begin_time = time;
-    }
+	time = clock();
+	if (((double)(time - win->sound_begin_time) / CLOCKS_PER_SEC) > 12)
+	{
+		system(KILL_SOUND);
+		game_sound();
+		win->sound_begin_time = time;
+	}
 }

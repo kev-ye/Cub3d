@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:05:42 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 11:34:26 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 13:07:03 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int				ray_casting(t_win *win)
 {
 	t_ray_cast *ray;
 
+	if (!win->need_casting)
+		return (1);
 	if (!(ray = malloc(sizeof(t_ray_cast))))
 		return (0);
 	ft_bzero(ray, sizeof(t_ray_cast));

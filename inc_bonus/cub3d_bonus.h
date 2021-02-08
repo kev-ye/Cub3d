@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 10:46:13 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 15:23:10 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 #  define KEY_CODE_UP 126
 #  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
-#  define KEY_CODE_H 4
-#  define KEY_CODE_M 46
 #  define SOUND "afplay"
 #  define KILL_SOUND "killall afplay"
 # else
@@ -50,8 +48,6 @@
 #  define KEY_CODE_UP 65362
 #  define KEY_CODE_DOWN 65364
 #  define RED_CROSS 33
-#  define KEY_CODE_H 104
-#  define KEY_CODE_M 109
 #  define SOUND "aplay"
 #  define KILL_SOUND "killall aplay"
 # endif
@@ -84,8 +80,6 @@
 # define MSG1 "PRESS ESC     : QUIT GAME"
 # define MSG2 "PRESS W S A D : MOVE"
 # define MSG3 "PRESS ^ v < > : CAMERA"
-# define MSG4 "PRESS H       : CLOSE HUD"
-# define MSG5 "PRESS M       : CLOSE MINI MAP"
 
 /*
 ** STRUCT - CAMERA / PLAYER
@@ -232,6 +226,7 @@ typedef struct	s_desc
 */
 typedef struct	s_desc_info
 {
+	t_desc	desc;
 	char	**map;
 	int		map_y;
 	int		map_x;
@@ -289,6 +284,17 @@ typedef struct	s_sp_cast
 }				t_sp_cast;
 
 /*
+** STRUCT - FOR FUCKING NORME
+*/
+typedef struct	s_var
+{
+	int r;
+	int	i;
+	int j;
+	int len;
+}				t_var;
+
+/*
 ** STRUCT - GLOBAL
 */
 typedef struct	s_win
@@ -307,9 +313,7 @@ typedef struct	s_win
 	t_img		*life;
 	t_img		*gun;
 	t_img		*mini_map;
-	int			show_mini_map;
 	int			pix_size;
-	int			hud;
 	double		player_life;
 	clock_t		sound_begin_time;
 	int			need_casting;
@@ -434,8 +438,8 @@ void			game_sound_loop(t_win *win);
 /*
 ** ENGINE - MINI MAP
 */
-int    			init_mini_map(t_win *win);
-void     		mini_map(t_win *win);
+int				init_mini_map(t_win *win);
+void			mini_map(t_win *win);
 
 /*
 ** ENGINE - INIT CAMERA / PLAYER
@@ -501,6 +505,7 @@ int				get_path(char *line, t_desc_info *desc_info);
 int				check_file_name(const char *path);
 int				check_file_line(char *line, t_desc *desc,
 													t_desc_info *desc_info);
+int				check_file_line_info_done(t_desc desc);
 int				check_map_ready(t_desc desc);
 int				check_no_map(char *line, t_desc *desc);
 int				check_map_norm(char *line);
@@ -511,8 +516,10 @@ t_desc_info		*check_file(t_win *win, const char *path);
 ** PARSER - MAP
 */
 char			**get_map(const char *path, int *len_max_y, int *len_max_x);
+char			**get_map2(const char *path, int fd, int y_max, int x_max);
+int				map_line(char *line);
 char			**get_player_place(char **map, int *p_x, int *p_y,
-										t_desc_info *desc_info, t_desc desc);
+												t_desc_info *desc_info);
 int				check_map_x(char **map, int y, int x);
 int				check_map_y(char **map, int y, int x, int len_y_max);
 int				check_map(char **map, int len_y_max);

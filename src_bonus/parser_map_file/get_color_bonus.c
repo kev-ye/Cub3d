@@ -6,79 +6,79 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:01:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/01/31 22:47:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/08 14:26:53 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int get_color(char **s)
+static int		get_color(char **s)
 {
-    int r;
-    int g;
-    int b;
-    int color;
+	int r;
+	int g;
+	int b;
+	int color;
 
-    r = ft_atoi(s[0]);
-    g = ft_atoi(s[1]);
-    b = ft_atoi(s[2]);
-    if (r > 255 || g > 255 || b > 255)
-        return (-1);
-    color = create_rgb(r, g, b);
-    return (color);
+	r = ft_atoi(s[0]);
+	g = ft_atoi(s[1]);
+	b = ft_atoi(s[2]);
+	if (r > 255 || g > 255 || b > 255)
+		return (-1);
+	color = create_rgb(r, g, b);
+	return (color);
 }
 
-int check_and_get_color(char *s)
+static int		check_color_amount(char **color, int count)
 {
-    char **color;
-    int count;
-    int c;
+	if (count != 3)
+	{
+		free_split(color);
+		return (-1);
+	}
+	return (1);
+}
 
-    count = 0;
-    if (ft_charinstr(s, ',') != 2)
-        return (-1);
-    if (!(color = ft_split(s, ',')))
-        return (-1);
-    while (color[count] != NULL)
-        ++count;
-    if (count != 3)
-    {
-        free_split(color);
-        return (-1);
-    }
-    count = 0;
-    while (color[0][count])
-    {
-        if (color[0][count] && !ft_isdigit(color[0][count]))
-        {
-            free_split(color);
-            return (-1);
-        }
-        ++count;
-    }
-    count = 0;
-    while (color[1][count])
-    {
-        if (color[1][count] && !ft_isdigit(color[1][count]))
-        {
-            free_split(color);
-            return (-1);
-        }
-        ++count;
-    }
-    count = 0;
-    while (color[2][count])
-    {
-        if (color[2][count] && !ft_isdigit(color[2][count]))
-        {
-            free_split(color);
-            return (-1);
-        }
-        ++count;
-    }
-    c = get_color(color);
-    free_split(color);
-    if (c == -1)
-        return (-1);
-    return (c);
+static int		check_color(char **color, int i)
+{
+	int count;
+
+	count = 0;
+	while (color[i][count])
+	{
+		if (color[i][count] && !ft_isdigit(color[i][count]))
+		{
+			free_split(color);
+			return (-1);
+		}
+		++count;
+	}
+	return (1);
+}
+
+int				check_and_get_color(char *s)
+{
+	char	**color;
+	int		count;
+	int		c;
+
+	count = 0;
+	if (ft_charinstr(s, ',') != 2)
+		return (-1);
+	if (!(color = ft_split(s, ',')))
+		return (-1);
+	while (color[count] != NULL)
+		++count;
+	if (check_color_amount(color, count) == -1)
+		return (-1);
+	if (check_color(color, 0) == -1)
+		return (-1);
+	if (check_color(color, 1) == -1)
+		return (-1);
+	if (check_color(color, 2) == -1)
+		return (-1);
+	c = get_color(color);
+	free_split(color);
+	if (c == -1)
+		return (-1);
+	return (c);
 }

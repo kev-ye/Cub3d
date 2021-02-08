@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/02/07 21:21:55 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/08 15:45:31 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ SUB_SRC_B 	:= img_bonus.c \
 		   	   set_camera_bonus.c \
 		   	   set_sprites_bonus.c \
 		   	   set_textures_bonus.c \
+			   sprite_drawing_bonus.c \
 		   	   sprite_casting_utils_bonus.c \
 		   	   sprite_casting_bonus.c \
 		   	   life_gun_bonus.c \
@@ -118,9 +119,11 @@ SUB_SRC_B 	:= check_map_bonus.c \
 		   	   check_x_bonus.c \
 		   	   check_y_bonus.c \
 		   	   get_map_bonus.c \
+			   get_map_2_bonus.c \
 		   	   get_player_place_bonus.c
 SRC_B		+= $(addprefix parser_map/, $(SUB_SRC_B))
 SUB_SRC_B 	:= check_file_line_id_bonus.c \
+				check_file_line_id_2_bonus.c \
 		   	   check_file_line_map_bonus.c \
 		   	   check_file_name_bonus.c \
 		   	   check_file_bonus.c \

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:11:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 15:59:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/09 09:58:27 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ int				check_file_line(
 	if (!*line)
 		return (1);
 	i = 0;
-	while (line[i])
-	{
+	// while (line[i])
+	// {
 		if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
 				line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
 				line[i] == 'C' || line[i] == 'B' || line[i] == 'L' ||
@@ -149,10 +149,16 @@ int				check_file_line(
 					&& check_file_line_info_done(*desc))
 				return (1);
 			else
+			{
+				printf("little if ici\n");
 				return (0);
+			}
 		}
 		else
+		{
+			printf("big if ici\n");
 			return (0);
-	}
+		}
+	// }
 	return (1);
 }

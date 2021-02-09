@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 11:19:51 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/09 09:19:29 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_win	*init_mlx_win(char *path)
 	new_win->height = new_win->desc_info->r_y;
 	r_max(new_win, &new_win->width, &new_win->height);
 	if (!(new_win->win_ptr = mlx_new_window(new_win->mlx_ptr,
-					new_win->width, new_win->height, "Cub3d")))
+					new_win->width, new_win->height, "cub3D")))
 		return (NULL);
 	if (!(new_win->img = new_image(new_win, new_win->width, new_win->height)))
 		return (NULL);

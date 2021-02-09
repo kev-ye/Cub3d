@@ -6,26 +6,19 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:57:11 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 14:18:26 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/09 10:14:05 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-t_desc			init_desc(void)
-{
-	t_desc desc;
-
-	ft_bzero(&desc, sizeof(desc));
-	return (desc);
-}
 
 t_desc_info		*init_desc_info(void)
 {
 	t_desc_info *new_info;
 
 	if (!(new_info = malloc(sizeof(t_desc_info))))
-		return (void *)0;
+		return (NULL);
+	ft_bzero(&new_info->desc, sizeof(t_desc));
 	new_info->r_x = -1;
 	new_info->r_y = -1;
 	new_info->path_no = NULL;

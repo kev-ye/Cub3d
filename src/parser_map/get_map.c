@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:45:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 15:25:12 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/09 15:30:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int				map_line(char *line)
 	while (line[i])
 	{
 		if (line[i] == ' ' || line[i] == '0' || line[i] == '1'
-				|| line[i] == '2' || line[i] == '4' || line[i] == 'N'
-				|| line[i] == 'S' || line[i] == 'E')
+				|| line[i] == '2' || line[i] == 'N' || line[i] == 'S'
+				|| line[i] == 'W' || line[i] == 'E')
 			++i;
 		else
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/09 10:11:34 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/09 14:53:45 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,34 +48,10 @@ static int		check_file_id(
 		r = get_next_line(*fd, &line);
 		if (!check_file_line(line, &desc_info->desc, desc_info))
 		{
-					printf("%d\n", desc_info->desc.r);
-		printf("%d\n", desc_info->desc.no);
-		printf("%d\n", desc_info->desc.so);
-		printf("%d\n", desc_info->desc.we);
-		printf("%d\n", desc_info->desc.ea);
-		printf("%d\n", desc_info->desc.s);
-		printf("%d\n", desc_info->desc.m);
-		printf("%d\n", desc_info->desc.b);
-		printf("%d\n", desc_info->desc.l);
-		printf("%d\n", desc_info->desc.g);
-		printf("%d\n", desc_info->desc.f);
-		printf("%d\n", desc_info->desc.c);
 			free(line);
 			free_desc_info(desc_info);
 			msg_error(win, "File -> ID error\n");
 		}
-		// printf("%d\n", desc_info->desc.r);
-		// printf("%d\n", desc_info->desc.no);
-		// printf("%d\n", desc_info->desc.so);
-		// printf("%d\n", desc_info->desc.we);
-		// printf("%d\n", desc_info->desc.ea);
-		// printf("%d\n", desc_info->desc.s);
-		// printf("%d\n", desc_info->desc.m);
-		// printf("%d\n", desc_info->desc.b);
-		// printf("%d\n", desc_info->desc.l);
-		// printf("%d\n", desc_info->desc.g);
-		// printf("%d\n", desc_info->desc.f);
-		// printf("%d\n", desc_info->desc.c);
 		free(line);
 		if (check_map_ready(desc_info->desc))
 			return (r);

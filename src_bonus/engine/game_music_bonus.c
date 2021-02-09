@@ -6,11 +6,16 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:44:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 12:30:48 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/09 10:47:41 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+/*
+** clock(void) : Determine processor time used. Return -1 on error.
+** Using in function game_soud_loop to play game music on loop.
+*/
 
 void	game_sound(void)
 {
@@ -37,10 +42,12 @@ void	game_sound_loop(t_win *win)
 {
 	clock_t time;
 
-	time = clock();
-	if (((double)(time - win->sound_begin_time) / CLOCKS_PER_SEC) > 12)
+	if ((time = clock()) == -1)
+		return ;
+	if (win->sound_begin_time == -1)
+		return ;
+	if (((double)(time - win->sound_begin_time) / CLOCKS_PER_SEC) > 15)
 	{
-		system(KILL_SOUND);
 		game_sound();
 		win->sound_begin_time = time;
 	}

@@ -6,13 +6,13 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:56:10 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/05 15:53:16 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/16 11:19:56 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_split(char **s)
+void			free_split(char **s)
 {
 	int count;
 
@@ -23,7 +23,7 @@ void	free_split(char **s)
 	free(s);
 }
 
-void	free_desc_info(t_desc_info *desc_info)
+void			free_desc_info(t_desc_info *desc_info)
 {
 	int i;
 
@@ -51,30 +51,53 @@ void	free_desc_info(t_desc_info *desc_info)
 	free(desc_info);
 }
 
-void	free_win(t_win *win)
+static void		destroy_img(t_win *win)
 {
+	if (win->texture != NULL)
+	{
+		if (win->texture[0] != NULL)
+		{
+			mlx_destroy_image(win->mlx_ptr, win->texture[0]->img_ptr);
+			free(win->texture[0]);
+		}
+		if (win->texture[1] != NULL)
+		{
+			mlx_destroy_image(win->mlx_ptr, win->texture[1]->img_ptr);
+			free(win->texture[0]);
+		}
+		if (win->texture[2] != NULL)
+		{
+			mlx_destroy_image(win->mlx_ptr, win->texture[2]->img_ptr);
+			free(win->texture[0]);
+		}
+		if (win->texture[3] != NULL)
+		{
+			mlx_destroy_image(win->mlx_ptr, win->texture[3]->img_ptr);
+			free(win->texture[0]);
+		}
+		free(win->texture);
+	}
+}
+
+void			free_win(t_win *win)
+{
+	destroy_img(win);
+	if (win->sprite != NULL)
+	{
+		mlx_destroy_image(win->mlx_ptr, win->sprite->img_ptr);
+		free(win->sprite);
+	}
 	if (win->key_code != NULL)
 		free(win->key_code);
 	if (win->img != NULL)
+	{
+		mlx_destroy_image(win->mlx_ptr, win->img->img_ptr);
 		free(win->img);
+	}
 	if (win->camera != NULL)
 		free(win->camera);
 	if (win->desc_info != NULL)
 		free_desc_info(win->desc_info);
-	if (win->texture != NULL)
-	{
-		if (win->texture[0] != NULL)
-			free(win->texture[0]);
-		if (win->texture[1] != NULL)
-			free(win->texture[1]);
-		if (win->texture[2] != NULL)
-			free(win->texture[2]);
-		if (win->texture[3] != NULL)
-			free(win->texture[3]);
-		free(win->texture);
-	}
-	if (win->sprite != NULL)
-		free(win->sprite);
 	if (win != NULL)
 		free(win);
 }

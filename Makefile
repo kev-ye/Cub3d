@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/02/08 15:45:31 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/16 11:43:06 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,6 +136,7 @@ SUB_SRC_B 	:= check_file_line_id_bonus.c \
 SRC_B		+= $(addprefix parser_map_file/, $(SUB_SRC_B))
 SUB_SRC_B 	:= color_bonus.c \
 		   	   free_bonus.c \
+			   free_img_bonus.c \
 		   	   msg_error_bonus.c \
 		   	   quit_bonus.c \
 		   	   bmp_bonus.c
@@ -265,9 +266,9 @@ fclean_bonus: clean_bonus
 
 re: fclean all
 
-re_bonus: fclean bonus
+re_bonus: fclean_bonus bonus
 
-.PHONY: all clean fclean re bonus clean_bonus fclean_bonus re bonus
+.PHONY: all clean fclean re bonus clean_bonus fclean_bonus re_bonus
 	
 $(BUILD):
 	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."

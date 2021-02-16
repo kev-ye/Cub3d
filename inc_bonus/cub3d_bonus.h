@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/09 10:07:07 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/16 11:27:23 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -531,7 +531,10 @@ void			msg_error(t_win *win, char *msg);
 int				create_rgb(int r, int g, int b);
 void			free_split(char **s);
 void			free_desc_info(t_desc_info *desc_info);
+void			free_img_sprite(t_win *win);
+void			free_img_effect(t_win *win);
 void			free_win(t_win *win);
+void			free_img_tex(t_win *win);
 void			shut_down(t_win *win);
 void			make_bmp(t_win *win);
 void			put_hud(t_win *win);

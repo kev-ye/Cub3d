@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:56:10 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 11:21:19 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/16 11:39:42 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,43 +64,22 @@ void			free_desc_info(t_desc_info *desc_info)
 	free(desc_info);
 }
 
-static void		free_img(t_win *win)
-{
-	if (win->texture != NULL)
-	{
-		if (win->texture[0] != NULL)
-			free(win->texture[0]);
-		if (win->texture[1] != NULL)
-			free(win->texture[1]);
-		if (win->texture[2] != NULL)
-			free(win->texture[2]);
-		if (win->texture[3] != NULL)
-			free(win->texture[3]);
-		free(win->texture);
-	}
-	if (win->sprite != NULL)
-	{
-		if (win->sprite[0] != NULL)
-			free(win->sprite[0]);
-		if (win->sprite[1] != NULL)
-			free(win->sprite[1]);
-		if (win->sprite[2] != NULL)
-			free(win->sprite[2]);
-		free(win->sprite);
-	}
-}
-
 void			free_win(t_win *win)
 {
+	free_img_tex(win);
+	free_img_sprite(win);
+	free_img_effect(win);
+	if (win->img != NULL)
+	{
+		mlx_destroy_image(win->mlx_ptr, win->img->img_ptr);
+		free(win->img);
+	}
 	if (win->key_code != NULL)
 		free(win->key_code);
-	if (win->img != NULL)
-		free(win->img);
 	if (win->camera != NULL)
 		free(win->camera);
 	if (win->desc_info != NULL)
 		free_desc_info(win->desc_info);
-	free_img(win);
 	if (win != NULL)
 		free(win);
 }

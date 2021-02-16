@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/10 16:31:37 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/15 14:29:48 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		sprite_casting(t_win *win, t_ray_cast *ray)
 		sprite_draw(win, sp_cast, ray);
 		i++;
 	}
-	free(sp_cast);
 	free(sp_cast->sprite);
+	free(sp_cast);
 	return (1);
 }

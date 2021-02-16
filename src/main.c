@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/16 11:04:50 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/16 14:27:21 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,6 @@ static t_win	*init_mlx_win(char *path)
 	return (new_win);
 }
 
-static int		init_ray(t_win *win)
-{
-	t_ray_cast *ray;
-
-	if (!(ray = malloc(sizeof(t_ray_cast))))
-		return (0);
-	ft_bzero(ray, sizeof(t_ray_cast));
-	if (!(ray->zbuffer = malloc(sizeof(double) * win->width)))
-		return (0);
-	ft_bzero(ray->zbuffer, sizeof(double) * win->width);
-	win->ray = ray;
-	return (1);
-}
-
 static void		check_ac(int ac)
 {
 	if (ac < 2)
@@ -75,8 +61,6 @@ int				main(int ac, char **av)
 	check_ac(ac);
 	if (!(win = init_mlx_win(av[1])) || !(init_key(win)) ||
 			!(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)))
-		msg_error(win, "Error : Malloc/mlx error\n");
-	if (!(init_ray(win)))
 		msg_error(win, "Error : Malloc/mlx error\n");
 	if (ac == 3)
 	{

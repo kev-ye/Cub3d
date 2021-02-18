@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 12:33:10 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 15:20:17 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/18 10:08:22 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char			**get_map2(const char *path, int fd, int y_max, int x_max)
 
 	if (!(map = malloc(sizeof(char *) * (y_max))))
 		return (NULL);
-	if ((fd = open(path, O_RDONLY)) == -1)
+	if ((fd = open(path, O_RDWR | O_NOFOLLOW)) == -1)
 		return (NULL);
 	line = NULL;
 	if (!(map = get_map_line(&fd, line, map, x_max)))

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:17:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 14:27:10 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/19 16:50:52 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,27 @@ static int	check_path_name(char *path, int *fd)
 	s = ft_strrchr(path, '.');
 	if (ft_strcmp(s, ".xpm") != 0)
 		return (0);
+	
 	if ((*fd = open(path, O_RDONLY)) == -1)
 		return (0);
 	close(*fd);
 	return (1);
 }
 
+
 int			check_path(t_desc_info *desc_info)
 {
 	int fd;
 
-	if (!(check_path_name(desc_info->path_no, &fd)))
+	if (!desc_info->path_no || !(check_path_name(desc_info->path_no, &fd)))
 		return (0);
-	if (!(check_path_name(desc_info->path_so, &fd)))
+	if (!desc_info->path_so || !(check_path_name(desc_info->path_so, &fd)))
 		return (0);
-	if (!(check_path_name(desc_info->path_we, &fd)))
+	if (!desc_info->path_we || !(check_path_name(desc_info->path_we, &fd)))
 		return (0);
-	if (!(check_path_name(desc_info->path_ea, &fd)))
+	if (!desc_info->path_ea || !(check_path_name(desc_info->path_ea, &fd)))
 		return (0);
-	if (!(check_path_name(desc_info->path_s, &fd)))
+	if (!desc_info->path_s || !(check_path_name(desc_info->path_s, &fd)))
 		return (0);
 	return (1);
 }

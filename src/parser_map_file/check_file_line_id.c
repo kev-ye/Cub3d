@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:11:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/09 09:50:40 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/22 20:55:44 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,17 @@ int			check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
 	if (!*line)
 		return (1);
 	i = 0;
-	while (line[i])
+	if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
+			line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
+			line[i] == 'C')
 	{
-		if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
-				line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
-				line[i] == 'C')
-		{
-			if (check_file_line_info(line, i, desc, desc_info)
-					&& check_file_line_info_done(*desc))
-				return (1);
-			else
-				return (0);
-		}
+		if (check_file_line_info(line, i, desc, desc_info)
+				&& check_file_line_info_done(*desc))
+			return (1);
 		else
 			return (0);
 	}
+	else
+		return (0);
 	return (1);
 }

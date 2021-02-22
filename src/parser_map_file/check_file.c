@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/19 16:49:15 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/22 16:35:07 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ static int		check_file_id(
 		r = get_next_line(*fd, &line);
 		if (!line[0] || !check_file_line(line, &desc_info->desc, desc_info))
 		{
+			if (!line[0])
+			{
+				free(line);
+				free_desc_info(desc_info);
+				msg_error(win, "File -> No content\n");
+			}
 			free(line);
 			free_desc_info(desc_info);
-			if (!line[0])
-				msg_error(win, "File -> No content\n");
 			msg_error(win, "File -> ID error\n");
 		}
 		free(line);

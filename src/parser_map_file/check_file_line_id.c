@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:11:45 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/22 20:55:44 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/22 21:10:21 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int	check_file_line_info_done(t_desc desc)
 	return (0);
 }
 
-static int	check_file_line_info_3(char *line, int i, t_desc **desc,
+static int	check_file_line_info_3(char *line, t_desc **desc,
 														t_desc_info *desc_info)
 {
-	if (line[i] == 'W' && !ft_strncmp((line + i), "WE", 2))
+	if (line[0] == 'W' && !ft_strncmp((line), "WE", 2))
 	{
 		if (!(get_path(line, desc_info)))
 			return (0);
 		(*desc)->we++;
 	}
-	else if (line[i] == 'E' && !ft_strncmp((line + i), "EA", 2))
+	else if (line[0] == 'E' && !ft_strncmp((line), "EA", 2))
 	{
 		if (!(get_path(line, desc_info)))
 			return (0);
@@ -43,70 +43,67 @@ static int	check_file_line_info_3(char *line, int i, t_desc **desc,
 	return (1);
 }
 
-static int	check_file_line_info_2(char *line, int i, t_desc **desc,
+static int	check_file_line_info_2(char *line, t_desc **desc,
 														t_desc_info *desc_info)
 {
-	if (line[i] == 'C' && line[i + 1] == ' ')
+	if (line[0] == 'C' && line[0 + 1] == ' ')
 	{
 		if (!(get_ceiling_color(line, desc_info)))
 			return (0);
 		(*desc)->c++;
 	}
-	else if (line[i] == 'N' && !ft_strncmp((line + i), "NO", 2))
+	else if (line[0] == 'N' && !ft_strncmp((line), "NO", 2))
 	{
 		if (!(get_path(line, desc_info)))
 			return (0);
 		(*desc)->no++;
 	}
-	else if (line[i] == 'S' && !ft_strncmp((line + i), "SO", 2))
+	else if (line[0] == 'S' && !ft_strncmp((line), "SO", 2))
 	{
 		if (!(get_path(line, desc_info)))
 			return (0);
 		(*desc)->so++;
 	}
-	else if (!(check_file_line_info_3(line, i, desc, desc_info)))
+	else if (!(check_file_line_info_3(line, desc, desc_info)))
 		return (0);
 	return (1);
 }
 
-static int	check_file_line_info(char *line, int i, t_desc *desc,
+static int	check_file_line_info(char *line, t_desc *desc,
 														t_desc_info *desc_info)
 {
-	if (line[i] == 'R' && line[i + 1] == ' ')
+	if (line[0] == 'R' && line[1] == ' ')
 	{
 		if (!(get_resoltion(line, desc_info)))
 			return (0);
 		desc->r++;
 	}
-	else if (line[i] == 'S' && line[i + 1] == ' ')
+	else if (line[0] == 'S' && line[1] == ' ')
 	{
 		if (!(get_path(line, desc_info)))
 			return (0);
 		desc->s++;
 	}
-	else if (line[i] == 'F' && line[i + 1] == ' ')
+	else if (line[0] == 'F' && line[1] == ' ')
 	{
 		if (!(get_floor_color(line, desc_info)))
 			return (0);
 		desc->f++;
 	}
-	else if (!(check_file_line_info_2(line, i, &desc, desc_info)))
+	else if (!(check_file_line_info_2(line, &desc, desc_info)))
 		return (0);
 	return (1);
 }
 
 int			check_file_line(char *line, t_desc *desc, t_desc_info *desc_info)
 {
-	int i;
-
-	if (!*line)
+	if (!line[0])
 		return (1);
-	i = 0;
-	if (line[i] == 'R' || line[i] == 'S' || line[i] == 'F' ||
-			line[i] == 'N' || line[i] == 'W' || line[i] == 'E' ||
-			line[i] == 'C')
+	if (line[0] == 'R' || line[0] == 'S' || line[0] == 'F' ||
+			line[0] == 'N' || line[0] == 'W' || line[0] == 'E' ||
+			line[0] == 'C')
 	{
-		if (check_file_line_info(line, i, desc, desc_info)
+		if (check_file_line_info(line, desc, desc_info)
 				&& check_file_line_info_done(*desc))
 			return (1);
 		else

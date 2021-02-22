@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/22 20:55:46 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/22 21:16:19 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int		check_file_id(
 		{
 			free(line);
 			free_desc_info(desc_info);
+			close(*fd);
 			msg_error(win, "File -> ID error\n");
 		}
 		free(line);
@@ -74,6 +75,7 @@ static int		check_is_map(
 		{
 			free(line);
 			free_desc_info(desc_info);
+			close(*fd);
 			msg_error(win, "File -> ID error\n");
 		}
 		free(line);
@@ -99,6 +101,7 @@ static void		check_map_get_ready(
 		{
 			free(line);
 			free_desc_info(desc_info);
+			close(*fd);
 			msg_error(win, "File -> Map error\n");
 		}
 		free(line);

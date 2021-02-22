@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/19 16:53:00 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/22 21:04:21 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static int		check_file_id(
 		{
 			free(line);
 			free_desc_info(desc_info);
-			if (!line[0])
-				msg_error(win, "File -> No content\n");
 			msg_error(win, "File -> ID error\n");
 		}
 		free(line);
@@ -127,7 +125,7 @@ t_desc_info		*check_file(t_win *win, const char *path)
 	if (!check_path(desc_info))
 	{
 		free_desc_info(desc_info);
-		msg_error(win, "Path -> Path no exist\n");
+		msg_error(win, "Path -> Path no exist / no content\n");
 	}
 	if (!parser_map(path, desc_info, win))
 		msg_error(win, "Map -> Map error\n");

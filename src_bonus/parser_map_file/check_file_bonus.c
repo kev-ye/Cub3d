@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/22 21:04:21 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/23 15:20:32 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int		check_file_id(
 	while (r > 0)
 	{
 		r = get_next_line(*fd, &line);
-		if (!line[0] || !check_file_line(line, &desc_info->desc, desc_info))
+		if (!check_file_line(line, &desc_info->desc, desc_info))
 		{
 			free(line);
 			free_desc_info(desc_info);

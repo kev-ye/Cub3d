@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/16 11:27:23 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/23 21:24:43 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,6 @@ typedef struct	s_win
 	int			pix_size;
 	double		player_life;
 	clock_t		sound_begin_time;
-	int			need_casting;
 }				t_win;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/16 11:15:43 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/23 21:24:33 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,6 @@ typedef struct	s_win
 	t_img		*img;
 	t_img		**texture;
 	t_img		*sprite;
-	int			need_casting;
 }				t_win;
 
 /*

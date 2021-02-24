@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:21:27 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/16 11:15:37 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/24 14:09:14 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_side(
 	line->draw_start = ray->draw_start;
 	line->draw_end = ray->draw_end;
 	line->tex_x = tex_x;
-	vertical_line_tex(line, win, img, ray);
+	draw_vertical_tex(line, win, img, ray);
 }
 
 void	draw_ceiling_floor(
@@ -46,10 +46,10 @@ void	draw_ceiling_floor(
 {
 	line->draw_start = 0;
 	line->draw_end = ray->draw_start;
-	vertical_line_color(line, win, win->desc_info->color_c);
+	draw_vertical_color(line, win, win->desc_info->color_c);
 	line->draw_start = ray->draw_end;
 	line->draw_end = win->height;
-	vertical_line_color(line, win, win->desc_info->color_f);
+	draw_vertical_color(line, win, win->desc_info->color_f);
 }
 
 void	mapping(

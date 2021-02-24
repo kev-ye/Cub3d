@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 16:59:07 by kaye              #+#    #+#              #
-#    Updated: 2021/02/04 10:54:20 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/24 16:20:12 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SUB_SRC := ft_isalpha.c \
 		   ft_isascii.c \
 		   ft_isprint.c \
 		   ft_toupper.c \
-		   ft_tolower.c
+		   ft_tolower.c \
+		   ft_isspace.c
 SRC 	:= $(addprefix ctype/, $(SUB_SRC))
 SUB_SRC := ft_memset.c \
 		   ft_bzero.c \

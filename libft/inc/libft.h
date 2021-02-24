@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 16:52:49 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/05 09:26:19 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/24 16:24:59 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
+int				ft_isspace(int c);
 
 /*
 ** Io function

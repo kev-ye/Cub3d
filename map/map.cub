@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 R 640 480
-=======
-R 301 301
->>>>>>> 05e2a79cb71cefe273fbed92b429c121a9217fd0
 NO ./textures/north1.xpm
 SO ./textures/south1.xpm
 WE ./textures/west1.xpm

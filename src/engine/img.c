@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/24 14:08:58 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/24 15:54:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	draw_vertical_tex(
 	texpos = (line->line_y - win->height / 2 + ray->line_height / 2) * step;
 	if (line->line_y >= 0)
 	{
-		while (line->line_y < line->draw_end)
+		while (line->line_y++ < line->draw_end)
 		{
 			line->tex_y = (int)texpos;
 			texpos += step;
@@ -51,7 +51,6 @@ void	draw_vertical_tex(
 			+ line->line_x * win->img->bpp / 8,
 			texture->addr + line->tex_y * texture->line_len
 			+ line->tex_x * (texture->bpp / 8), sizeof(unsigned int));
-			++line->line_y;
 		}
 	}
 }

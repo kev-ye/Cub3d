@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 19:22:41 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/15 14:29:48 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/24 15:54:35 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	sprite_draw(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
 
 void	sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
 {
-	while (sp_cast->stripe < sp_cast->draw_end_x)
+	while (sp_cast->stripe++ < sp_cast->draw_end_x)
 	{
 		sp_cast->tex_x = (int)((256 * (sp_cast->stripe
 						- (-sp_cast->sprite_width / 2
@@ -93,15 +93,13 @@ void	sprite_drawing(t_win *win, t_sp_cast *sp_cast, t_ray_cast *ray)
 				&& sp_cast->transform_y < ray->zbuffer[sp_cast->stripe])
 		{
 			sp_cast->y = sp_cast->draw_start_y;
-			while (sp_cast->y < sp_cast->draw_end_y)
+			while (sp_cast->y++ < sp_cast->draw_end_y)
 			{
 				pixel_put_sprite(win, sp_cast);
 				if ((sp_cast->color & 0x00FFFFFF) != 0)
 					paint_pixel(win, sp_cast);
-				sp_cast->y++;
 			}
 		}
-		sp_cast->stripe++;
 	}
 }
 

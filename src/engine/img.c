@@ -6,80 +6,51 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/07 11:27:56 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/24 15:54:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	pixel_put_color(
-		t_img *img,
-		int x,
-		int y,
-		unsigned int color)
-{
-	char *dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-void	vertical_line_color(
+void	draw_vertical_color(
 		t_line *line,
 		t_win *win,
 		unsigned int color)
 {
-	int draw_start;
-	int draw_end;
-
-	draw_start = line->draw_start;
-	draw_end = line->draw_end;
-	if (draw_start >= 0)
+	line->line_y = line->draw_start;
+	if (line->line_y >= 0)
 	{
-		while (draw_start < draw_end)
+		while (line->line_y < line->draw_end)
 		{
-			pixel_put_color(win->img, line->line_x, draw_start, color);
-			++draw_start;
+			ft_memcpy(win->img->addr + line->line_y * win->img->line_len
+			+ line->line_x * (win->img->bpp / 8), &color, sizeof(unsigned int));
+			++line->line_y;
 		}
 	}
 }
 
-/*
-** Note : 256 -> the size of line texure image,
-** 64 (width of one line of pixel is 64) * 4 (coded on 4 chars) = 256.
-*/
-
-void	pixel_put_tex(
+void	draw_vertical_tex(
 		t_line *line,
-		t_img *texture,
 		t_win *win,
+		t_img *texture,
 		t_ray_cast *ray)
 {
-	line->tex_y = (((line->line_y * 256 - win->height * win->camera->cam_height
-						* 128 + ray->line_height * 128) * texture->height)
-						/ ray->line_height) / 256;
-	ft_memcpy(win->img->addr + line->line_y * win->img->line_len
+	double step;
+	double texpos;
+
+	line->line_y = line->draw_start;
+	step = (double)texture->height / (double)ray->line_height;
+	texpos = (line->line_y - win->height / 2 + ray->line_height / 2) * step;
+	if (line->line_y >= 0)
+	{
+		while (line->line_y++ < line->draw_end)
+		{
+			line->tex_y = (int)texpos;
+			texpos += step;
+			ft_memcpy(win->img->addr + line->line_y * win->img->line_len
 			+ line->line_x * win->img->bpp / 8,
 			texture->addr + line->tex_y * texture->line_len
 			+ line->tex_x * (texture->bpp / 8), sizeof(unsigned int));
-}
-
-void	vertical_line_tex(
-		t_line *line,
-		t_win *win,
-		t_img *texture,
-		t_ray_cast *ray)
-{
-	int draw_end;
-
-	line->line_y = line->draw_start;
-	draw_end = line->draw_end;
-	if (line->line_y >= 0)
-	{
-		while (line->line_y < draw_end)
-		{
-			pixel_put_tex(line, texture, win, ray);
-			++line->line_y;
 		}
 	}
 }

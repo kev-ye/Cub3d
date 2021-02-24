@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:37:31 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 15:49:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/24 16:37:03 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ static void		drawing2(t_win *win, t_sp_cast *sp_cast, int i)
 			paint_pixel(win, sp_cast, i);
 	if (win->desc_info->map[sp_cast->sprite[i].y]
 			[sp_cast->sprite[i].x] == '3')
-	{
 		if ((sp_cast->color & 0x00FCFCFC) != 0x00FCFCFC)
 			paint_pixel(win, sp_cast, i);
-	}
 	if (win->desc_info->map[sp_cast->sprite[i].y]
 			[sp_cast->sprite[i].x] == '4')
 		if ((sp_cast->color & 0x000000FF) != 0x000000FF)
@@ -65,7 +63,7 @@ void			sprite_drawing(
 		t_ray_cast *ray,
 		int i)
 {
-	while (sp_cast->stripe < sp_cast->draw_end_x)
+	while (sp_cast->stripe++ < sp_cast->draw_end_x)
 	{
 		drawing(win, sp_cast, i);
 		if (sp_cast->transform_y > 0 && sp_cast->stripe > 0
@@ -73,12 +71,8 @@ void			sprite_drawing(
 				&& sp_cast->transform_y < ray->zbuffer[sp_cast->stripe])
 		{
 			sp_cast->y = sp_cast->draw_start_y;
-			while (sp_cast->y < sp_cast->draw_end_y)
-			{
+			while (sp_cast->y++ < sp_cast->draw_end_y)
 				drawing2(win, sp_cast, i);
-				sp_cast->y++;
-			}
 		}
-		sp_cast->stripe++;
 	}
 }

@@ -6,14 +6,14 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 18:53:03 by kaye              #+#    #+#              #
-#    Updated: 2021/02/23 20:54:26 by kaye             ###   ########.fr        #
+#    Updated: 2021/02/23 14:16:08 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILATION ##################################################################
 
 CC 			= gcc
-CFLAG 		= -Wall -Wextra -Werror -fsanitize=address
+CFLAG 		= -Wall -Wextra -Werror
 IFLAG 		= -I./inc -I./libft/inc -I./mlx/mlx
 IFLAG_B 	= -I./inc_bonus -I./libft/inc -I./mlx/mlx
 LFLAG 		= -L./mlx/mlx -lmlx -lm -framework OpenGL -framework AppKit

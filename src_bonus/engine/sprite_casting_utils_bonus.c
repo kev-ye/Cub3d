@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:51:29 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 15:50:55 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/25 12:26:02 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		pixel_put_sprite2(t_win *win, t_sp_cast *sp_cast, int i)
 {
 	if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '4')
 	{
-		sp_cast->tex_y = (((sp_cast->y * 256 - win->height
+		sp_cast->tex_y = (((sp_cast->y * 256 - (win->height - 1)
 				* win->camera->cam_height * 128 + sp_cast->sprite_height * 128)
 				* win->sprite[1]->height) / sp_cast->sprite_height) / 256;
 		ft_memcpy(&sp_cast->color, win->sprite[1]->addr + sp_cast->tex_y
@@ -58,7 +58,7 @@ void			pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i)
 {
 	if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '2')
 	{
-		sp_cast->tex_y = (((sp_cast->y * 256 - win->height
+		sp_cast->tex_y = (((sp_cast->y * 256 - (win->height - 1)
 				* win->camera->cam_height * 128 + sp_cast->sprite_height * 128)
 				* win->sprite[0]->height) / sp_cast->sprite_height) / 256;
 		ft_memcpy(&sp_cast->color, win->sprite[0]->addr + sp_cast->tex_y
@@ -67,7 +67,7 @@ void			pixel_put_sprite(t_win *win, t_sp_cast *sp_cast, int i)
 	}
 	if (win->desc_info->map[sp_cast->sprite[i].y][sp_cast->sprite[i].x] == '3')
 	{
-		sp_cast->tex_y = (((sp_cast->y * 256 - win->height
+		sp_cast->tex_y = (((sp_cast->y * 256 - (win->height - 1)
 				* win->camera->cam_height * 128 + sp_cast->sprite_height * 128)
 				* win->sprite[2]->height) / sp_cast->sprite_height) / 256;
 		ft_memcpy(&sp_cast->color, win->sprite[2]->addr + sp_cast->tex_y

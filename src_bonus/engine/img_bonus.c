@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:09:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/24 14:13:58 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/25 12:25:00 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	pixel_put_color(
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int*)dst = color;
 }
+
 void	draw_vertical_color(
 		t_line *line,
 		t_win *win,

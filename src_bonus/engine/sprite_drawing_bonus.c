@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:37:31 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/25 13:02:43 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/25 14:26:01 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ static void		drawing(t_win *win, t_sp_cast *sp_cast, int i)
 	if (win->desc_info->map[sp_cast->sprite[i].y]
 			[sp_cast->sprite[i].x] == '2')
 	{
-		sp_cast->tex_x = (int)((256 * (sp_cast->stripe
+		sp_cast->tex_x = (int)((sp_cast->stripe
 						- (-sp_cast->sprite_width / 2
 						+ sp_cast->sprite_screen_x))
-						* win->sprite[0]->width / sp_cast->sprite_width) / 256);
+						* win->sprite[0]->width / sp_cast->sprite_width);
 	}
 	if (win->desc_info->map[sp_cast->sprite[i].y]
 			[sp_cast->sprite[i].x] == '3')
 	{
-		sp_cast->tex_x = (int)((256 * (sp_cast->stripe
+		sp_cast->tex_x = (int)((sp_cast->stripe
 						- (-sp_cast->sprite_width / 2
 						+ sp_cast->sprite_screen_x))
-						* win->sprite[2]->width / sp_cast->sprite_width) / 256);
+						* win->sprite[2]->width / sp_cast->sprite_width);
 	}
 	if (win->desc_info->map[sp_cast->sprite[i].y]
 			[sp_cast->sprite[i].x] == '4')
 	{
-		sp_cast->tex_x = (int)((256 * (sp_cast->stripe
+		sp_cast->tex_x = (int)((sp_cast->stripe
 						- (-sp_cast->sprite_width / 2
 						+ sp_cast->sprite_screen_x))
-						* win->sprite[1]->width / sp_cast->sprite_width) / 256);
+						* win->sprite[1]->width / sp_cast->sprite_width);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:01:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/26 11:17:37 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/26 11:35:41 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int		check_color_amount(char **color, int count)
 
 static int		check_color(char **color, int i)
 {
-	char 	*str_trim;
-	int 	count;
+	char	*str_trim;
+	int		count;
 
 	if (!(str_trim = ft_strtrim(color[i], " ")))
 	{

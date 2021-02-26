@@ -6,11 +6,12 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:01:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 14:26:53 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/26 12:40:04 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
 
 static int		get_color(char **s)
 {
@@ -40,18 +41,26 @@ static int		check_color_amount(char **color, int count)
 
 static int		check_color(char **color, int i)
 {
-	int count;
+	char	*str_trim;
+	int		count;
 
-	count = 0;
-	while (color[i][count])
+	if (!(str_trim = ft_strtrim(color[i], " ")))
 	{
-		if (color[i][count] && !ft_isdigit(color[i][count]))
+		free_split(color);
+		return (-1);
+	}
+	count = 0;
+	while (str_trim[count])
+	{
+		if (!ft_isdigit(str_trim[count]))
 		{
+			free(str_trim);
 			free_split(color);
 			return (-1);
 		}
 		++count;
 	}
+	free(str_trim);
 	return (1);
 }
 

@@ -6,27 +6,17 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:02:39 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 14:24:27 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/26 11:27:01 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		color_f_is_true(int color_f, char **s)
+static int		color_is_true(int color, char *s)
 {
-	if (color_f == -1)
+	if (color == -1)
 	{
-		free_split(s);
-		return (0);
-	}
-	return (1);
-}
-
-static int		color_c_is_true(int color_c, char **s)
-{
-	if (color_c == -1)
-	{
-		free_split(s);
+		free(s);
 		return (0);
 	}
 	return (1);
@@ -34,54 +24,30 @@ static int		color_c_is_true(int color_c, char **s)
 
 int				get_floor_color(char *line, t_desc_info *desc_info)
 {
-	int		count;
-	char	**s;
+	char *s;
 
-	count = 0;
-	if (!(s = ft_split(line, ' ')))
+	if (ft_strncmp(line, "F", 1) != 0)
 		return (0);
-	while (s[count] != NULL)
-		++count;
-	if (count != 2)
-	{
-		free_split(s);
+	if (!(s = ft_substr(line, 1, ft_strlen(line) - 1)))
 		return (0);
-	}
-	if (ft_strcmp(s[0], "F") != 0)
-	{
-		free_split(s);
+	desc_info->color_f = check_and_get_color(s);
+	if (!(color_is_true(desc_info->color_f, s)))
 		return (0);
-	}
-	desc_info->color_f = check_and_get_color(s[1]);
-	if (!(color_f_is_true(desc_info->color_f, s)))
-		return (0);
-	free_split(s);
+	free(s);
 	return (1);
 }
 
 int				get_ceiling_color(char *line, t_desc_info *desc_info)
 {
-	int		count;
-	char	**s;
+	char *s;
 
-	count = 0;
-	if (!(s = ft_split(line, ' ')))
+	if (ft_strncmp(line, "C", 1) != 0)
 		return (0);
-	while (s[count] != NULL)
-		++count;
-	if (count != 2)
-	{
-		free_split(s);
+	if (!(s = ft_substr(line, 1, ft_strlen(line) - 1)))
 		return (0);
-	}
-	if (ft_strcmp(s[0], "C") != 0)
-	{
-		free_split(s);
+	desc_info->color_c = check_and_get_color(s);
+	if (!(color_is_true(desc_info->color_c, s)))
 		return (0);
-	}
-	desc_info->color_c = check_and_get_color(s[1]);
-	if (!(color_c_is_true(desc_info->color_c, s)))
-		return (0);
-	free_split(s);
+	free(s);
 	return (1);
 }

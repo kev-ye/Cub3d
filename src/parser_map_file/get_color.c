@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:01:34 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/08 14:25:00 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/26 11:17:37 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,26 @@ static int		check_color_amount(char **color, int count)
 
 static int		check_color(char **color, int i)
 {
-	int count;
+	char 	*str_trim;
+	int 	count;
 
-	count = 0;
-	while (color[i][count])
+	if (!(str_trim = ft_strtrim(color[i], " ")))
 	{
-		if (color[i][count] && !ft_isdigit(color[i][count]))
+		free_split(color);
+		return (-1);
+	}
+	count = 0;
+	while (str_trim[count])
+	{
+		if (!ft_isdigit(str_trim[count]))
 		{
+			free(str_trim);
 			free_split(color);
 			return (-1);
 		}
 		++count;
 	}
+	free(str_trim);
 	return (1);
 }
 

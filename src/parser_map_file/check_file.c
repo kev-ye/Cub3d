@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:19:17 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/22 21:16:19 by kaye             ###   ########.fr       */
+/*   Updated: 2021/02/26 11:14:14 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int		check_file_id(
 	while (r > 0)
 	{
 		r = get_next_line(*fd, &line);
+		if (!line)
+			return (r);
 		if (!check_file_line(line, &desc_info->desc, desc_info))
 		{
 			free(line);
@@ -71,6 +73,8 @@ static int		check_is_map(
 	while (r > 0)
 	{
 		r = get_next_line(*fd, &line);
+		if (!line)
+			return (r);
 		if (!check_no_map(line, &desc_info->desc))
 		{
 			free(line);
@@ -97,6 +101,8 @@ static void		check_map_get_ready(
 	while (r > 0)
 	{
 		r = get_next_line(*fd, &line);
+		if (!line)
+			return ;
 		if (!check_map_norm(line))
 		{
 			free(line);

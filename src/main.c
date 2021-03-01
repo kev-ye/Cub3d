@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/24 16:37:47 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/01 19:52:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		r_max(t_win *new_win, int *x, int *y)
 		*y = y_max;
 }
 
-static t_win	*init_mlx_win(char *path)
+static t_win	*init_mlx_win(char *path, int save)
 {
 	t_win *new_win;
 
@@ -38,31 +38,40 @@ static t_win	*init_mlx_win(char *path)
 	new_win->width = new_win->desc_info->r_x;
 	new_win->height = new_win->desc_info->r_y;
 	r_max(new_win, &new_win->width, &new_win->height);
-	if (!(new_win->win_ptr = mlx_new_window(new_win->mlx_ptr,
-					new_win->width, new_win->height, "cub3D")))
-		return (NULL);
+	new_win->save = save;
+	if (!new_win->save)
+		if (!(new_win->win_ptr = mlx_new_window(new_win->mlx_ptr,
+						new_win->width, new_win->height, "cub3D")))
+			return (NULL);
 	if (!(new_win->img = new_image(new_win, new_win->width, new_win->height)))
 		return (NULL);
 	return (new_win);
 }
 
-static void		check_ac(int ac)
+static int		check_ac(int ac)
 {
+	int save;
+
 	if (ac < 2)
 		msg_error(NULL, "Too few arguments\n");
 	if (ac > 3)
 		msg_error(NULL, "Too much arguments\n");
+	save = 0;
+	if (ac == 3)
+		save = 1;
+	return (save);
 }
 
 int				main(int ac, char **av)
 {
-	t_win *win;
+	t_win	*win;
+	int		save;
 
-	check_ac(ac);
-	if (!(win = init_mlx_win(av[1])) || !(init_key(win)) ||
+	save = check_ac(ac);
+	if (!(win = init_mlx_win(av[1], save)) || !(init_key(win)) ||
 			!(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)))
 		msg_error(win, "Error : Malloc/mlx error\n");
-	if (ac == 3)
+	if (save == 1)
 	{
 		if (ft_strcmp(av[2], "--save") != 0)
 			msg_error(win, "The second argumnets isn't --save\n");

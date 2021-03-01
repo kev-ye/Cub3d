@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:56:10 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/16 11:39:42 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/01 19:52:44 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,21 @@ void			free_desc_info(t_desc_info *desc_info)
 	free(desc_info);
 }
 
+static void		free_win2(t_win *win)
+{
+	if (win->save)
+	{
+		if (win->mlx_ptr != NULL)
+		{
+			if (FREE_SAVE)
+				mlx_destroy_display(win->mlx_ptr);
+			free(win->mlx_ptr);
+		}
+	}
+	if (win != NULL)
+		free(win);
+}
+
 void			free_win(t_win *win)
 {
 	free_img_tex(win);
@@ -80,6 +95,5 @@ void			free_win(t_win *win)
 		free(win->camera);
 	if (win->desc_info != NULL)
 		free_desc_info(win->desc_info);
-	if (win != NULL)
-		free(win);
+	free_win2(win);
 }

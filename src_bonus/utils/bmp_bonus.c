@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:40:36 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/24 16:38:05 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/01 19:45:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void			make_bmp(t_win *win)
 {
 	int fd;
 
-	win->save = 1;
 	ray_casting(win);
 	if ((fd = open("./save.bmp", O_WRONLY | O_CREAT, 0755)) == -1)
 		msg_error(win, "Malloc in mode --save\n");

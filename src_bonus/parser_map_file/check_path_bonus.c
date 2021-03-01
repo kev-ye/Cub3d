@@ -15,7 +15,7 @@
 static int		check_path_name(char *path, int *fd)
 {
 	char *s;
-	
+
 	if (!path)
 		return (0);
 	s = ft_strrchr(path, '.');

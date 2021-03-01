@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:42:20 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/16 11:21:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/01 19:49:47 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	shut_down(t_win *win)
 {
-	mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+	if (!win->save)
+		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
 	system(KILL_SOUND);
 	if (win->player_life < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:17:38 by kaye              #+#    #+#             */
-/*   Updated: 2021/02/19 16:52:18 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/01 16:07:39 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static int		check_path_name(char *path, int *fd)
 {
 	char *s;
-
+	
+	if (!path)
+		return (0);
 	s = ft_strrchr(path, '.');
 	if (ft_strcmp(s, ".xpm") != 0)
 		return (0);

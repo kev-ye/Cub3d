@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/03/02 11:49:27 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/02 12:30:20 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,7 +360,6 @@ int				init_tex(t_win *win);
 ** 3) it's on the screen (right).
 ** 4) ZBuffer, with perpendicular distance.
 ** Loop for every pixel of the current stripe (sprite_drawing).
-** 256 and 128 factors to avoid floats for calculate tex_y
 ** (sprite_drawing + pixel_put_sprite).
 ** Get current color from the texture (sprite_drawing + pixel_put_sprite).
 ** Paint pixel if it isn't the invisible color(sprite_drawing + paint_pixel).

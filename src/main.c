@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/03/01 19:52:20 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/02 12:04:58 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				main(int ac, char **av)
 	if (!(win = init_mlx_win(av[1], save)) || !(init_key(win)) ||
 			!(init_camera(win)) || !(init_tex(win)) || !(init_sprite(win)))
 		msg_error(win, "Error : Malloc/mlx error\n");
-	if (save == 1)
+	if (save)
 	{
 		if (ft_strcmp(av[2], "--save") != 0)
 			msg_error(win, "The second argumnets isn't --save\n");

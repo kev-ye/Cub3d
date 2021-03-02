@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 21:43:00 by kaye              #+#    #+#             */
-/*   Updated: 2021/03/01 19:45:40 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/02 12:05:05 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int				main(int ac, char **av)
 			!(set_gun_img(win, win->desc_info->path_g)) ||
 			!(init_mini_map(win)))
 		msg_error(win, "Error : Malloc/mlx error\n");
-	if (save == 3)
+	if (save)
 	{
 		if (ft_strcmp(av[2], "--save") != 0)
 			msg_error(win, "The second argumnets isn't --save\n");

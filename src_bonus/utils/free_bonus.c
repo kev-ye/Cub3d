@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:56:10 by kaye              #+#    #+#             */
-/*   Updated: 2021/03/01 19:52:44 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/02 11:48:50 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,8 @@ void			free_desc_info(t_desc_info *desc_info)
 static void		free_win2(t_win *win)
 {
 	if (win->save)
-	{
 		if (win->mlx_ptr != NULL)
-		{
-			if (FREE_SAVE)
-				mlx_destroy_display(win->mlx_ptr);
 			free(win->mlx_ptr);
-		}
-	}
 	if (win != NULL)
 		free(win);
 }

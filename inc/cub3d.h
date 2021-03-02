@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/03/01 19:48:25 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/02 11:49:35 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 #  define KEY_CODE_LEFT 123
 #  define KEY_CODE_RIGHT 124
 #  define RED_CROSS 17
-#  define FREE_SAVE 0
 # else
 #  define KEY_CODE_ESC 65307
 #  define KEY_CODE_W 119
@@ -42,7 +41,6 @@
 #  define KEY_CODE_LEFT 65361
 #  define KEY_CODE_RIGHT 65363
 #  define RED_CROSS 33
-#  define FREE_SAVE 1
 # endif
 
 /*
@@ -467,10 +465,5 @@ void			free_desc_info(t_desc_info *desc_info);
 void			free_win(t_win *win);
 void			shut_down(t_win *win);
 void			make_bmp(t_win *win);
-
-# if defined (__APPLE__) && (__MACH__)
-
-int				mlx_destroy_display(void *mlx_ptr);
-# endif
 
 #endif

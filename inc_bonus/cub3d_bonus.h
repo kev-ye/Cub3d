@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 20:11:06 by kaye              #+#    #+#             */
-/*   Updated: 2021/03/01 19:48:42 by kaye             ###   ########.fr       */
+/*   Updated: 2021/03/02 11:49:27 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 #  define KEY_CODE_UP 126
 #  define KEY_CODE_DOWN 125
 #  define RED_CROSS 17
-#  define FREE_SAVE 0
 #  define SOUND "afplay"
 #  define KILL_SOUND "killall afplay"
 # else
@@ -49,7 +48,6 @@
 #  define KEY_CODE_UP 65362
 #  define KEY_CODE_DOWN 65364
 #  define RED_CROSS 33
-#  define FREE_SAVE 1
 #  define SOUND "aplay"
 #  define KILL_SOUND "killall aplay"
 # endif
@@ -537,10 +535,5 @@ void			free_img_tex(t_win *win);
 void			shut_down(t_win *win);
 void			make_bmp(t_win *win);
 void			put_hud(t_win *win);
-
-# if defined (__APPLE__) && (__MACH__)
-
-int				mlx_destroy_display(void *mlx_ptr);
-# endif
 
 #endif

@@ -15,11 +15,11 @@ Cub3D is a remarkable playground to explore the playful practical applications o
 
     Program are tested in Macos and linux.
 
-**Mandadory part :**
+Mandadory part :
 
     make && ./cub3D map/map.cub
 
-**Bonus part :**
+Bonus part :
 
     make bonus && ./cub3D_bonus map/map_bonus.cub
 
@@ -29,9 +29,9 @@ Cub3D is a remarkable playground to explore the playful practical applications o
 
     “still reachable” means your program is probably ok – it didn’t free some memory it could have. This is quite common and often reasonable. Don’t use –show-reachable=yes if you don’t want to see these reports.
 
-**Solution :**
+Solution :
 
-    Use the function "mlx_destroy_display(void *mlx_ptr)" in mlx to destroy your mlx pointer before free it.
+    Use the function "mlx_destroy_display(void *mlx_ptr)" to destroy your mlx pointer and free it.
 
 
 ## Utils_docs

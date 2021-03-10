@@ -36,5 +36,5 @@ Solution :
 
 ## Utils_docs
 
-[Link_getting_started_mlx](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)  
-[Link_lodev_raycasting](https://lodev.org/cgtutor/raycasting.html)
+[__Link_getting_started_mlx__](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)  
+[__`Link_lodev_raycasting`__](https://lodev.org/cgtutor/raycasting.html)
